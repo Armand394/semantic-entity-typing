@@ -94,11 +94,13 @@ df_stats_correct = rename_columns(df_stats_correct)
 df_stats_bad = rename_columns(df_stats_bad)
 
 plot_metrics_classif(df_stats_correct, df_stats_bad, "(r-tr) (mean)", "tr (AC) (mean)", figures_folder,
-                     xlabel="RTcC_{\mu}",ylabel="TC_{\mu}")
+                     xlabel=r"RTcC_{\mu}", ylabel=r"TC_{\mu}")
+
 plot_metrics_classif(df_stats_correct, df_stats_bad, "(r-tr) (mean)", "TTR (avg)", figures_folder,
-                     xlabel="RTcC_{\mu}",ylabel="TTT_{\mu}")
+                     xlabel=r"RTcC_{\mu}", ylabel=r"TTT_{\mu}")
+
 plot_metrics_classif(df_stats_correct, df_stats_bad, "r (AC) (std)", "(r-tr) (std)", figures_folder,
-                     xlabel="RC_{\sigma}",ylabel="RTcC_{\sigma}")
+                     xlabel=r"RC_{\sigma}", ylabel=r"RTcC_{\sigma}")
 
 # Add the classification column
 df_stats_correct["y"] = 1
@@ -146,7 +148,7 @@ print('start clustering')
 # Find mean embedding for each entity
 entity_embeddings = compute_mean_embeddings(df_KG_train_text)
 # Find clusters
-optimal_k = find_optimal_clusters(entity_embeddings, max_clusters=100, result_folder=figures_folder)
+optimal_k = find_optimal_clusters(entity_embeddings, max_clusters=500, result_folder=figures_folder)
 print('optimal cluster', optimal_k)
 # Cluster entities
 clustered_entities = cluster_entities(entity_embeddings, num_clusters=optimal_k)
