@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def preprocess_dataframes(df_triples, df_train, entity_labels ):
+def preprocess_dataframes(df_triples, df_train, entity_labels):
     
     # Add text in dataframes for triples in KG 
     df_triples = df_triples.rename(columns={df_triples.columns[0]: 'object', 
@@ -27,7 +27,8 @@ def preprocess_dataframes(df_triples, df_train, entity_labels ):
 def convert_type_df_to_text(df_type_text, df_type, entity_labels):
     
     # convert id object into string
-    df_type.loc[:, "object"] = df_type["object"].map(lambda x: entity_labels.get(x, {}).get("label", x))
+    df_type.loc[:, "object"] = df_type["object"].map(
+    lambda x: f"{entity_labels.get(x, {}).get('label', x)} {entity_labels.get(x, {}).get('description', '')}")
 
     # Text of types
     df_type_text = df_type_text.rename(columns={df_type_text.columns[0]: 'type', df_type_text.columns[1]: 'text'})
@@ -78,7 +79,8 @@ def process_rank_df(df_rank, entity_labels):
     df_rank = df_rank.rename(columns={ 0 : 'entity'})
     # Format columns
     df_rank['rank'] = df_rank['rank'].astype(int)
-    df_rank.loc[:, "entity"] = df_rank["entity"].map(lambda x: entity_labels.get(x, {}).get("label", x))
+    df_rank.loc[:, "entity"] = df_rank["entity"].map(
+    lambda x: f"{entity_labels.get(x, {}).get('label', x)} {entity_labels.get(x, {}).get('description', '')}")
 
     return df_rank
 
