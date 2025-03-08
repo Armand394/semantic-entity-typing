@@ -10,12 +10,11 @@ import statsmodels.api as sm
 from wordfreq import top_n_list
 from sklearn.metrics import accuracy_score
 
-# Specify locations for loading and saving data current coment
+# Specify locations for loading and saving data
 project_folder = Path(__file__).parent.parent
 data_folder = os.path.join(project_folder, "Data")
 result_folder = os.path.join(project_folder, "Results", "Rank Performance")
 figures_folder = os.path.join(project_folder, "Results", "Rank Performance", "Figures")
-my_var = "var"
 
 # Specify data folder
 data_folder_FB = os.path.join(data_folder, "FB15kET")
