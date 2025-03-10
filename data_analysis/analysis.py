@@ -272,13 +272,13 @@ def plot_entity_graph(entity_example, filtered_triples, filtered_train, filtered
 
 def load_data(data_folder):
     # Specify files 1
-    entities_path = f"{data_folder}\\entities.tsv"
-    relations_path = f"{data_folder}\\relations.tsv"
-    types_path = f"{data_folder}\\types.tsv"
-    triples_path = f"{data_folder}\\KG_train.txt"
-    train_path = f"{data_folder}\\ET_train.txt"
-    test_path = f"{data_folder}\\ET_test.txt"
-    validate_path = f"{data_folder}\\ET_valid.txt"
+    entities_path = os.path.join(data_folder, "entities.tsv")
+    relations_path = os.path.join(data_folder, "relations.tsv")
+    types_path = os.path.join(data_folder, "types.tsv")
+    triples_path = os.path.join(data_folder, "KG_train.txt")
+    train_path = os.path.join(data_folder, "ET_train.txt")
+    test_path = os.path.join(data_folder, "ET_test.txt")
+    validate_path = os.path.join(data_folder, "ET_valid.txt")
 
     # Open files
     df_entities = pd.read_csv(entities_path, sep='\t', header=None)
