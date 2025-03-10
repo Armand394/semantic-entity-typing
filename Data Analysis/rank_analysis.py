@@ -56,7 +56,7 @@ df_triples['relation'] = df_triples['relation'].map(relation_dict).fillna(df_tri
 df_triples_text = convert_entity_text(df_triples)
 
 # Text of types
-df_train_type_txt = convert_type_df_to_text(df_type_text, df_train, entity_labels)
+df_train_type_txt = convert_type_df_to_text(df_type_text, df_train)
 
 # Final dataframe for KG train text data
 df_KG_train_text = pd.concat([df_triples_text, df_train_type_txt])

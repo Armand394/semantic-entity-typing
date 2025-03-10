@@ -24,11 +24,7 @@ def preprocess_dataframes(df_triples, df_train, entity_labels):
     return df_triples, df_train
 
 
-def convert_type_df_to_text(df_type_text, df_type, entity_labels):
-    
-    # convert id object into string
-    df_type.loc[:, "object"] = df_type["object"].map(
-    lambda x: f"{entity_labels.get(x, {}).get('label', x)} {entity_labels.get(x, {}).get('description', '')}")
+def convert_type_df_to_text(df_type_text, df_type):
 
     # Text of types
     df_type_text = df_type_text.rename(columns={df_type_text.columns[0]: 'type', df_type_text.columns[1]: 'text'})

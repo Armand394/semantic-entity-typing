@@ -45,7 +45,7 @@ def entity_train_coherence(sentences):
 
     # If only one sentence indecisive so return 0.5
     if len(sentences) < 2:
-        return 0.5, 0.0
+        return 0.5, 1.0
 
     # Encode sentences
     embeddings = model.encode(sentences, convert_to_tensor=True)
