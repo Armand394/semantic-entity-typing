@@ -50,10 +50,10 @@ def main(args):
     # model = TET(args, num_entities, num_rels, num_types, num_clusters)
     model = SEM(args, num_entities, num_rels, num_types)
 
-    # if use_cuda:
-    #     model = model.to(device)
-    # for name, param in model.named_parameters():
-    #     logging.debug('Parameter %s: %s, require_grad=%s' % (name, str(param.size()), str(param.requires_grad)))
+    if use_cuda:
+        model = model.to(device)
+    for name, param in model.named_parameters():
+        logging.debug('Parameter %s: %s, require_grad=%s' % (name, str(param.size()), str(param.requires_grad)))
 
     # current_learning_rate = args['lr']
     # warm_up_steps = args['warm_up_steps']
