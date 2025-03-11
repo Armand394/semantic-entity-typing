@@ -24,6 +24,7 @@ def main(args):
     num_clusters = len(c2id)
     train_type_label, test_type_label = load_train_all_labels(data_path, e2id, t2id)
     if use_cuda:
+        print("GPU")
         sample_ent2pair = torch.LongTensor(load_entity_cluster_type_pair_context(args, r2id, e2id)).cuda()
     
     train_dataset = SEMdataset(args, "LMET_train.txt", e2id, r2id, t2id, c2id, 'train')
@@ -140,68 +141,68 @@ def main(args):
         et_mask_index = (et_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero(as_tuple=True)
         return et_seq_tokens, et_mask_index
 
-    for epoch in range(args['max_epoch']):
-        log = []
-        iter = 0
-        for sample_et_content, sample_kg_content, gt_ent in train_dataloader:
-            iter += 1
-            bs = sample_kg_content.shape[0]
-            kg_seq_tokens, kg_mask_index = tokenize_with_mask(sample_kg_content)
-            et_seq_tokens, et_mask_index = tokenize_known_type(sample_et_content)
-            type_label = train_type_label[gt_ent, :]
-            if use_cuda:
-                kg_seq_tokens = kg_seq_tokens.to(device)
-                et_seq_tokens = et_seq_tokens.to(device)
-                #   kg_mask_index = kg_mask_index.to(device)
-                type_label = type_label.to(device)
-            type_predict = model(kg_seq_tokens, kg_mask_index, et_seq_tokens, et_mask_index, bs)
+    # for epoch in range(args['max_epoch']):
+    #     log = []
+    #     iter = 0
+    #     for sample_et_content, sample_kg_content, gt_ent in train_dataloader:
+    #         iter += 1
+    #         bs = sample_kg_content.shape[0]
+    #         kg_seq_tokens, kg_mask_index = tokenize_with_mask(sample_kg_content)
+    #         et_seq_tokens, et_mask_index = tokenize_known_type(sample_et_content)
+    #         type_label = train_type_label[gt_ent, :]
+    #         if use_cuda:
+    #             kg_seq_tokens = kg_seq_tokens.to(device)
+    #             et_seq_tokens = et_seq_tokens.to(device)
+    #             #   kg_mask_index = kg_mask_index.to(device)
+    #             type_label = type_label.to(device)
+    #         type_predict = model(kg_seq_tokens, kg_mask_index, et_seq_tokens, et_mask_index, bs)
 
-            # if use_cuda:
-            #     sample_et_content = sample_et_content.cuda()
-            #     sample_kg_content = sample_kg_content.cuda()
-            #     type_label = type_label.cuda()
-            # type_predict = model(sample_et_content, sample_kg_content, sample_ent2pair)
+    #         # if use_cuda:
+    #         #     sample_et_content = sample_et_content.cuda()
+    #         #     sample_kg_content = sample_kg_content.cuda()
+    #         #     type_label = type_label.cuda()
+    #         # type_predict = model(sample_et_content, sample_kg_content, sample_ent2pair)
 
-            if args['loss'] == 'BCE':
-                bce_loss = torch.nn.BCELoss()
-                type_loss = bce_loss(type_predict, type_label)
-                type_pos_loss, type_neg_loss = type_loss, type_loss
-            elif args['loss'] == 'FNA':
-                type_pos_loss, type_neg_loss = fna_loss(type_predict, type_label, args['beta'])
-                type_loss = type_pos_loss + type_neg_loss
-            elif args['loss'] == 'SFNA':
-                type_pos_loss, type_neg_loss = slight_fna_loss(type_predict, type_label, args['beta'])
-                type_loss = type_pos_loss + type_neg_loss
-            else:
-                raise ValueError('loss %s is not defined' % args['loss'])
+    #         if args['loss'] == 'BCE':
+    #             bce_loss = torch.nn.BCELoss()
+    #             type_loss = bce_loss(type_predict, type_label)
+    #             type_pos_loss, type_neg_loss = type_loss, type_loss
+    #         elif args['loss'] == 'FNA':
+    #             type_pos_loss, type_neg_loss = fna_loss(type_predict, type_label, args['beta'])
+    #             type_loss = type_pos_loss + type_neg_loss
+    #         elif args['loss'] == 'SFNA':
+    #             type_pos_loss, type_neg_loss = slight_fna_loss(type_predict, type_label, args['beta'])
+    #             type_loss = type_pos_loss + type_neg_loss
+    #         else:
+    #             raise ValueError('loss %s is not defined' % args['loss'])
 
-            log.append({
-                "loss": type_loss.item(),
-                "pos_loss": type_pos_loss.item(),
-                "neg_loss": type_neg_loss.item(),
-            })
-            # logging.debug('epoch %d, iter %d: loss: %f\tpos_loss: %f\tneg_loss: %f' %
-            #               (epoch, iter, type_loss.item(), type_pos_loss.item(), type_neg_loss.item()))
+    #         log.append({
+    #             "loss": type_loss.item(),
+    #             "pos_loss": type_pos_loss.item(),
+    #             "neg_loss": type_neg_loss.item(),
+    #         })
+    #         # logging.debug('epoch %d, iter %d: loss: %f\tpos_loss: %f\tneg_loss: %f' %
+    #         #               (epoch, iter, type_loss.item(), type_pos_loss.item(), type_neg_loss.item()))
 
-            optimizer.zero_grad()
-            type_loss.requires_grad_(True)
-            type_loss.backward()
-            optimizer.step()
+    #         optimizer.zero_grad()
+    #         type_loss.requires_grad_(True)
+    #         type_loss.backward()
+    #         optimizer.step()
 
-        if epoch >= warm_up_steps:
-            # current_learning_rate = current_learning_rate / 5
-            current_learning_rate = current_learning_rate / 2
-            optimizer = torch.optim.Adam(
-                filter(lambda p: p.requires_grad, model.parameters()),
-                lr=current_learning_rate
-            )
-            warm_up_steps = warm_up_steps * 2
+    #     if epoch >= warm_up_steps:
+    #         # current_learning_rate = current_learning_rate / 5
+    #         current_learning_rate = current_learning_rate / 2
+    #         optimizer = torch.optim.Adam(
+    #             filter(lambda p: p.requires_grad, model.parameters()),
+    #             lr=current_learning_rate
+    #         )
+    #         warm_up_steps = warm_up_steps * 2
 
-        avg_type_loss = sum([_['loss'] for _ in log]) / len(log)
-        avg_type_pos_loss = sum([_['pos_loss'] for _ in log]) / len(log)
-        avg_type_neg_loss = sum([_['neg_loss'] for _ in log]) / len(log)
-        logging.debug('epoch %d: loss: %f\tpos_loss: %f\tneg_loss: %f' %
-                      (epoch, avg_type_loss, avg_type_pos_loss, avg_type_neg_loss))
+    #     avg_type_loss = sum([_['loss'] for _ in log]) / len(log)
+    #     avg_type_pos_loss = sum([_['pos_loss'] for _ in log]) / len(log)
+    #     avg_type_neg_loss = sum([_['neg_loss'] for _ in log]) / len(log)
+    #     logging.debug('epoch %d: loss: %f\tpos_loss: %f\tneg_loss: %f' %
+    #                   (epoch, avg_type_loss, avg_type_pos_loss, avg_type_neg_loss))
 
     #     if epoch != 0 and epoch % args['valid_epoch'] == 0:
     #     #   if epoch % args['valid_epoch'] == 0:
@@ -261,25 +262,25 @@ def main(args):
     #             #     relation_embedding
     #             # )
 
-    # logging.debug('-----------------------best test step-----------------------')
-    # with torch.no_grad():
-    #     model.load_state_dict(torch.load(os.path.join(save_path, 'best_model.pkl')))
-    #     model.eval()
-    #     predict = torch.zeros(num_entities, num_types, dtype=torch.half)
-    #     for sample_et_content, sample_kg_content, gt_ent in test_dataloader:
-    #         bs = sample_kg_content.shape[0]
-    #         kg_seq_tokens, kg_mask_index = tokenize_with_mask(sample_kg_content)
-    #         et_seq_tokens, et_mask_index = tokenize_known_type(sample_et_content)
-    #         if use_cuda:
-    #             kg_seq_tokens = kg_seq_tokens.to(device)
-    #             #   kg_mask_index = kg_mask_index.to(device)
-    #             et_seq_tokens = et_seq_tokens.to(device)
-    #         predict[gt_ent] = model(kg_seq_tokens, kg_mask_index, et_seq_tokens, et_mask_index, bs).cpu().half()
-    #         # if use_cuda:
-    #         #     sample_et_content = sample_et_content.cuda()
-    #         #     sample_kg_content = sample_kg_content.cuda()
-    #         # predict[gt_ent] = model(sample_et_content, sample_kg_content, sample_ent2pair).cpu().half()
-    #     evaluate(os.path.join(data_path, 'ET_test.txt'), predict, test_type_label, e2id, t2id)
+    logging.debug('-----------------------best test step-----------------------')
+    with torch.no_grad():
+        model.load_state_dict(torch.load(os.path.join(save_path, 'FB15kET_SEM_roberta-base.pkl')))
+        model.eval()
+        predict = torch.zeros(num_entities, num_types, dtype=torch.half)
+        for sample_et_content, sample_kg_content, gt_ent in test_dataloader:
+            bs = sample_kg_content.shape[0]
+            kg_seq_tokens, kg_mask_index = tokenize_with_mask(sample_kg_content)
+            et_seq_tokens, et_mask_index = tokenize_known_type(sample_et_content)
+            if use_cuda:
+                kg_seq_tokens = kg_seq_tokens.to(device)
+                #   kg_mask_index = kg_mask_index.to(device)
+                et_seq_tokens = et_seq_tokens.to(device)
+            predict[gt_ent] = model(kg_seq_tokens, kg_mask_index, et_seq_tokens, et_mask_index, bs).cpu().half()
+            # if use_cuda:
+            #     sample_et_content = sample_et_content.cuda()
+            #     sample_kg_content = sample_kg_content.cuda()
+            # predict[gt_ent] = model(sample_et_content, sample_kg_content, sample_ent2pair).cpu().half()
+        evaluate(os.path.join(data_path, 'ET_test.txt'), predict, test_type_label, e2id, t2id)
 
 
 def get_params():
@@ -297,7 +298,7 @@ def get_params():
     parser.add_argument('--max_epoch', type=int, default=500)
     parser.add_argument('--valid_epoch', type=int, default=25)
     parser.add_argument('--beta', type=float, default=1.0)
-    parser.add_argument('--plm', type=str, default='bert-base-uncased')
+    parser.add_argument('--plm', type=str, default='roberta-base')
     parser.add_argument('--loss', type=str, default='SFNA')
 
     # params for first trm layer
