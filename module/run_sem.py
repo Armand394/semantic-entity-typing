@@ -24,7 +24,8 @@ def main(args):
     num_clusters = len(c2id)
     train_type_label, test_type_label = load_train_all_labels(data_path, e2id, t2id)
     if use_cuda:
-        print("GPU")
+        gpu_name = torch.cuda.get_device_name(torch.cuda.current_device())
+        print(f"Using GPU: {gpu_name}")
         sample_ent2pair = torch.LongTensor(load_entity_cluster_type_pair_context(args, r2id, e2id)).cuda()
     
     train_dataset = SEMdataset(args, "LMET_train.txt", e2id, r2id, t2id, c2id, 'train')
