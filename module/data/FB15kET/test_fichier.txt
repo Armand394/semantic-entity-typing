@@ -1,0 +1,22 @@
+Reconstruction des phrases : 
+exemple fichier pkl train
+
+première entité-type :
+
+[4606, 1663, 16272]
+
+numéro d'entité : 4606 -> /m/02hmw9
+
+16272 : longueur du fichier d'entité : 14951 + l'id du type associé dans ce triplet
+
+16272-14951=1321 -> /education/university
+
+/m/02hmw9 /education/university
+
+Et au milieu : longueur de realtions.tsv + id du cluster
+ici cluster = film
+
+[4606, 1180, 10783] : relation dans train
+4606 : /m/02hmw9
+1180 : relation : /education/educational_institution/students_graduates./education/education/student
+10783 : /m/03dpqd
