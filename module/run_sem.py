@@ -11,7 +11,6 @@ def main(args):
     use_cuda = args['cuda'] and torch.cuda.is_available()
     data_path = os.path.join(args['data_dir'], args['dataset'])
     save_path = os.path.join(args['save_dir'], args['save_path'])
-
     e2id = read_id(os.path.join(data_path, 'entities.tsv'))
     r2id = read_id(os.path.join(data_path, 'relations.tsv'))
     t2id = read_id(os.path.join(data_path, 'types.tsv'))
@@ -25,7 +24,10 @@ def main(args):
     num_clusters = len(c2id)
     train_type_label, test_type_label = load_train_all_labels(data_path, e2id, t2id)
     if use_cuda:
+        gpu_name = torch.cuda.get_device_name(torch.cuda.current_device())
+        print(f"Using GPU: {gpu_name}")
         sample_ent2pair = torch.LongTensor(load_entity_cluster_type_pair_context(args, r2id, e2id)).cuda()
+    
     train_dataset = SEMdataset(args, "LMET_train.txt", e2id, r2id, t2id, c2id, 'train')
     valid_dataset = SEMdataset(args, "LMET_valid.txt", e2id, r2id, t2id, c2id, 'valid')
     test_dataset = SEMdataset(args, "LMET_test.txt", e2id, r2id, t2id, c2id, 'test')
@@ -297,7 +299,7 @@ def get_params():
     parser.add_argument('--max_epoch', type=int, default=500)
     parser.add_argument('--valid_epoch', type=int, default=25)
     parser.add_argument('--beta', type=float, default=1.0)
-    parser.add_argument('--plm', type=str, default='bert-base-uncased')
+    parser.add_argument('--plm', type=str, default='roberta-base')
     parser.add_argument('--loss', type=str, default='SFNA')
 
     # params for first trm layer

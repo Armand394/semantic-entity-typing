@@ -1,3 +1,4 @@
 .venv/
-Data Analysis/__pycache__/
-module/
+data_analysis/__pycache__/
+module/__pycache__/
+save/

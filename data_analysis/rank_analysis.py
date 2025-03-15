@@ -12,9 +12,9 @@ from sklearn.metrics import accuracy_score
 
 # Specify locations for loading and saving data
 project_folder = Path(__file__).parent.parent
-data_folder = os.path.join(project_folder, "Data")
-result_folder = os.path.join(project_folder, "Results", "Rank Performance")
-figures_folder = os.path.join(project_folder, "Results", "Rank Performance", "Figures")
+data_folder = os.path.join(project_folder, "data")
+result_folder = os.path.join(project_folder, "results", "Rank Performance")
+figures_folder = os.path.join(project_folder, "results", "Rank Performance", "Figures")
 
 # Specify data folder
 data_folder_FB = os.path.join(data_folder, "FB15kET")
