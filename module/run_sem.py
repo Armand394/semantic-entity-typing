@@ -55,90 +55,90 @@ def main(args):
     for name, param in model.named_parameters():
         logging.debug('Parameter %s: %s, require_grad=%s' % (name, str(param.size()), str(param.requires_grad)))
 
-    # current_learning_rate = args['lr']
-    # warm_up_steps = args['warm_up_steps']
-    # optimizer = torch.optim.Adam(
-    #     filter(lambda p: p.requires_grad, model.parameters()),
-    #     lr=current_learning_rate
-    # )
-    # tokenizer = AutoTokenizer.from_pretrained(args['plm'])
-    # max_valid_mrr = 0
-    # max_test_mrr = 0
-    # model.train()
+    current_learning_rate = args['lr']
+    warm_up_steps = args['warm_up_steps']
+    optimizer = torch.optim.Adam(
+        filter(lambda p: p.requires_grad, model.parameters()),
+        lr=current_learning_rate
+    )
+    tokenizer = AutoTokenizer.from_pretrained(args['plm'])
+    max_valid_mrr = 0
+    max_test_mrr = 0
+    model.train()
 
-    # def tokenize_with_mask(sample_kg_content):
-    #     cls_token = tokenizer.cls_token
-    #     mask_token = tokenizer.mask_token
-    #     sep_token = tokenizer.sep_token
+    def tokenize_with_mask(sample_kg_content):
+        cls_token = tokenizer.cls_token
+        mask_token = tokenizer.mask_token
+        sep_token = tokenizer.sep_token
 
-    #     curr_batch_size = sample_kg_content.shape[0]
-    #     num_neighbors_sampled = sample_kg_content.shape[1]
-    #     #   load text / descriptions of entities / relations from sample_kg_content
-    #     #   heads, rels, tails.shape = args['train_batch_size'] x args['sample_kg_size']
-    #     heads, rels, tails, = sample_kg_content[:, :, 0], sample_kg_content[:, :, 1], sample_kg_content[:, :, 2]
-    #     heads = heads.reshape(curr_batch_size * num_neighbors_sampled)
-    #     rels = rels.reshape(curr_batch_size * num_neighbors_sampled)
-    #     tails = tails.reshape(curr_batch_size * num_neighbors_sampled)
-    #     head_context = np.empty(curr_batch_size * num_neighbors_sampled, dtype=object)
-    #     # rel_context = np.empty(curr_batch_size * num_neighbors_sampled, dtype=object)
-    #     tail_context = np.empty(curr_batch_size * num_neighbors_sampled, dtype=object)
-    #     #   ATTENTION: special arrangement when len(heads) == len(rels) == len(tails) == 1
-    #     if heads.shape[0] == 1:
-    #         head = heads[0]
-    #         rel = rels[0]
-    #         tail = tails[0]
-    #         if rel < num_rels:
-    #             kg_sequence = [cls_token + ' ' + mask_token + ' ' + sep_token + ' ' + r2text[int(rel) % num_rels] + ' ' + sep_token + ' '  + e2desc[int(tail)] + ' ' + sep_token]
-    #         else:
-    #             kg_sequence = [cls_token + ' ' + e2desc[int(tail)] + ' ' + sep_token + ' ' + r2text[int(rel) % num_rels] + ' ' + sep_token + ' ' + mask_token + ' ' + sep_token]
-    #     else:
-    #         #   if rel < num_rels, then mask head, and keep rel and tail
-    #         head_context[rels < num_rels] = mask_token
-    #         tail_context[rels < num_rels] = e2desc[np.array(tails)][rels < num_rels]
-    #         rel_context = r2text[np.array(rels) % num_rels]
-    #         #   if rel >= num_rels, then mask tail, keep rel and move tail entity to head
-    #         head_context[rels >= num_rels] = e2desc[np.array(tails)][rels >= num_rels]
-    #         tail_context[rels >= num_rels] = mask_token
-    #         #   concatenate heads, rels, tails with [CLS] token and [SEP] separator
-    #         cls_arr = np.array([cls_token + ' '], dtype=str).repeat(curr_batch_size * num_neighbors_sampled)
-    #         sep_arr = np.array([' ' + sep_token + ' '], dtype=str).repeat(curr_batch_size * num_neighbors_sampled)
-    #         last_sep_arr = np.array([' ' + sep_token], dtype=str).repeat(curr_batch_size * num_neighbors_sampled)
-    #         kg_sequence = cls_arr + head_context + sep_arr + rel_context + sep_arr + tail_context + last_sep_arr
-    #         #   tokenize sample_kg_content
-    #         kg_sequence = kg_sequence.tolist()
-    #     #   kg_seq_tokens = tokenizer.batch_encode_plus(kg_sequence, add_special_tokens=False, padding=True)
-    #     kg_seq_tokens = tokenizer(kg_sequence, add_special_tokens=False, padding=True, return_tensors='pt')
-    #     kg_mask_index = (kg_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero(as_tuple=True)
-    #     #   kg_mask_index = (kg_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero()
-    #     #   kg_seq_tokens = tokenizer("Hello, my dog is cute", return_tensors="pt")
-    #     return kg_seq_tokens, kg_mask_index
+        curr_batch_size = sample_kg_content.shape[0]
+        num_neighbors_sampled = sample_kg_content.shape[1]
+        #   load text / descriptions of entities / relations from sample_kg_content
+        #   heads, rels, tails.shape = args['train_batch_size'] x args['sample_kg_size']
+        heads, rels, tails, = sample_kg_content[:, :, 0], sample_kg_content[:, :, 1], sample_kg_content[:, :, 2]
+        heads = heads.reshape(curr_batch_size * num_neighbors_sampled)
+        rels = rels.reshape(curr_batch_size * num_neighbors_sampled)
+        tails = tails.reshape(curr_batch_size * num_neighbors_sampled)
+        head_context = np.empty(curr_batch_size * num_neighbors_sampled, dtype=object)
+        # rel_context = np.empty(curr_batch_size * num_neighbors_sampled, dtype=object)
+        tail_context = np.empty(curr_batch_size * num_neighbors_sampled, dtype=object)
+        #   ATTENTION: special arrangement when len(heads) == len(rels) == len(tails) == 1
+        if heads.shape[0] == 1:
+            head = heads[0]
+            rel = rels[0]
+            tail = tails[0]
+            if rel < num_rels:
+                kg_sequence = [cls_token + ' ' + mask_token + ' ' + sep_token + ' ' + r2text[int(rel) % num_rels] + ' ' + sep_token + ' '  + e2desc[int(tail)] + ' ' + sep_token]
+            else:
+                kg_sequence = [cls_token + ' ' + e2desc[int(tail)] + ' ' + sep_token + ' ' + r2text[int(rel) % num_rels] + ' ' + sep_token + ' ' + mask_token + ' ' + sep_token]
+        else:
+            #   if rel < num_rels, then mask head, and keep rel and tail
+            head_context[rels < num_rels] = mask_token
+            tail_context[rels < num_rels] = e2desc[np.array(tails)][rels < num_rels]
+            rel_context = r2text[np.array(rels) % num_rels]
+            #   if rel >= num_rels, then mask tail, keep rel and move tail entity to head
+            head_context[rels >= num_rels] = e2desc[np.array(tails)][rels >= num_rels]
+            tail_context[rels >= num_rels] = mask_token
+            #   concatenate heads, rels, tails with [CLS] token and [SEP] separator
+            cls_arr = np.array([cls_token + ' '], dtype=str).repeat(curr_batch_size * num_neighbors_sampled)
+            sep_arr = np.array([' ' + sep_token + ' '], dtype=str).repeat(curr_batch_size * num_neighbors_sampled)
+            last_sep_arr = np.array([' ' + sep_token], dtype=str).repeat(curr_batch_size * num_neighbors_sampled)
+            kg_sequence = cls_arr + head_context + sep_arr + rel_context + sep_arr + tail_context + last_sep_arr
+            #   tokenize sample_kg_content
+            kg_sequence = kg_sequence.tolist()
+        #   kg_seq_tokens = tokenizer.batch_encode_plus(kg_sequence, add_special_tokens=False, padding=True)
+        kg_seq_tokens = tokenizer(kg_sequence, add_special_tokens=False, padding=True, return_tensors='pt')
+        kg_mask_index = (kg_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero(as_tuple=True)
+        #   kg_mask_index = (kg_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero()
+        #   kg_seq_tokens = tokenizer("Hello, my dog is cute", return_tensors="pt")
+        return kg_seq_tokens, kg_mask_index
 
-    # def tokenize_known_type(sample_et_content):
-    #     cls_token = tokenizer.cls_token
-    #     mask_token = tokenizer.mask_token
-    #     sep_token = tokenizer.sep_token
-    #     start_str = cls_token + ' ' + mask_token + ' has type ' + sep_token + ' '
-    #     end_str = ' ' + sep_token
+    def tokenize_known_type(sample_et_content):
+        cls_token = tokenizer.cls_token
+        mask_token = tokenizer.mask_token
+        sep_token = tokenizer.sep_token
+        start_str = cls_token + ' ' + mask_token + ' has type ' + sep_token + ' '
+        end_str = ' ' + sep_token
 
-    #     curr_batch_size = sample_et_content.shape[0]
-    #     num_known_types_sampled = sample_et_content.shape[1]
-    #     #   load hierarchical descriptions of known types of an entity from sample_et_content
-    #     known_types = sample_et_content[:, :, 2]
-    #     known_types = known_types.reshape(curr_batch_size * num_known_types_sampled)
-    #     known_types = known_types - num_entities
-    #     known_types_context = np.empty(curr_batch_size * num_known_types_sampled, dtype=object)
-    #     if known_types.shape[0] == 1:
-    #         known_type = known_types[0]
-    #         et_sequence = [start_str + t2desc[int(known_type)] + end_str]
-    #     else:
-    #         start_arr = np.array([start_str], dtype=str).repeat(curr_batch_size * num_known_types_sampled)
-    #         end_arr = np.array([end_str], dtype=str).repeat(curr_batch_size * num_known_types_sampled)
-    #         known_types_context[known_types >= 0] = t2desc[np.array(known_types)]
-    #         et_sequence = start_arr + known_types_context + end_arr
-    #         et_sequence = et_sequence.tolist()
-    #     et_seq_tokens = tokenizer(et_sequence, add_special_tokens=False, padding=True, return_tensors='pt')
-    #     et_mask_index = (et_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero(as_tuple=True)
-    #     return et_seq_tokens, et_mask_index
+        curr_batch_size = sample_et_content.shape[0]
+        num_known_types_sampled = sample_et_content.shape[1]
+        #   load hierarchical descriptions of known types of an entity from sample_et_content
+        known_types = sample_et_content[:, :, 2]
+        known_types = known_types.reshape(curr_batch_size * num_known_types_sampled)
+        known_types = known_types - num_entities
+        known_types_context = np.empty(curr_batch_size * num_known_types_sampled, dtype=object)
+        if known_types.shape[0] == 1:
+            known_type = known_types[0]
+            et_sequence = [start_str + t2desc[int(known_type)] + end_str]
+        else:
+            start_arr = np.array([start_str], dtype=str).repeat(curr_batch_size * num_known_types_sampled)
+            end_arr = np.array([end_str], dtype=str).repeat(curr_batch_size * num_known_types_sampled)
+            known_types_context[known_types >= 0] = t2desc[np.array(known_types)]
+            et_sequence = start_arr + known_types_context + end_arr
+            et_sequence = et_sequence.tolist()
+        et_seq_tokens = tokenizer(et_sequence, add_special_tokens=False, padding=True, return_tensors='pt')
+        et_mask_index = (et_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero(as_tuple=True)
+        return et_seq_tokens, et_mask_index
 
     # for epoch in range(args['max_epoch']):
     #     log = []
@@ -261,25 +261,25 @@ def main(args):
     #             #     relation_embedding
     #             # )
 
-    # logging.debug('-----------------------best test step-----------------------')
-    # with torch.no_grad():
-    #     model.load_state_dict(torch.load(os.path.join(save_path, 'best_model.pkl')))
-    #     model.eval()
-    #     predict = torch.zeros(num_entities, num_types, dtype=torch.half)
-    #     for sample_et_content, sample_kg_content, gt_ent in test_dataloader:
-    #         bs = sample_kg_content.shape[0]
-    #         kg_seq_tokens, kg_mask_index = tokenize_with_mask(sample_kg_content)
-    #         et_seq_tokens, et_mask_index = tokenize_known_type(sample_et_content)
-    #         if use_cuda:
-    #             kg_seq_tokens = kg_seq_tokens.to(device)
-    #             #   kg_mask_index = kg_mask_index.to(device)
-    #             et_seq_tokens = et_seq_tokens.to(device)
-    #         predict[gt_ent] = model(kg_seq_tokens, kg_mask_index, et_seq_tokens, et_mask_index, bs).cpu().half()
-    #         # if use_cuda:
-    #         #     sample_et_content = sample_et_content.cuda()
-    #         #     sample_kg_content = sample_kg_content.cuda()
-    #         # predict[gt_ent] = model(sample_et_content, sample_kg_content, sample_ent2pair).cpu().half()
-    #     evaluate(os.path.join(data_path, 'ET_test.txt'), predict, test_type_label, e2id, t2id)
+    logging.debug('-----------------------best test step-----------------------')
+    with torch.no_grad():
+        model.load_state_dict(torch.load(os.path.join(save_path, 'FB15kET_SEM_roberta-base.pkl')))
+        model.eval()
+        predict = torch.zeros(num_entities, num_types, dtype=torch.half)
+        for sample_et_content, sample_kg_content, gt_ent in test_dataloader:
+            bs = sample_kg_content.shape[0]
+            kg_seq_tokens, kg_mask_index = tokenize_with_mask(sample_kg_content)
+            et_seq_tokens, et_mask_index = tokenize_known_type(sample_et_content)
+            if use_cuda:
+                kg_seq_tokens = kg_seq_tokens.to(device)
+                #   kg_mask_index = kg_mask_index.to(device)
+                et_seq_tokens = et_seq_tokens.to(device)
+            predict[gt_ent] = model(kg_seq_tokens, kg_mask_index, et_seq_tokens, et_mask_index, bs).cpu().half()
+            # if use_cuda:
+            #     sample_et_content = sample_et_content.cuda()
+            #     sample_kg_content = sample_kg_content.cuda()
+            # predict[gt_ent] = model(sample_et_content, sample_kg_content, sample_ent2pair).cpu().half()
+        evaluate(os.path.join(data_path, 'ET_test.txt'), predict, test_type_label, e2id, t2id)
 
 
 def get_params():

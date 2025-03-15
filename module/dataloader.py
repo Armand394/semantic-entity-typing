@@ -22,6 +22,7 @@ class SEMdataset(Dataset):
 
     def load_dataset(self):
         data_name_path = self.args["data_dir"] + '/' + self.args["dataset"] + '/' + self.data_name
+        print(data_name_path)
         contents = []
 
         output_pickle = data_name_path[0: data_name_path.rfind('.')] + '.pkl'
