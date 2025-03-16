@@ -26,6 +26,8 @@ def main(args):
     if use_cuda:
         sample_ent2pair = torch.LongTensor(load_entity_cluster_type_pair_context(args, r2id, e2id)).cuda()
     train_dataset = SEMdataset(args, "KG_train.txt", e2id, r2id, t2id, c2id, 'train')
+
+
 def get_params():
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default='./data')

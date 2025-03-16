@@ -1,3 +1,0 @@
-[CLS] [MASK] has type [SEP] education [SEP] academic [SEP]
-
-/m/02hmw9 /education/university 
