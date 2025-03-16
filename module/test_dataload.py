@@ -24,7 +24,9 @@ def main(args):
     train_type_label, test_type_label = load_train_all_labels(data_path, e2id, t2id)
     if use_cuda:
         sample_ent2pair = torch.LongTensor(load_entity_cluster_type_pair_context(args, r2id, e2id)).cuda()
-    train_dataset = SEMdataset(args, "output.txt", e2id, r2id, t2id, c2id, 'train')
+    train_dataset = SEMdataset(args, "LMET_train2.txt", e2id, r2id, t2id, c2id, 'train')
+    train_dataset = SEMdataset(args, "LMET_test2.txt", e2id, r2id, t2id, c2id, 'test')
+    train_dataset = SEMdataset(args, "LMET_valid2.txt", e2id, r2id, t2id, c2id, 'valid')
 
 
 def get_params():

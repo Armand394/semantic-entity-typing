@@ -83,4 +83,16 @@ kg_dict = load_kg("KG_train.txt")
 et_dict = load_et("ET_train.txt")
 
 # Générer le fichier de sortie
-construct_output(kg_dict, et_dict, entite_dict, relation_dict, type_dict, "output.txt")
+construct_output(kg_dict, et_dict, entite_dict, relation_dict, type_dict, "LMET_train2.txt")
+
+kg_dict = load_kg("KG_train.txt")
+et_dict = load_et("ET_test.txt")
+
+# Générer le fichier de sortie
+construct_output(kg_dict, et_dict, entite_dict, relation_dict, type_dict, "LMET_test2.txt")
+
+kg_dict = load_kg("KG_train.txt")
+et_dict = load_et("ET_valid.txt")
+
+# Générer le fichier de sortie
+construct_output(kg_dict, et_dict, entite_dict, relation_dict, type_dict, "LMET_valid2.txt")
