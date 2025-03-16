@@ -44,6 +44,11 @@ class SEMdataset(Dataset):
                 kg_list = []
 
                 for et_content in et_content_list:
+                    if not et_content:
+                        break
+                        
+
+                    print(et_content)
                     et_head, et_rel, et_type = et_content.split(' ')
                     et_head_id = self.e2id[et_head]
                     et_type_id = self.t2id[et_type] + len(self.e2id)
