@@ -13,7 +13,7 @@ numéro d'entité : 4606 -> /m/02hmw9
 
 /m/02hmw9 /education/university
 
-Et au milieu : longueur de realtions.tsv + id du cluster
+Et au milieu : longueur de relations.tsv + id du cluster
 ici cluster = film
 
 [4606, 1180, 10783] : relation dans train
