@@ -18,14 +18,13 @@ def main(args):
     r2text = read_rel_context(os.path.join(data_path, 'relation2text.txt'), r2id)
     t2desc = read_type_context(os.path.join(data_path, 'hier_type_desc.txt'), t2id)
     num_entities = len(e2id)
-    print(num_entities)
     num_rels = len(r2id)
     num_types = len(t2id)
     num_clusters = len(c2id)
     train_type_label, test_type_label = load_train_all_labels(data_path, e2id, t2id)
     if use_cuda:
         sample_ent2pair = torch.LongTensor(load_entity_cluster_type_pair_context(args, r2id, e2id)).cuda()
-    train_dataset = SEMdataset(args, "KG_train.txt", e2id, r2id, t2id, c2id, 'train')
+    train_dataset = SEMdataset(args, "output.txt", e2id, r2id, t2id, c2id, 'train')
 
 
 def get_params():
