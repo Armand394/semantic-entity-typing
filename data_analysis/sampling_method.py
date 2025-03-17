@@ -21,11 +21,11 @@ def directed_random_walk_sampling(graph, seed_nodes, walk_length=10, sample_size
         current_node = node
         for _ in range(walk_length):
             if random.random() < p_restart:
-                current_node = random.choice(seed_nodes)  # 以一定概率重置到起始节点
+                current_node = random.choice(seed_nodes)
             else:
-                neighbors = list(graph.successors(current_node))  # 只看出边
+                neighbors = list(graph.successors(current_node))
                 if not neighbors:
-                    break  # 没有出边就终止当前游走
+                    break 
                 current_node = random.choice(neighbors)
 
             sampled_nodes.add(current_node)
