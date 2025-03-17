@@ -26,11 +26,6 @@ def load_kg(file_path):
                     kg[head] = []
                 kg[head].append((relation, tail))
 
-                # Ajouter la relation inverse
-                inverse_relation = "inv-" + relation
-                if tail not in kg:
-                    kg[tail] = []
-                kg[tail].append((inverse_relation, head))
     return kg
 
 # === 3. CHARGEMENT DU FICHIER ET_train.txt ===

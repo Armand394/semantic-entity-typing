@@ -47,7 +47,6 @@ class SEMdataset(Dataset):
                     if not et_content:
                         break
                         
-
                     print(et_content)
                     et_head, et_rel, et_type = et_content.split(' ')
                     et_head_id = self.e2id[et_head]
@@ -76,7 +75,11 @@ class SEMdataset(Dataset):
         kg_content = self.data[index][1]
         ent = self.data[index][2]
 
+        if len(et_content) == 0:
+            raise ValueError(f"et_content est vide pour l'index {index} dans le DataLoader.")
+
         single_et_np_list = []
+        
         if self.sample_et_size != 1:
             sampled_index = np.random.choice(range(0, len(et_content)), size=self.sample_et_size,
                                              replace=len(range(0, len(et_content))) < self.sample_et_size)

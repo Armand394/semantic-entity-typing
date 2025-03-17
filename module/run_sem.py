@@ -90,9 +90,9 @@ def main(args):
             rel = rels[0]
             tail = tails[0]
             if rel < num_rels:
-                kg_sequence = [cls_token + ' ' + mask_token + ' ' + sep_token + ' ' + r2text[int(rel) % num_rels] + ' ' + sep_token + ' '  + e2desc[int(tail)] + ' ' + sep_token]
+                kg_sequence = [cls_token + ' ' + mask_token + ' ' + sep_token + ' ' + r2text[int(rel) % (num_rels + num_clusters)] + ' ' + sep_token + ' '  + e2desc[int(tail)] + ' ' + sep_token]
             else:
-                kg_sequence = [cls_token + ' ' + e2desc[int(tail)] + ' ' + sep_token + ' ' + r2text[int(rel) % num_rels] + ' ' + sep_token + ' ' + mask_token + ' ' + sep_token]
+                kg_sequence = [cls_token + ' ' + e2desc[int(tail)] + ' ' + sep_token + ' ' + r2text[int(rel) % (num_rels + num_clusters)] + ' ' + sep_token + ' ' + mask_token + ' ' + sep_token]
         else:
             #   if rel < num_rels, then mask head, and keep rel and tail
             head_context[rels < num_rels] = mask_token
@@ -296,7 +296,7 @@ def get_params():
     parser.add_argument('--train_batch_size', type=int, default=128)
     parser.add_argument('--test_batch_size', type=int, default=1)
     parser.add_argument('--cuda', action='store_true', default=True)
-    parser.add_argument('--max_epoch', type=int, default=10)
+    parser.add_argument('--max_epoch', type=int, default=2)
     parser.add_argument('--valid_epoch', type=int, default=25)
     parser.add_argument('--beta', type=float, default=1.0)
     parser.add_argument('--plm', type=str, default='roberta-base')
