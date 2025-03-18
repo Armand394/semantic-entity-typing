@@ -5,7 +5,7 @@ from dataloader import SEMdataset
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
 
-device = torch.device('cuda:0')
+device = torch.device('cuda:1')
 
 def main(args):
     use_cuda = args['cuda'] and torch.cuda.is_available()
