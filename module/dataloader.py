@@ -75,14 +75,13 @@ class SEMdataset(Dataset):
         kg_content = self.data[index][1]
         ent = self.data[index][2]
 
-        if len(et_content) == 0:
-            raise ValueError(f"et_content est vide pour l'index {index} dans le DataLoader.")
+        # if len(et_content) == 0:
+        #     raise ValueError(f"et_content est vide pour l'index {index} dans le DataLoader.")
 
         single_et_np_list = []
-        
         if self.sample_et_size != 1:
             sampled_index = np.random.choice(range(0, len(et_content)), size=self.sample_et_size,
-                                             replace=len(range(0, len(et_content))) < self.sample_et_size)
+                                            replace=len(range(0, len(et_content))) < self.sample_et_size)
             for i in sampled_index:
                 single_et_np_list.append(et_content[i])
         else:
@@ -91,7 +90,7 @@ class SEMdataset(Dataset):
         single_kg_np_list = []
         if self.sample_kg_size != 1:
             sampled_index = np.random.choice(range(0, len(kg_content)), size=self.sample_kg_size,
-                                             replace=len(range(0, len(kg_content))) < self.sample_kg_size)
+                                            replace=len(range(0, len(kg_content))) < self.sample_kg_size)
             for i in sampled_index:
                 single_kg_np_list.append(kg_content[i])
         else:
@@ -104,6 +103,7 @@ class SEMdataset(Dataset):
 
         gt_ent = ent
 
+        print()
         if self.data_flag == 'test':
             # for test, we need all neighbor information
             # Nevertheless, using all neighbor information directly needs a considerable GPU memory which is not

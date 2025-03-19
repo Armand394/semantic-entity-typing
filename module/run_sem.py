@@ -4,8 +4,13 @@ from SEM import SEM
 from dataloader import SEMdataset
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
+import os
+import subprocess
+from tqdm import tqdm  # make sure to install tqdm: pip install tqdm
 
-device = torch.device('cuda:1')
+result = subprocess.check_output("nvidia-smi", shell=True)
+print(result.decode())
+device = torch.device('cuda:0')
 
 def main(args):
     use_cuda = args['cuda'] and torch.cuda.is_available()
@@ -28,9 +33,9 @@ def main(args):
         print(f"Using GPU: {gpu_name}")
         sample_ent2pair = torch.LongTensor(load_entity_cluster_type_pair_context(args, r2id, e2id)).cuda()
     
-    train_dataset = SEMdataset(args, "LMET_train2.txt", e2id, r2id, t2id, c2id, 'train')
-    valid_dataset = SEMdataset(args, "LMET_valid2.txt", e2id, r2id, t2id, c2id, 'valid')
-    test_dataset = SEMdataset(args, "LMET_test2.txt", e2id, r2id, t2id, c2id, 'test')
+    train_dataset = SEMdataset(args, "LMET_train.pkl", e2id, r2id, t2id, c2id, 'train')
+    valid_dataset = SEMdataset(args, "LMET_valid.pkl", e2id, r2id, t2id, c2id, 'valid')
+    test_dataset = SEMdataset(args, "LMET_test.pkl", e2id, r2id, t2id, c2id, 'test')
 
 
     train_dataloader = DataLoader(train_dataset,
@@ -142,7 +147,8 @@ def main(args):
         et_mask_index = (et_seq_tokens.input_ids == tokenizer.mask_token_id).nonzero(as_tuple=True)
         return et_seq_tokens, et_mask_index
 
-    for epoch in range(args['max_epoch']):
+
+    for epoch in tqdm(range(args['max_epoch']), desc='Train'):
         log = []
         iter = 0
         for sample_et_content, sample_kg_content, gt_ent in train_dataloader:
@@ -265,10 +271,16 @@ def main(args):
 
     logging.debug('-----------------------best test step-----------------------')
     with torch.no_grad():
-        model.load_state_dict(torch.load(os.path.join(save_path, 'FB15kET_SEM_roberta-base.pkl')))
+        if torch.cuda.is_available():
+            print(f"Current GPU: {torch.cuda.get_device_name(torch.cuda.current_device())}")
+        else:
+            print("No GPU available")
+
+        model.load_state_dict(torch.load(os.path.join(save_path, 'best_model.pkl')))
         model.eval()
         predict = torch.zeros(num_entities, num_types, dtype=torch.half)
-        for sample_et_content, sample_kg_content, gt_ent in test_dataloader:
+        for sample_et_content, sample_kg_content, gt_ent in tqdm(
+            test_dataloader, desc="Testing"):
             bs = sample_kg_content.shape[0]
             kg_seq_tokens, kg_mask_index = tokenize_with_mask(sample_kg_content)
             et_seq_tokens, et_mask_index = tokenize_known_type(sample_et_content)
