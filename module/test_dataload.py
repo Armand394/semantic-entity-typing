@@ -32,7 +32,7 @@ def main(args):
 def get_params():
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default='./data')
-    parser.add_argument('--dataset', type=str, default='FB15kET_sample')
+    parser.add_argument('--dataset', type=str, default='FB15kET')
     parser.add_argument('--save_dir', type=str, default='save')
     parser.add_argument('--save_path', type=str, default='SFNA')
     parser.add_argument('--hidden_dim', type=int, default=100)
