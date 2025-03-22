@@ -37,7 +37,6 @@ def main(args):
     valid_dataset = SEMdataset(args, "LMET_valid.pkl", e2id, r2id, t2id, c2id, 'valid')
     test_dataset = SEMdataset(args, "LMET_test.pkl", e2id, r2id, t2id, c2id, 'test')
 
-
     train_dataloader = DataLoader(train_dataset,
                                   batch_size=args['train_batch_size'],
                                   shuffle=True,
