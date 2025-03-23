@@ -14,8 +14,8 @@ def group_by_entity(data):
         entity_dict[entity]["list2"].extend(triplets2)
     return entity_dict
 
-file1 = "./data/FB15kET/LMET_train.pkl"
-file2 = "./data/FB15kET/LMET_train2.pkl"
+file1 = "./data/FB15kET/LMET_valid.pkl"
+file2 = "./data/FB15kET/LMET_valid2.pkl"
 
 data1 = load_pkl(file1)
 data2 = load_pkl(file2)
@@ -23,7 +23,6 @@ data2 = load_pkl(file2)
 dict1 = group_by_entity(data1)
 dict2 = group_by_entity(data2)
 
-# Exemple de comparaison des nombres de triplets pour chaque entité
 for entity in dict1:
     if entity in dict2:
         len1 = len(dict1[entity]["list1"]) + len(dict1[entity]["list2"])
