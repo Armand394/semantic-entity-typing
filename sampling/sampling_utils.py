@@ -8,7 +8,6 @@ import shutil
 
 tqdm.pandas() 
 
-
 # Function to load a directed graph from a text file
 def load_graph_from_txt(file_path):
     G = nx.DiGraph()  # Create a directed graph
@@ -62,7 +61,8 @@ def filter_types_data(sampled_triplets_file, et_file, output_file):
         for line in f:
             parts = line.strip().split("\t")
             if len(parts) == 3:
-                entities_in_sampled.add(parts[0])  
+                entities_in_sampled.add(parts[0])
+                entities_in_sampled.add(parts[2])  
     
     # Open write all types for only entities still in graph
     with open(et_file, "r", encoding="utf-8") as fin, open(output_file, "w", encoding="utf-8") as fout:
@@ -71,98 +71,121 @@ def filter_types_data(sampled_triplets_file, et_file, output_file):
             if len(parts) == 2 and parts[0] in entities_in_sampled:  
                 fout.write(line)
 
+# Make args dictionary for SEMDataset
+def args_dict(data_dir, dataset, sample_et_size=0, sample_kg_size=0):
+    args = {}
+    args["sample_et_size"] = sample_et_size
+    args["sample_kg_size"] = sample_kg_size
+    args["data_dir"] = data_dir
+    args["dataset"] = dataset
+    return args
 
-def get_cluster_name_from_type_FB(type_name):
-    if len(type_name.split('/')) < 2:
-        return type_name
+# === 1. CHARGEMENT DES FICHIERS TSV ===
+def load_tsv(file_path):
+    """Charge un fichier TSV sous forme de dictionnaire {id: nom}"""
+    data_dict = {}
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            parts = line.strip().split("\t")
+            if len(parts) == 2:
+                data_dict[parts[1]] = parts[0]  
+    return data_dict
+
+# === 2. CHARGEMENT DU FICHIER KG_train.txt AVEC RELATIONS INVERSÉES ET FILTRAGE DES SELF-LOOPS ===
+def load_kg(file_path):
+    """Charge les relations sous forme de dictionnaire {entité: [(relation, objet)]}, sans self-loop"""
+    kg = {}
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            parts = line.strip().split("\t")
+            if len(parts) == 3:
+                head, relation, tail = parts
+                
+                if head == tail:
+                    continue  
+
+                if head not in kg:
+                    kg[head] = []
+                kg[head].append((relation, tail))
+
+                inverse_relation = "inv-" + relation
+                if tail not in kg:
+                    kg[tail] = []
+                kg[tail].append((inverse_relation, head))
+    return kg
+
+# === 3. CHARGEMENT DU FICHIER ET_train.txt ET AJOUT DES ENTITÉS ===
+def load_et(file_path):
+    """Charge les types sous forme de dictionnaire {entité: [types]}"""
+    et = {}
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            parts = line.strip().split("\t")
+            if len(parts) == 2:
+                entity, entity_type = parts
+                if entity not in et:
+                    et[entity] = []
+                et[entity].append(entity_type)
+    return et
+
+# === 4. FILTRER LES ENTITÉS DE ET_test.txt ET ET_valid.txt ===
+def filter_et_by_kg(et_dict, kg_dict):
+    """Filtre les entités de et_dict pour ne garder que celles qui sont dans kg_dict"""
+    return {entity: types for entity, types in et_dict.items() if entity in kg_dict}
+
+# === 5. FONCTION D'EXTRACTION DU CLUSTER ===
+def extract_cluster(type_str):
+    """Extrait le cluster à partir du type donné en suivant les règles spécifiées"""
+    parts = type_str.split("/")
     
-    cluster_name = type_name.split('/')
-    if cluster_name[1] == 'base':
-        return f"/{cluster_name[1]}/{cluster_name[2]}"
+    if type_str.startswith("/base/") and len(parts) > 2:
+        return f"/base/{parts[2]}" 
+    elif len(parts) > 1:
+        return parts[1] 
+    else:
+        return "unknown"
+
+# === 6. CONSTRUCTION DU FICHIER FINAL ===
+def construct_output(kg_dict, et_train_dict, et_valid_dict, et_filter_dict, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train"):
+    """Construit le fichier texte final avec la structure demandée, incluant les entités supplémentaires"""
     
-    return cluster_name[1]
-
-def get_cluster_name_from_type_YG(type_name):
-    if len(type_name.split('_')) < 2:
-        return type_name
-    cluster_name = type_name.split('_')[1]
-    return cluster_name
-
-
-def convert_to_pkl(KG_path, KG_file, ET_file, output_file, get_clust_name_fonc=get_cluster_name_from_type_FB):
-    """
-    @brief convert a knowledge graph into a pkl accepted by SSET
-    @param KG_path : folder where clusters.tsv, entities.tsv and type.tsv are present
-    @param KG_file : KG file to convert (Formatted as -> entity_A\trel\tentity_B)
-    @param ET_file : ET file to convert (Formatted as -> entity\ttype)
-    @param get_clust_name_fonc : function to get cluster from type must take type and df_clust as input
-    @param output_file : pkl generated
-    """
-    rel_path = os.path.join(KG_path, 'relations.tsv')
-    df_rel = pd.read_csv(rel_path, sep='\t', header=None, names=['relation', 'id'])
-    rel_count = len(df_rel)
-
-    ent_path = os.path.join(KG_path, 'entities.tsv')
-    df_ent = pd.read_csv(ent_path, sep='\t', header=None, names=['entity', 'id'])
-    ent_count = len(df_ent)
-
-    type_path = os.path.join(KG_path, 'types.tsv')
-    df_type = pd.read_csv(type_path, sep='\t', header=None, names=['type', 'id'])
-    df_type['id'] += ent_count
-
-    clust_path = os.path.join(KG_path, 'clusters.tsv')
-    df_clust = pd.read_csv(clust_path, sep='\t', header=None, names=['cluster', 'id'], keep_default_na=False)
-    df_clust['id'] += rel_count
+    relation_0 = relation_dict.get("0", "0")  # Relation correspondant à l'ID 0
+    entity_0 = entite_dict.get("0", "0")  # Entité correspondant à l'ID 0
     
-    df_kg = pd.read_csv(KG_file, sep='\t', header=None, names=['entity', 'relation', 'entity_2'])
-
-    df_kg_id = (
-        df_kg.merge(df_ent, on="entity")
-            .rename(columns={"id": "id_1", "entity": "entity_1", "entity_2": "entity"})
-            .merge(df_ent, on="entity")
-            .rename(columns={"id": "id_2", "entity": "entity_2"})
-            .merge(df_rel, on="relation")
-            .rename(columns={"id": "rel_id"})
-            [["id_1", "rel_id", "id_2"]]
-    )
-    df_et = pd.read_csv(ET_file, sep='\t', header=None, names=['entity', 'type'])
+    last_cluster = cluster_dict.get(list(cluster_dict.keys())[-1], "unknown")
+    last_type = type_dict.get(list(type_dict.keys())[-1], "unknown")
     
-    df_et_id = (
-        df_et.merge(df_type.assign(clust_id=df_type['type'].progress_apply(lambda t: df_clust[df_clust['cluster'] == get_clust_name_fonc(t)]['id'].iloc[0])), on='type')
-        .rename(columns={'id': 'type_id'})[['entity', 'clust_id', 'type_id']]
-        .merge(df_ent, on='entity')
-        .rename(columns={'id': 'ent_id'})[['ent_id', 'clust_id', 'type_id']]
-    )
+    if mode == "train":
+        all_entities = set(kg_dict.keys()).union(set(et_train_dict.keys())).union(set(et_valid_dict.keys()))
+    else: 
+        all_entities = set(et_filter_dict.keys())
 
-    triplets_list = [
-    (df_et_id[(df_et_id['ent_id'] == ent_id)].values.tolist()
-     , df_kg_id[(df_kg_id['id_1'] == ent_id) | (df_kg_id['id_2'] == ent_id)].values.tolist()
-     , ent_id)    
-    for ent_id in tqdm(df_ent['id'])
-    ]
+    with open(output_file, "w", encoding="utf-8") as f:
+        for entity in all_entities:
+            entity_name = entite_dict.get(entity, entity)  
 
-    if output_file is not None:
-        with open(output_file, 'wb') as f:
-            pickle.dump(triplets_list, f)
+            types = et_train_dict.get(entity, []) + et_valid_dict.get(entity, [])
+            types_part = " [SEP] ".join([ 
+                f"{entity_name} {extract_cluster(type_dict.get(t, t))} {type_dict.get(t, t)}"
+                for t in types
+            ])
 
-    return triplets_list
+            if not types:
+                types_part = f"{entity_name} {last_cluster} {last_type}"
 
+            relations_part = " [SEP] ".join([ 
+                f"{entity_name} {relation_dict.get(rel, rel)} {entite_dict.get(tail, tail)}"
+                for rel, tail in kg_dict.get(entity, [])
+                if entity != tail 
+            ])
 
-def filter_pkl(pkl_file, entities):
-    # Open the original pickle file in read-binary mode
-    with open(pkl_file, "rb") as f:
-        data = pickle.load(f)
+            if not relations_part:
+                relations_part = f"{entity_name} {relation_0} {entity_0}"
 
-    # Filter out empty (et, kg) tuples
-    filtered_data = [(et, kg, eid) for et, kg, eid in data if eid in entities]
-
-    # Save the filtered data to a new pickle file in write-binary mode
-    with open(pkl_file, "wb") as f:
-        pickle.dump(filtered_data, f)
+            f.write(f"{entity_name} ||| {types_part} ||| {relations_part} ||| cluster \n")
 
 
 def copy_other_kg_files(source_folder, destination_folder):
-
     # Loop over all items in the source folder
     for filename in os.listdir(source_folder):
         source_file = os.path.join(source_folder, filename)
@@ -173,4 +196,3 @@ def copy_other_kg_files(source_folder, destination_folder):
             # Copy the file only if it doesn't already exist in the destination
             if not os.path.exists(destination_file):
                 shutil.copy2(source_file, destination_file)
-                print(filename)

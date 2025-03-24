@@ -3,18 +3,25 @@ import random
 import os
 from sampling_utils import *
 from utils import read_id
+from dataloader import SEMdataset
 
 def main(dataset="FB15kET", sampled_folder="FB15kET_sample", generate_2hopsample=True):
     # Get data file paths
     project_path = os.getcwd()
+    data_folder = os.path.join(project_path, "data")
     data_dir = os.path.join(project_path, "data", dataset)
     data_sample_dir = os.path.join(project_path, "data", f"{dataset}_sample")
     result_path = os.path.join(project_path, "data_entity_metrics")
     os.makedirs(data_sample_dir, exist_ok=True)
 
+    # Load dictionaries
+    e2id = read_id(os.path.join(data_dir, 'entities.tsv'))
+    r2id = read_id(os.path.join(data_dir, 'relations.tsv'))
+    t2id = read_id(os.path.join(data_dir, 'types.tsv'))
+    c2id = read_id(os.path.join(data_dir, 'clusters.tsv'))
+
     # Load relationships
     G = load_graph_from_txt(os.path.join(data_dir, "KG_train.txt"))
-    e2id = read_id(os.path.join(data_dir, 'entities.tsv'))
 
     # Sample random nodes with highest degree
     num_hubs = 300 
@@ -37,55 +44,52 @@ def main(dataset="FB15kET", sampled_folder="FB15kET_sample", generate_2hopsample
     edges = [(u, d["relation"], v, ) for u, v, d in G_sampled.edges(data=True)]
     save_triplets_to_txt(edges, file_path=os.path.join(data_sample_dir, "KG_train.txt"))
 
+    kg_train_path = os.path.join(data_sample_dir, "KG_train.txt")
 
     # Filter train types with sampled entities in KG
-    filter_types_data(os.path.join(data_sample_dir, "KG_train.txt"), os.path.join(data_dir, "ET_train.txt"),
+    filter_types_data(kg_train_path, os.path.join(data_dir, "ET_train.txt"),
                     os.path.join(data_sample_dir, "ET_train.txt"))
 
     # Filter valid types with sampled entities in KG
-    filter_types_data(os.path.join(data_sample_dir, "KG_train.txt"), os.path.join(data_dir, "ET_valid.txt"),
+    filter_types_data(kg_train_path, os.path.join(data_dir, "ET_valid.txt"),
                     os.path.join(data_sample_dir, "ET_valid.txt"))
 
     # Filter test types with sampled entities in KG
-    filter_types_data(os.path.join(data_sample_dir, "KG_train.txt"), os.path.join(data_dir, "ET_test.txt"),
+    filter_types_data(kg_train_path, os.path.join(data_dir, "ET_test.txt"),
                     os.path.join(data_sample_dir, "ET_test.txt"))
 
     # Debug print
     print("ET files with sampled graph saved")
     
-    # Create pkl files (unfiltered)
-    kg_train_path = os.path.join(data_sample_dir, "KG_train.txt")
+    # Chargement des dictionnaires à partir des fichiers TSV
+    entite_dict = load_tsv(os.path.join(data_dir, "entities.tsv"))
+    relation_dict = load_tsv(os.path.join(data_dir, "relations.tsv"))
+    type_dict = load_tsv(os.path.join(data_dir, "types.tsv"))
+    cluster_dict = load_tsv(os.path.join(data_dir, "clusters.tsv"))
 
-    # Get cluster id function
-    if dataset == "FB15kET":
-        get_clust_name_fonc = get_cluster_name_from_type_FB
-    else:
-        get_clust_name_fonc = get_cluster_name_from_type_YG
+    # Chargement des données KG et ET
+    kg_dict = load_kg(os.path.join(data_sample_dir,"KG_train.txt"))
+    et_train_dict = load_et(os.path.join(data_sample_dir,"ET_train.txt"))
+    et_valid_dict = load_et(os.path.join(data_sample_dir,"ET_valid.txt"))
+    et_test_dict = load_et(os.path.join(data_sample_dir,"ET_test.txt"))
 
-    # Convert to pkl
-    triplets_list = convert_to_pkl(data_dir, kg_train_path, os.path.join(data_sample_dir,'ET_train.txt')
-                                    , os.path.join(data_sample_dir,'LMET_train.pkl'), get_clust_name_fonc=get_clust_name_fonc)
+    # Construct train./valid .txt files for dataloading
+    construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict,
+                     output_file=os.path.join(data_sample_dir, "LMET_train.txt"), mode="train")
+    construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict,
+                     output_file=os.path.join(data_sample_dir, "LMET_valid.txt"), mode="train")
 
-    triplets_list = convert_to_pkl(data_dir, kg_train_path, os.path.join(data_sample_dir,'ET_train.txt')
-                                    , os.path.join(data_sample_dir,'LMET_test.pkl'))
+    # Construct test .txt files 
+    filtered_et_test_dict = filter_et_by_kg(et_test_dict, kg_dict)
+    construct_output(kg_dict, et_train_dict, et_valid_dict, filtered_et_test_dict, entite_dict, relation_dict, type_dict,
+                     cluster_dict, output_file=os.path.join(data_sample_dir, "LMET_test.txt"), mode="test")
+    
+    print(".txt files with sampled graph saved")
 
-    triplets_list = convert_to_pkl(data_dir, kg_train_path, os.path.join(data_sample_dir,'ET_train.txt')
-                                    , os.path.join(data_sample_dir,'LMET_valid.pkl'))
-
-    # filter pkl files: Entities in train split set 
-    df_et_train = pd.read_csv(os.path.join(data_sample_dir, "ET_train.txt"), sep='\t', header=None)
-    ids = [e2id[entity] for entity in list(df_et_train[0].unique()) if entity in e2id]
-    filter_pkl(os.path.join(data_sample_dir,'LMET_train.pkl'), entities=ids)
-
-    # filter pkl files: Entities in valid split set 
-    df_et_valid = pd.read_csv(os.path.join(data_sample_dir, "ET_valid.txt"), sep='\t', header=None)
-    ids = [e2id[entity] for entity in list(df_et_valid[0].unique()) if entity in e2id]
-    filter_pkl(os.path.join(data_sample_dir,'LMET_valid.pkl'), entities=ids)
-
-    # filter pkl files: Entities in test split set
-    df_et_test = pd.read_csv(os.path.join(data_dir, "ET_test.txt"), sep='\t', header=None)
-    ids = [e2id[entity] for entity in list(df_et_test[0].unique()) if entity in e2id]
-    filter_pkl(os.path.join(data_sample_dir,'LMET_test.pkl'), entities=ids)
+    args = args_dict(dataset=f"{dataset}_sample", data_dir=data_folder)
+    SEMdataset(args, "LMET_train.txt", e2id, r2id, t2id, c2id, 'train')
+    SEMdataset(args, "LMET_test.txt", e2id, r2id, t2id, c2id, 'test')
+    SEMdataset(args, "LMET_valid.txt", e2id, r2id, t2id, c2id, 'valid')
     
     print(".pkl files with sampled graph saved")
 
@@ -113,40 +117,33 @@ def main(dataset="FB15kET", sampled_folder="FB15kET_sample", generate_2hopsample
 
         kg_new2hop.to_csv(os.path.join(data_sample_dir_2hop,"KG_train.txt"),sep='\t', header=None, index=None)
         et_new2hop.to_csv(os.path.join(data_sample_dir_2hop,"ET_train.txt"), sep='\t', header=None, index=None)
+        print("New 2-hop train files saved")
 
-        # Convert to pkl
-        triplets_list = convert_to_pkl(data_dir, os.path.join(data_sample_dir_2hop,"KG_train.txt"),
-                                       os.path.join(data_sample_dir_2hop,'ET_train.txt'),
-                                       os.path.join(data_sample_dir_2hop,'LMET_train.pkl'), get_clust_name_fonc=get_clust_name_fonc)
-        
-        triplets_list = convert_to_pkl(data_dir, os.path.join(data_sample_dir_2hop,"KG_train.txt"),
-                                os.path.join(data_sample_dir_2hop,'ET_train.txt'),
-                                os.path.join(data_sample_dir_2hop,'LMET_test.pkl'), get_clust_name_fonc=get_clust_name_fonc)
-        
-        triplets_list = convert_to_pkl(data_dir, os.path.join(data_sample_dir_2hop,"KG_train.txt"),
-                        os.path.join(data_sample_dir_2hop,'ET_train.txt'),
-                        os.path.join(data_sample_dir_2hop,'LMET_valid.pkl'), get_clust_name_fonc=get_clust_name_fonc)
+        # Load new train data with 2-hop knowledge
+        kg_dict = load_kg(os.path.join(data_sample_dir_2hop,"KG_train.txt"))
+        et_train_dict = load_et(os.path.join(data_sample_dir_2hop,"ET_train.txt"))
 
-        # Copy other dataset files
+        # Construct train/valid .txt files for dataloading
+        construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict,
+                        output_file=os.path.join(data_sample_dir_2hop, "LMET_train.txt"), mode="train")
+        construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict,
+                        output_file=os.path.join(data_sample_dir_2hop, "LMET_valid.txt"), mode="train")
+
+        # Construct test .txt files 
+        filtered_et_test_dict = filter_et_by_kg(et_test_dict, kg_dict)
+        construct_output(kg_dict, et_train_dict, et_valid_dict, filtered_et_test_dict, entite_dict, relation_dict, type_dict,
+                        cluster_dict, output_file=os.path.join(data_sample_dir_2hop, "LMET_test.txt"), mode="test")
+
+        args = args_dict(dataset=f"{dataset}_sample_2hop", data_dir=data_folder)
+
+        SEMdataset(args, "LMET_train.txt", e2id, r2id, t2id, c2id, 'train')
+        SEMdataset(args, "LMET_test.txt", e2id, r2id, t2id, c2id, 'test')
+        SEMdataset(args, "LMET_valid.txt", e2id, r2id, t2id, c2id, 'valid')
+        
+        print(".pkl files with sampled graph saved")
+       
+       # Copy other dataset files (no sampling)
         copy_other_kg_files(data_sample_dir, data_sample_dir_2hop)
-        
-        # filter pkl files: Entities in train split set 
-        df_et_train = pd.read_csv(os.path.join(data_sample_dir_2hop, "ET_train.txt"), sep='\t', header=None)
-        ids = [e2id[entity] for entity in list(df_et_train[0].unique()) if entity in e2id]
-        filter_pkl(os.path.join(data_sample_dir_2hop,'LMET_train.pkl'), entities=ids)
-
-        # filter pkl files: Entities in valid split set 
-        df_et_valid = pd.read_csv(os.path.join(data_sample_dir_2hop, "ET_valid.txt"), sep='\t', header=None)
-        ids = [e2id[entity] for entity in list(df_et_valid[0].unique()) if entity in e2id]
-        filter_pkl(os.path.join(data_sample_dir_2hop,'LMET_valid.pkl'), entities=ids)
-
-        # filter pkl files: Entities in test split set
-        df_et_test = pd.read_csv(os.path.join(data_sample_dir_2hop, "ET_test.txt"), sep='\t', header=None)
-        ids = [e2id[entity] for entity in list(df_et_test[0].unique()) if entity in e2id]
-        filter_pkl(os.path.join(data_sample_dir_2hop,'LMET_test.pkl'), entities=ids)
-
-        print("Created .pkl file with 2-hop neighbors")
-
 
 if __name__ == '__main__':
     main()
