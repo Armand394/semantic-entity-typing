@@ -5,6 +5,19 @@ import matplotlib.patches as mpatches
 import pandas as pd
 import numpy as np
 
+# Apply global settings
+plt.rcParams.update({
+    'axes.spines.right': False,   # Enable right spine (solid)
+    'axes.spines.top': False,     # Enable top spine (solid)
+    'axes.grid': True,           # Enable grid
+    'grid.alpha': 0.4,           # Make the grid transparent (adjust alpha)
+    'xtick.direction': 'out',     # Tickmarks on x-axis (inside)
+    'ytick.direction': 'out',     # Tickmarks on y-axis (inside)
+    'grid.linestyle': '--',      # Dashed grid (can be changed)
+    'axes.edgecolor': 'black',   # Ensure spines are visible
+    'axes.linewidth': 1.2,        # Make spines slightly thicker
+    'axes.labelsize': 11
+})
 
 def plot_percentages_ranks(df_rank, result_folder):
     # Compute percentage of types with rank above thresholds
@@ -271,4 +284,48 @@ def frequent_clusters_plot(cluster_labels, clustered_entities, entities_good_top
         plt.legend(handles=legend_patches_bad, fontsize=10)
     plt.tight_layout()
     plt.savefig(os.path.join(result_folder, "top_clusters_bad_normalized.png"))
+    plt.close()
+
+
+
+def box_plot_metrics(metrics_df, columns, fig_name, figure_folder):
+
+    latex_labels = {
+    'avg_ttr': r'$TTT_{\mu}$',
+    'triple_train_coherence_mean': r'$RTcC_{\mu}$',
+    'triple_train_coherence_std': r'$RTcC_{\sigma}$',
+    'triple_self_coherence_mean': r'$RC_{\mu}$',
+    'triple_self_coherence_std': r'$RC_{\sigma}$',
+    'type_self_coherence_mean': r'$TC_{\mu}$',
+    'type_self_coherence_std': r'$TC_{\sigma}$',
+    'direct_neighbors': r'$dir_n$',
+    'type_triple_ratio': r'$(T\!-\!R)_{ratio}$',
+    'avg_triple_length': r'$R_{alen}$',
+    'avg_type_length': r'$T_{alen}$'
+    }
+
+    figure = os.path.join(figure_folder, f"boxplot_{fig_name}.png")
+
+    # Melt the DataFrame to long format for plotting
+    df_melted = metrics_df.melt(id_vars='y', 
+                        value_vars= columns,
+                        var_name='Metric', value_name='Value')
+
+    # Map the column names to LaTeX-style metric names
+    df_melted['Metric'] = df_melted['Metric'].map(latex_labels)
+
+    # Define custom colors for the classes
+    custom_palette = {0: "firebrick", 1: "limegreen"}
+
+    # Create the boxplot with custom colors
+    plt.figure(figsize=(12, 6))
+    sns.boxplot(x='Metric', y='Value', hue='y', data=df_melted, palette=custom_palette)
+
+    # Improve plot aesthetics
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel("Metric")
+    plt.ylabel("Value")
+    plt.legend(title="Class (y)", loc='upper right')
+    plt.tight_layout()
+    plt.savefig(figure)
     plt.close()

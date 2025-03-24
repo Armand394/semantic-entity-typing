@@ -1,7 +1,7 @@
 from tools_kg import *
-from analysis import *
-from data_cleaning import *
-from data_visualization import *
+from data_stats import *
+from cleaning import *
+from visualisations import *
 from pathlib import Path
 import os
 import json
@@ -9,6 +9,7 @@ import pandas as pd
 import statsmodels.api as sm
 from wordfreq import top_n_list
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import MinMaxScaler
 
 # Specify locations for loading and saving data
 project_folder = Path(__file__).parent.parent
@@ -107,15 +108,6 @@ else:
 df_stats_correct = rename_columns(df_stats_correct)
 df_stats_bad = rename_columns(df_stats_bad)
 
-plot_metrics_classif(df_stats_correct, df_stats_bad, "(r-tr) (mean)", "tr (AC) (mean)", figures_folder,
-                     xlabel=r"RTcC_{\mu}", ylabel=r"TC_{\mu}")
-
-plot_metrics_classif(df_stats_correct, df_stats_bad, "(r-tr) (mean)", "TTR (avg)", figures_folder,
-                     xlabel=r"RTcC_{\mu}", ylabel=r"TTT_{\mu}")
-
-plot_metrics_classif(df_stats_correct, df_stats_bad, "r (AC) (std)", "(r-tr) (std)", figures_folder,
-                     xlabel=r"RC_{\sigma}", ylabel=r"RTcC_{\sigma}")
-
 # Add the classification column
 df_stats_correct["y"] = 1
 df_stats_bad["y"] = 0 
@@ -123,6 +115,24 @@ df_stats_bad["y"] = 0
 # Dataframe with final features
 df_final = pd.concat([df_stats_correct, df_stats_bad], ignore_index=True)
 df_final = df_final.drop(columns=["entity"])
+
+coherence_columns = ["triple_train_coherence_mean", "triple_train_coherence_std",
+                                         'triple_self_coherence_mean', 'triple_self_coherence_std',
+                                            'type_self_coherence_mean', 'type_self_coherence_std']
+
+box_plot_metrics(df_final, coherence_columns, fig_name="coherence_metrics", figure_folder=figures_folder)
+
+# Columns you want to scale
+cols_to_scale = ['direct_neighbors', 'type_triple_ratio', 'avg_triple_length',
+                 'avg_type_length', 'avg_ttr']
+
+# Initialize the scaler
+scaler = MinMaxScaler()
+
+# Fit and transform the selected columns
+df_final[cols_to_scale] = scaler.fit_transform(df_final[cols_to_scale])
+
+box_plot_metrics(df_final, cols_to_scale, fig_name="text_metrics", figure_folder=figures_folder)
 
 # Compute descriptive statistics features
 descriptive_stats_features(df_final, result_folder)
@@ -157,18 +167,3 @@ with open(output_file, "w") as f:
 # Do the test of differences in distribution between correct and wrong for variables
 output_tests = os.path.join(result_folder, "stat_test_distribution.csv")
 df_test_results = apply_statistical_tests_and_save(df_final, output_tests)
-
-print('start clustering')
-# Find mean embedding for each entity
-entity_embeddings = compute_mean_embeddings(df_KG_train_text)
-# Find clusters
-optimal_k = find_optimal_clusters(entity_embeddings, max_clusters=500, result_folder=figures_folder)
-print('optimal cluster', optimal_k)
-# Cluster entities
-clustered_entities = cluster_entities(entity_embeddings, num_clusters=optimal_k)
-# Label clusters
-word_list = top_n_list("en", 1000)
-cluster_labels = label_clusters_with_nearest_words(clustered_entities, entity_embeddings, word_list)
-
-# Plot clusters
-frequent_clusters_plot(cluster_labels, clustered_entities, correct_entities, wrong_entities, result_folder=figures_folder)

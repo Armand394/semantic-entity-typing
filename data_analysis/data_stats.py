@@ -6,19 +6,6 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import json
 
-# Specify locations for loading and saving data
-project_folder = Path(__file__).parent.parent
-data_folder = os.path.join(project_folder, "Data")
-result_folder = os.path.join(project_folder, "Results", "Descriptive statistics")
-
-# Specify dataset names
-dataset_name_FB = 'FB15kET_stats'
-dataset_name_YG = 'YAGO43kET_stats'
-
-# Specify data folder
-data_folder_FB = os.path.join(data_folder, "FB15kET")
-data_folder_YG = os.path.join(data_folder, "YAGO43kET")
-
 
 def run_stats_analysis(data_folder, dataset, folder_result):
 
@@ -269,6 +256,69 @@ def plot_entity_graph(entity_example, filtered_triples, filtered_train, filtered
     plt.title(f"Graph for Entity: {entity_example}")
     plt.savefig(figure_result)
 
+def hop_2_rel_neighbors(df_triples, data_folder):
+
+    if not os.path.exists(os.path.join(data_folder,"two_hop_neighbors.json")):
+        # Retrieve columns
+        e_col, r_col, s_col = df_triples.columns
+
+        # Step 1: Construct adjacency lists for incoming & outgoing relations (store relations as well)
+        outgoing_map = defaultdict(set)
+        incoming_map = defaultdict(set)
+
+        # Fill adjacency maps with (neighbor, relation) tuples
+        for obj, rel, subj in zip(df_triples[e_col], df_triples[r_col], df_triples[s_col]):
+            outgoing_map[obj].add((subj, rel))  # object -> subject (relation)
+            incoming_map[subj].add((obj, rel))  # subject <- object (relation)
+
+        # Step 2: Compute 2-hop neighbors with labeled relations
+        two_hop_neighbors = defaultdict(list)
+
+        # Step 2: Compute and write 2-hop neighbors line by line
+        json_file_path = os.path.join(data_folder, "two_hop_neighbors.json")
+
+        with open(json_file_path, "w") as f:
+            f.write("{\n")  # Start JSON object
+            first_entry = True  # To control comma placement
+
+            for entity in set(outgoing_map.keys()).union(set(incoming_map.keys())):
+                neighbors = set()
+
+                # CASE 1: (object_x --> mid --> object_z) -> Label format: "r z"
+                for mid, r1 in outgoing_map[entity]:  
+                    for obj_z, r2 in outgoing_map.get(mid, set()):  
+                        neighbors.add((obj_z, f"{r2} {obj_z}"))
+
+                # CASE 2: (object_x <-- mid <-- object_z) -> Label format: "z r"
+                for mid, r1 in incoming_map[entity]:  
+                    for obj_z, r2 in incoming_map.get(mid, set()):  
+                        neighbors.add((obj_z, f"{obj_z} {r2}"))
+
+                # CASE 3: (object_x --> mid <-- object_z) -> Label format: "z r"
+                for mid, r1 in outgoing_map[entity]:  
+                    for obj_z, r2 in incoming_map.get(mid, set()):  
+                        neighbors.add((obj_z, f"{obj_z} {r2}"))
+
+                # CASE 4: (object_x <-- mid --> object_z) -> Label format: "r z"
+                for mid, r1 in incoming_map[entity]:
+                    for obj_z, r2 in outgoing_map.get(mid, set()):  
+                        neighbors.add((obj_z, f"{r2} {obj_z}"))
+
+                # Write entity's neighbors to file line by line
+                if neighbors:
+                    if not first_entry:
+                        f.write(",\n")  # Add comma except for the first entry
+                    first_entry = False
+
+                    json.dump({entity: list(neighbors)}, f)
+
+            f.write("\n}")  # End JSON object
+
+    # open
+    with open(os.path.join(data_folder, 'two_hop_neighbors.json'), "r") as f:
+        two_hop_neighbors = json.load(f)
+
+    return two_hop_neighbors
 
 def load_data(data_folder):
     # Specify files 1
@@ -292,9 +342,3 @@ def load_data(data_folder):
     return df_entities, df_relations, df_types, df_triples, df_train, df_test, df_validate
 
 
-
-if __name__ == "__main__":
-    run_stats_analysis(data_folder_FB, dataset_name_FB, result_folder)
-    run_stats_analysis(data_folder_YG, dataset_name_YG, result_folder)
-    plot_sample_graph(data_folder_FB, result_folder, "Sample graph FB")
-    plot_sample_graph(data_folder_YG, result_folder, "Sample graph YG", FB=False)

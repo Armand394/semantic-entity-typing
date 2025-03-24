@@ -3,14 +3,14 @@ from collections import Counter
 from sentence_transformers import SentenceTransformer, util
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from scipy.stats import shapiro, ttest_ind, mannwhitneyu
+from scipy.stats import mannwhitneyu
 import os
 import seaborn as sns
 import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-import numpy as np
 from sklearn.cluster import KMeans
+import networkx as nx
+from collections import defaultdict
+import json
 
 # Apply global settings
 plt.rcParams.update({
@@ -24,7 +24,6 @@ plt.rcParams.update({
     'axes.edgecolor': 'black',   # Ensure spines are visible
     'axes.linewidth': 1.2        # Make spines slightly thicker
 })
-
 
 # Load the SBERT model
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -40,7 +39,7 @@ def token_to_type_ratio(text):
     return len(unique_words) / len(words) if len(words) > 0 else 0
 
 
-# Compute coherence of train sentences for entity
+# Compute coherence of train sentences for entity   
 def entity_train_coherence(sentences):
 
     # If only one sentence indecisive so return 0.5
@@ -219,9 +218,9 @@ def test_mean_difference(df, variable, target_column='y'):
     group_1 = df[df[target_column] == 1][variable]
 
     # Use t-test (Welch's if variances differ)
-    t_stat, p_val = ttest_ind(group_0, group_1, equal_var=False)
+    t_stat, p_val = mannwhitneyu(group_0, group_1, alternative='two-sided')
     stat = t_stat
-    test_used = "Welch's t-test"
+    test_used = "Mann-Whitney U t-test"
 
     return variable, test_used, stat, p_val
 

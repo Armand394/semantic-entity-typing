@@ -1,5 +1,5 @@
 import pandas as pd
-
+import os
 
 def preprocess_dataframes(df_triples, df_train, entity_labels):
     
@@ -67,6 +67,25 @@ def convert_entity_text(df_triples):
 
     return entity_texts
 
+def acquire_text_representation(df_triples, df_train, entity_labels, data_folder):
+    # Preprocess triples and train types
+    df_triples, df_train = preprocess_dataframes(df_triples, df_train, entity_labels)
+
+    # Text of relations
+    relation_mapping = pd.read_csv(os.path.join(data_folder, 'relation2text.txt'), sep="\t", header=None, names=["relation_id", "relation_text"])
+    relation_dict = dict(zip(relation_mapping["relation_id"], relation_mapping["relation_text"]))
+    df_triples['relation'] = df_triples['relation'].map(relation_dict).fillna(df_triples['relation'])
+
+    # Text of types
+    df_type_text = pd.read_csv(os.path.join(data_folder, 'hier_type_desc.txt'), sep='\t', header=None)
+
+    # Create text for outgoing and incoming arcs of each entity
+    df_triples_text = convert_entity_text(df_triples)
+
+    # Text of types
+    df_train_type_txt = convert_type_df_to_text(df_type_text, df_train)
+
+    return df_triples_text, df_train_type_txt
 
 def process_rank_df(df_rank, entity_labels):
     # Adjust columns and columns names
