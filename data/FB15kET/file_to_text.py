@@ -115,7 +115,6 @@ et_train_dict = load_et("ET_train.txt")
 et_valid_dict = load_et("ET_valid.txt")
 
 construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict, "LMET_train2.txt", mode="train")
-
 construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict, "LMET_valid2.txt", mode="train")
 
 et_test_dict = load_et("ET_test.txt")

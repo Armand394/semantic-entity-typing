@@ -10,7 +10,7 @@ from tqdm import tqdm  # make sure to install tqdm: pip install tqdm
 
 result = subprocess.check_output("nvidia-smi", shell=True)
 print(result.decode())
-device = torch.device('cuda:0')
+device = torch.device('cuda:2')
 
 def main(args):
     use_cuda = args['cuda'] and torch.cuda.is_available()
@@ -247,7 +247,7 @@ def main(args):
             model.train()
             if valid_mrr < max_valid_mrr:
                 logging.debug('early stop')
-                break
+                # break
             else:
                 torch.save(model.state_dict(), os.path.join(save_path, 'best_model.pkl'))
                 max_valid_mrr = valid_mrr

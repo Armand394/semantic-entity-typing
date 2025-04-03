@@ -1,14 +1,19 @@
 import pandas as pd
+from tqdm import tqdm
 import os
-import json
 from sentence_transformers import SentenceTransformer
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import defaultdict
-import random
+import torch
 
-# Load SBERT model
-model = SentenceTransformer("all-MiniLM-L6-v2")
+if torch.cuda.is_available():
+    model = SentenceTransformer('all-MiniLM-L6-v2', device='cuda')  # Forces GPU
+else:
+    model = SentenceTransformer("all-MiniLM-L6-v2")
+
 
 def clean_coherence_statsdf(e_coherence, entity_labels):
     # Create a reverse mapping from label + description back to ID
@@ -37,6 +42,63 @@ def clean_coherence_statsdf(e_coherence, entity_labels):
 
     return e_coherence
 
+
+def recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2desc, t2id, result_folder):
+    """
+    Only computes mean similarity for kg triples and training types (does not compute other metrics). For detailed
+    metrics computation see main_analysis.py.
+    """
+    #Compute coherence metrics
+    entities_kg = set(df_triples[0].unique()).union(set(df_triples[2].unique()))
+    metrics = []
+
+    i = 0
+    for entity in tqdm(entities_kg, desc="Computing entity metrics", unit="Entity"):
+        # Compute mean cosine similarity of KG sentences
+        kg_entity_text = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id)
+        base_sim_kg = compute_mean_similarity(kg_entity_text)
+
+        # Compute mean cosine similarity of ET sentences
+        et_train_sentences = et_sentences(df_train, entity, t2desc, t2id)
+        base_sim_et = compute_mean_similarity(et_train_sentences)
+        
+        # Degree of entity
+        degree = len(kg_entity_text) + len(et_train_sentences)
+        
+        # Average text length entity
+        sentences = kg_entity_text + et_train_sentences
+        avg_length = sum(len(s) for s in sentences) / len(sentences)
+
+        # type-kg ratio, degrees
+        kg_degree = len(kg_entity_text)
+        et_degree = len(et_train_sentences)
+        ratio = len(et_train_sentences) / len(kg_entity_text)
+
+        metrics.append((entity, base_sim_kg, base_sim_et, degree, avg_length, kg_degree,
+                        et_degree, ratio))
+
+    e_coherence = pd.DataFrame(metrics, columns=['entity', 'kg_sim_mu', 'et_sim_mu', 'degree',
+                                                'avg_txt_length', 'kg_degree', 'et_degree','type_kg_ratio'])
+
+    e_coherence.to_csv(os.path.join(result_folder, "entity_metrics_sample.csv"), index=False)
+
+def compute_mean_similarity(sentences):
+    if len(sentences) < 2:
+        return 0.5 
+
+    # Encode sentences to get an
+    embedding_matrix = model.encode(sentences, convert_to_numpy=True, batch_size=200)
+
+    # Compute cosine similarity matrix
+    cosine_sim_matrix = cosine_similarity(embedding_matrix)
+    
+    # Extract upper triangle without diagonal
+    triu_indices = np.triu_indices_from(cosine_sim_matrix, k=1)
+    cosine_sim_values = cosine_sim_matrix[triu_indices]
+
+    # Compute mean cosine similarity
+    return np.mean(cosine_sim_values)
+
 def kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id):
     o, r, s = df_triples.columns
 
@@ -63,28 +125,13 @@ def kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id):
 def et_sentences(df_train, entity, t2desc, t2id):
     o, t = df_train.columns
     et_train = df_train[df_train[o] == entity].reset_index(drop=True)
-    et_train[t] = et_train[t].map(lambda typ: t2desc[t2id[typ]])
-    et_train[t] = et_train[t].str.replace(" [SEP] ", " ")
-    et_train[t] = "has type " + et_train[t]
+    et_train.loc[:, t] = et_train[t].map(lambda typ: t2desc[t2id[typ]])
+    et_train.loc[:, t] = et_train[t].str.replace(" [SEP] ", " ", regex=False)
+    et_train.loc[:, t] = "has type " + et_train[t]
 
     return et_train[t].to_list()
 
-def compute_mean_similarity(sentences):
-    # Encode sentences to get an
-    embedding_matrix = model.encode(sentences, convert_to_numpy=True)
-
-    # Compute cosine similarity matrix
-    cosine_sim_matrix = cosine_similarity(embedding_matrix)
-
-
-    # Extract upper triangle without diagonal
-    triu_indices = np.triu_indices_from(cosine_sim_matrix, k=1)
-    cosine_sim_values = cosine_sim_matrix[triu_indices]
-
-    # Compute mean cosine similarity
-    return np.mean(cosine_sim_values)
-
-def two_hop_neighbors(df_triples, entity):
+def two_hop_neighbors(df_triples, entity, r2text, r2id, e2desc, e2id):
     # Retrieve columns
     e_col, r_col, s_col = df_triples.columns
 
@@ -98,31 +145,36 @@ def two_hop_neighbors(df_triples, entity):
         incoming_map[subj].add((obj, rel))
 
     neighbors = set()
+    sentences = set()
 
     # CASE 1: (object_x --> mid --> object_z)
     for mid, r1 in outgoing_map[entity]:  
         for obj_z, r2 in outgoing_map.get(mid, set()):  
             neighbors.add((r2, obj_z, '-'))
+            sentences.add(f"{r2text[r2id[r2]]} {e2desc[e2id[obj_z]]}")
 
     # CASE 2: (object_x <-- mid <-- object_z)
     for mid, r1 in incoming_map[entity]:  
         for obj_z, r2 in incoming_map.get(mid, set()):  
             neighbors.add((r2, obj_z, 'inv'))
+            sentences.add(f"{e2desc[e2id[obj_z]]} {r2text[r2id[r2]]}")
 
     # CASE 3: (object_x --> mid <-- object_z)
     for mid, r1 in outgoing_map[entity]:  
         for obj_z, r2 in incoming_map.get(mid, set()):  
             neighbors.add((r2, obj_z, 'inv'))
+            sentences.add(f"{e2desc[e2id[obj_z]]} {r2text[r2id[r2]]}")
 
     # CASE 4: (object_x <-- mid --> object_z)
     for mid, r1 in incoming_map[entity]:
         for obj_z, r2 in outgoing_map.get(mid, set()):  
             neighbors.add((r2, obj_z, '-'))
+            sentences.add(f"{r2text[r2id[r2]]} {e2desc[e2id[obj_z]]}")
+    
+    return list(neighbors), list(sentences)
 
-    return list(neighbors)
 
-
-def two_hop_types(df_triples, df_train, entity):
+def two_hop_types(df_triples, df_train, entity, t2desc, t2id):
     # Retreive columns
     o, r, s = df_triples.columns
     o_t, t = df_train.columns
@@ -132,94 +184,51 @@ def two_hop_types(df_triples, df_train, entity):
     # Unique neighbor entities
     neighbors = set(outgoing_neighbors[s]) | set(ingoing_neighbors[o])
     # 2-hop types
-    return df_train[df_train[o_t].isin(neighbors)][t].to_list()
+    train_types_2hop = df_train[df_train[o_t].isin(neighbors)]
+    train_types_2hop = train_types_2hop.drop_duplicates(subset=[t])
+    types_2hop = train_types_2hop[t].to_list()
+    # Sentences 2-hop types
+    train_types_2hop.loc[:, t] = train_types_2hop[t].map(lambda typ: t2desc[t2id[typ]])
+    train_types_2hop.loc[:, t] = train_types_2hop[t].str.replace(" [SEP] ", " ", regex=False)
+    train_types_2hop.loc[:, t] = "has type " + train_types_2hop[t]
+    sentences_2hop_type = train_types_2hop[t].to_list()
+
+    return types_2hop, sentences_2hop_type
 
 
-def sample_2hop_sentences(neighbors_2hop, types_2hop, n_rel, n_type, e2desc, e2id, r2text, r2id, t2desc, t2id, sample_r=True, sample_t=True):
+def max_sim_2hop(entity_1hop_txt, entity_2hop_txt, hop2_ids, n_best):
     
-    if sample_r and not sample_t:
-        # Sample 2-hop from KG and ET
-        sampled_neighbors_2hop = random.sample(neighbors_2hop, min(n_rel, len(neighbors_2hop)))
-
-        # Create KG sampled sentences
-        sampled_r_sentences = []
-        for r, e, dir in sampled_neighbors_2hop:
-            if dir == 'inv':
-                sampled_r_sentences.append(f"{e2desc[e2id[e]]} {r2text[r2id[r]]}")
-            else:
-                sampled_r_sentences.append(f"{r2text[r2id[r]]} {e2desc[e2id[e]]}")    
-        
-        return sampled_r_sentences, [], sampled_neighbors_2hop, []
+    if len(hop2_ids) <= n_best:
+        return hop2_ids
     
-    elif not sample_r and sample_t:
-        # Sample 2-hop from ET
-        sampled_types_2hop = random.sample(types_2hop, min(n_type, len(types_2hop)))   
-        # Create ET sampled sentences
-        sampled_t_sentence = []
-        for t in sampled_types_2hop:
-            sampled_t_sentence.append(f"has type {t2desc[t2id[t]].replace(" [SEP] ", " ")}")
+    # Encode KG sentences to get embeddings
+    embeddings_1hop = model.encode(entity_1hop_txt, convert_to_numpy=True, batch_size=400)
+    embeddings_2hop = model.encode(entity_2hop_txt, convert_to_numpy=True, batch_size=400)
 
-        return [], sampled_t_sentence, [], sampled_types_2hop
-    else:
-        # Sample 2-hop from KG and ET
-        sampled_neighbors_2hop = random.sample(neighbors_2hop, min(n_rel, len(neighbors_2hop)))
-        sampled_types_2hop = random.sample(types_2hop, min(n_type, len(types_2hop)))
+    # Compute 2-hop neighbors with most similarity
+    cos_sim_matrix = cosine_similarity(embeddings_1hop, embeddings_2hop)
+    similarities_2hop = np.mean(cos_sim_matrix, axis=0)
 
-        # Create KG sampled sentences
-        sampled_r_sentences = []
-        for r, e, dir in sampled_neighbors_2hop:
-            if dir == 'inv':
-                sampled_r_sentences.append(f"{e2desc[e2id[e]]} {r2text[r2id[r]]}")
-            else:
-                sampled_r_sentences.append(f"{r2text[r2id[r]]} {e2desc[e2id[e]]}")
+    # Select best 2-hop kg neighbors
+    top_n_relations = list(np.argsort(similarities_2hop)[-n_best:][::-1])
+    top_2hop_neighbors = [hop2_ids[i] for i in top_n_relations]
 
-        # Create ET sampled sentences
-        sampled_t_sentence = []
-        for t in sampled_types_2hop:
-            sampled_t_sentence.append(f"has type {t2desc[t2id[t]].replace(" [SEP] ", " ")}")
-        
-        return sampled_r_sentences, sampled_t_sentence, sampled_neighbors_2hop, sampled_types_2hop
+    return top_2hop_neighbors
 
+def plot_entity_metrics_distribution(e_coherence, result_folder):
+    # Create subplots
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
 
+    # Plot distribution of kg_sim_mu
+    sns.histplot(e_coherence['kg_sim_mu'], kde=True, ax=axes[0], color='skyblue')
+    axes[0].set_title("Distribution of kg_sim_mu")
+    axes[0].set_xlabel("kg_sim_mu")
 
+    # Plot distribution of et_sim_mu
+    sns.histplot(e_coherence['et_sim_mu'], kde=True, ax=axes[1], color='lightgreen')
+    axes[1].set_title("Distribution of et_sim_mu")
+    axes[1].set_xlabel("et_sim_mu")
 
-
-
-
-
-def recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2desc, t2id, result_folder):
-    """
-    Only computes mean similarity for kg triples and training types (does not compute other metrics). For detailed
-    metrics computation see main_analysis.py.
-    """
-    #Compute coherence metrics
-    entities_kg = e2id.keys()
-    metrics = []
-
-    i = 0
-    for entity in entities_kg:
-        # Compute mean cosine similarity of KG sentences
-        kg_entity_text = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id)
-        if len(kg_entity_text) > 1:
-            base_sim_kg = compute_mean_similarity(kg_entity_text)
-        else:
-            base_sim_kg = None
-
-        # Compute mean cosine similarity of ET sentences
-        et_train_sentences = et_sentences(df_train, entity, t2desc, t2id)
-        if len(et_train_sentences) > 1:
-            base_sim_et = compute_mean_similarity(et_train_sentences)
-        else:
-            base_sim_et = None
-
-        if i % 100 == 0:
-            print(i)
-
-        i += 1
-        metrics.append((entity, base_sim_kg, base_sim_et))
-
-    e_coherence = pd.DataFrame(metrics, columns=['entity', 'kg_sim_mu', 'et_sim_mu'])
-
-    e_coherence.to_csv(os.path.join(result_folder, "entity_metrics.csv"), index=False)
-
-
+    plt.tight_layout()
+    plt.savefig(os.path.join(result_folder, "dsitribution_metrics"))
+    plt.close()
