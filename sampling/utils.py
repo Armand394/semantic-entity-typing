@@ -3,6 +3,8 @@ import torch
 import logging
 import os
 import numpy as np
+from collections import defaultdict
+
 
 def set_logger(args):
     if not os.path.exists(os.path.join(args['save_dir'], args['save_path'])):
@@ -195,3 +197,18 @@ def slight_fna_loss(predict, label, beta):
     negative_weight = negative_weight * (1 - label)
     negative_loss = negative_weight * output
     return positive_loss.mean(), negative_loss.mean()
+
+def save_entity_kg_2hop(entity_kg_2hop, output_tsv_path):
+    """
+    Sauvegarde les relations de type (entité, relation, entité2) dans un fichier TSV :
+    entité<TAB>relation,entité2<TAB>relation,entité3...
+    """
+    ent_rel_dict = defaultdict(list)
+
+    for head, rel, tail in entity_kg_2hop:
+        if head != tail: 
+            ent_rel_dict[head].append(f"{rel},{tail}")
+
+    with open(output_tsv_path, "w", encoding="utf-8") as f:
+        for ent, rel_list in ent_rel_dict.items():
+            f.write(f"{ent}\t" + "\t".join(rel_list) + "\n")

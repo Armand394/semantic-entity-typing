@@ -261,15 +261,52 @@ def extract_cluster(type_str):
 
 # === 6. CONSTRUCTION DU FICHIER FINAL ===
 def construct_output(kg_dict, et_train_dict, et_valid_dict, et_filter_dict, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train"):
-    """Construit le fichier texte final avec la structure demandée, incluant les entités supplémentaires"""
-    
-    relation_0 = relation_dict.get("0", "0")  # Relation correspondant à l'ID 0
-    entity_0 = entite_dict.get("0", "0")  # Entité correspondant à l'ID 0
-    
-    last_cluster = cluster_dict.get(list(cluster_dict.keys())[-1], "unknown")
-    last_type = type_dict.get(list(type_dict.keys())[-1], "unknown")
-    
-    if mode == "train":
-        all_entities = set(kg_dict.keys()).union(set(et_train_dict.keys())).union(set(et_valid_dict.keys()))
-    else: 
-        all_ent
+     """Construit le fichier texte final avec la structure demandée, incluant les entités supplémentaires"""
+ 
+     relation_0 = relation_dict.get("0", "0")  # Relation correspondant à l'ID 0
+     entity_0 = entite_dict.get("0", "0")  # Entité correspondant à l'ID 0
+ 
+     last_cluster = cluster_dict.get(list(cluster_dict.keys())[-1], "unknown")
+     last_type = type_dict.get(list(type_dict.keys())[-1], "unknown")
+ 
+     if mode == "train":
+         all_entities = set(kg_dict.keys()).union(set(et_train_dict.keys())).union(set(et_valid_dict.keys()))
+     else: 
+         all_entities = set(et_filter_dict.keys())
+ 
+     with open(output_file, "w", encoding="utf-8") as f:
+         for entity in all_entities:
+             entity_name = entite_dict.get(entity, entity)  
+ 
+             types = et_train_dict.get(entity, []) + et_valid_dict.get(entity, [])
+             types_part = " [SEP] ".join([ 
+                 f"{entity_name} {extract_cluster(type_dict.get(t, t))} {type_dict.get(t, t)}"
+                 for t in types
+             ])
+ 
+             if not types:
+                 types_part = f"{entity_name} {last_cluster} {last_type}"
+ 
+             relations_part = " [SEP] ".join([ 
+                 f"{entity_name} {relation_dict.get(rel, rel)} {entite_dict.get(tail, tail)}"
+                 for rel, tail in kg_dict.get(entity, [])
+                 if entity != tail 
+             ])
+ 
+             if not relations_part:
+                 relations_part = f"{entity_name} {relation_0} {entity_0}"
+ 
+             f.write(f"{entity_name} ||| {types_part} ||| {relations_part} ||| cluster \n")
+             
+
+def copy_other_kg_files(source_folder, destination_folder):
+     # Loop over all items in the source folder
+     for filename in os.listdir(source_folder):
+         source_file = os.path.join(source_folder, filename)
+         destination_file = os.path.join(destination_folder, filename)
+         
+         # Check if the current item is a file
+         if os.path.isfile(source_file):
+             # Copy the file only if it doesn't already exist in the destination
+             if not os.path.exists(destination_file):
+                 shutil.copy2(source_file, destination_file)

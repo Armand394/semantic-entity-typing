@@ -82,6 +82,8 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
         elif direction == 'inv':
             entity_kg_2hop.append((entity2, relation, entity))
 
+    save_entity_kg_2hop(entity_kg_2hop, os.path.join(data_path, 'relation2hop.tsv'))
+
     for type in et_top_2hop:
         entity_et_2hop.append((entity, type))
 
