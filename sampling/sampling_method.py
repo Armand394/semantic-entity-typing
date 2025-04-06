@@ -114,20 +114,6 @@ if generate_2hopsample:
     data_sample_dir_2hop = os.path.join(project_path, "data", f"{dataset}_sample_2hop")
     os.makedirs(data_sample_dir_2hop, exist_ok=True)
 
-    # Open files
-    df_triples = pd.read_csv(os.path.join(data_sample_dir, "KG_train.txt"), sep='\t', header=None)
-    df_train = pd.read_csv(os.path.join(data_sample_dir, "ET_train.txt"), sep='\t', header=None)
-
-    df_train2hop = pd.read_csv(os.path.join(result_path, "KG_train_2hop_sample.txt"), sep='\t', header=None)
-    df_et2hop = pd.read_csv(os.path.join(result_path, "ET_train_2hop_sample.txt"), sep='\t', header=None)
-
-    kg_new2hop = pd.concat([df_triples, df_train2hop], axis=0)
-    et_new2hop = pd.concat([df_train, df_et2hop], axis=0)
-
-    kg_new2hop.to_csv(os.path.join(data_sample_dir_2hop,"KG_train.txt"),sep='\t', header=None, index=None)
-    et_new2hop.to_csv(os.path.join(data_sample_dir_2hop,"ET_train.txt"), sep='\t', header=None, index=None)
-    print("New 2-hop train files saved")
-
     # Chargement des dictionnaires à partir des fichiers TSV
     entite_dict = load_tsv(os.path.join(data_sample_dir, "entities.tsv"))
     relation_dict = load_tsv(os.path.join(data_sample_dir, "relations.tsv"))

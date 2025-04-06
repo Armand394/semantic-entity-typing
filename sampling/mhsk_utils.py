@@ -8,6 +8,7 @@ import seaborn as sns
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import defaultdict
 import torch
+import math
 
 if torch.cuda.is_available():
     model = SentenceTransformer('all-MiniLM-L6-v2', device='cuda')  # Forces GPU
@@ -99,18 +100,29 @@ def compute_mean_similarity(sentences):
     # Compute mean cosine similarity
     return np.mean(cosine_sim_values)
 
-def kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id):
+def kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id, filter=True):
+    # Filter out the relashionships with low semantic information
+    bad_r = ["/common/annotation_category/annotations./common/webpage/topic",
+            "/common/topic/webpage./common/webpage/category"]
+    
     o, r, s = df_triples.columns
 
-    # Textual value outcoming neighbors
+    # Neigbor dataframe
     outgoing_neighbors = df_triples[df_triples[o] == entity].reset_index(drop=True)
+    ingoing_neighbors = df_triples[df_triples[s] == entity].reset_index(drop=True)
+    neighbors = pd.concat([outgoing_neighbors, ingoing_neighbors], axis=0).reset_index(drop=True)
+
+    # Filter relationships with low semantic information
+    if filter:
+        outgoing_neighbors =  outgoing_neighbors[~(outgoing_neighbors[r].isin(bad_r))]
     # Textual value relation
     outgoing_neighbors[r] = outgoing_neighbors[r].map(lambda rel: r2text[r2id[rel]])
     # Textual value subject
     outgoing_neighbors[s] = outgoing_neighbors[s].map(lambda e: e2desc[e2id[e]])
 
-    # Textual value incoming neighbors
-    ingoing_neighbors = df_triples[df_triples[s] == entity].reset_index(drop=True)
+    # Filter relationships with low semantic information
+    if filter:
+        ingoing_neighbors =  ingoing_neighbors[~(ingoing_neighbors[r].isin(bad_r))]
     # Textual value relation
     ingoing_neighbors[r] = ingoing_neighbors[r].map(lambda rel: r2text[r2id[rel]])
     # Textual value object
@@ -119,19 +131,24 @@ def kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id):
     # Construct sentences
     outgoing_sentences = (outgoing_neighbors[r].astype(str) + " " + outgoing_neighbors[s].astype(str)).tolist()
     ingoing_sentences = (ingoing_neighbors[o].astype(str) + " " + ingoing_neighbors[r].astype(str)).tolist()
-    
-    return outgoing_sentences + ingoing_sentences
+    sentences = outgoing_sentences + ingoing_sentences
+    return sentences, neighbors
 
 def et_sentences(df_train, entity, t2desc, t2id):
     o, t = df_train.columns
     et_train = df_train[df_train[o] == entity].reset_index(drop=True)
+    et_train_filtered = et_train.copy(deep=True)
     et_train.loc[:, t] = et_train[t].map(lambda typ: t2desc[t2id[typ]])
     et_train.loc[:, t] = et_train[t].str.replace(" [SEP] ", " ", regex=False)
     et_train.loc[:, t] = "has type " + et_train[t]
 
-    return et_train[t].to_list()
+    return et_train[t].to_list(), et_train_filtered
 
 def two_hop_neighbors(df_triples, entity, r2text, r2id, e2desc, e2id):
+    # Filter out the relashionships with low semantic information
+    bad_r = ["/common/annotation_category/annotations./common/webpage/topic",
+            "/common/topic/webpage./common/webpage/category"]
+    
     # Retrieve columns
     e_col, r_col, s_col = df_triples.columns
 
@@ -149,28 +166,36 @@ def two_hop_neighbors(df_triples, entity, r2text, r2id, e2desc, e2id):
 
     # CASE 1: (object_x --> mid --> object_z)
     for mid, r1 in outgoing_map[entity]:  
-        for obj_z, r2 in outgoing_map.get(mid, set()):  
+        for obj_z, r2 in outgoing_map.get(mid, set()):
+            if r2 in bad_r:
+                continue
             neighbors.add((r2, obj_z, '-'))
             sentences.add(f"{r2text[r2id[r2]]} {e2desc[e2id[obj_z]]}")
 
     # CASE 2: (object_x <-- mid <-- object_z)
     for mid, r1 in incoming_map[entity]:  
-        for obj_z, r2 in incoming_map.get(mid, set()):  
+        for obj_z, r2 in incoming_map.get(mid, set()):
+            if r2 in bad_r:
+                continue
             neighbors.add((r2, obj_z, 'inv'))
             sentences.add(f"{e2desc[e2id[obj_z]]} {r2text[r2id[r2]]}")
 
     # CASE 3: (object_x --> mid <-- object_z)
     for mid, r1 in outgoing_map[entity]:  
-        for obj_z, r2 in incoming_map.get(mid, set()):  
+        for obj_z, r2 in incoming_map.get(mid, set()): 
+            if r2 in bad_r:
+                continue
             neighbors.add((r2, obj_z, 'inv'))
             sentences.add(f"{e2desc[e2id[obj_z]]} {r2text[r2id[r2]]}")
 
     # CASE 4: (object_x <-- mid --> object_z)
     for mid, r1 in incoming_map[entity]:
         for obj_z, r2 in outgoing_map.get(mid, set()):  
+            if r2 in bad_r:
+                continue
             neighbors.add((r2, obj_z, '-'))
             sentences.add(f"{r2text[r2id[r2]]} {e2desc[e2id[obj_z]]}")
-    
+
     return list(neighbors), list(sentences)
 
 
@@ -196,7 +221,7 @@ def two_hop_types(df_triples, df_train, entity, t2desc, t2id):
     return types_2hop, sentences_2hop_type
 
 
-def max_sim_2hop(entity_1hop_txt, entity_2hop_txt, hop2_ids, n_best):
+def max_sim_2hop(entity_1hop_txt, entity_2hop_txt, hop2_ids, n_best, kg=True):
     
     if len(hop2_ids) <= n_best:
         return hop2_ids
@@ -210,10 +235,56 @@ def max_sim_2hop(entity_1hop_txt, entity_2hop_txt, hop2_ids, n_best):
     similarities_2hop = np.mean(cos_sim_matrix, axis=0)
 
     # Select best 2-hop kg neighbors
-    top_n_relations = list(np.argsort(similarities_2hop)[-n_best:][::-1])
-    top_2hop_neighbors = [hop2_ids[i] for i in top_n_relations]
+    if kg:
+        top_2hop_neighbors = select_unique_kg_neighbors(similarities_2hop, hop2_ids, n_best)
+    else:
+        top_n_relations = list(np.argsort(similarities_2hop)[-n_best:][::-1])
+        top_2hop_neighbors = [hop2_ids[i] for i in top_n_relations]
 
     return top_2hop_neighbors
+
+
+def select_unique_kg_neighbors(similarities_2hop, hop2_ids, n_best):
+    
+    top_2hop_neighbors = []
+    relations_added = set()
+    top_selected = 0
+
+    # Get the sorted indices descending by similarity
+    sorted_relations = list(np.argsort(similarities_2hop)[::-1])
+
+    for idx in sorted_relations:
+        relation, entity, direction = hop2_ids[idx]
+        if (relation in relations_added):
+            continue
+        relations_added.add(relation)
+        top_2hop_neighbors.append((relation, entity, direction))
+        top_selected += 1
+        if top_selected == n_best:
+            break
+
+    return top_2hop_neighbors
+
+def remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_train, n_kg_remove, n_et_remove):
+    # Encode KG sentences to get embeddings
+    kg_embeddings = model.encode(kg_entity_text, convert_to_numpy=True, batch_size=400)
+    et_embeddings = model.encode(et_train_sentences, convert_to_numpy=True, batch_size=400)
+
+    # Compute embeddings with most similarity
+    cos_sim_matrix = cosine_similarity(kg_embeddings)
+    similarities_kg_rels = np.mean(cos_sim_matrix, axis=0)
+    cos_sim_matrix = cosine_similarity(et_embeddings)
+    similarities_et_rels = np.mean(cos_sim_matrix, axis=0)
+
+    # Sort by lowest similarity
+    kg_removed = np.argsort(similarities_kg_rels)[:n_kg_remove]
+    et_removed = np.argsort(similarities_et_rels)[:n_et_remove]
+
+    # Filter removed relationships and types
+    kg_train_removed = neighbors.iloc[kg_removed].reset_index(drop=True)
+    et_train_removed = et_train.iloc[et_removed].reset_index(drop=True)
+
+    return kg_train_removed, et_train_removed
 
 def plot_entity_metrics_distribution(e_coherence, result_folder):
     # Create subplots
