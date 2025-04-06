@@ -6,6 +6,7 @@ import pandas as pd
 import pickle
 import shutil
 import numpy as np
+from collections import defaultdict
 
 tqdm.pandas() 
 
@@ -260,7 +261,7 @@ def extract_cluster(type_str):
         return "unknown"
 
 # === 6. CONSTRUCTION DU FICHIER FINAL ===
-def construct_output(kg_dict, et_train_dict, et_valid_dict, et_filter_dict, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train"):
+def construct_output(kg_dict, et_train_dict, et_valid_dict, et_filter_dict, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train", kg_dict2=None, kg_remove=None):
      """Construit le fichier texte final avec la structure demandée, incluant les entités supplémentaires"""
  
      relation_0 = relation_dict.get("0", "0")  # Relation correspondant à l'ID 0
@@ -273,6 +274,8 @@ def construct_output(kg_dict, et_train_dict, et_valid_dict, et_filter_dict, enti
          all_entities = set(kg_dict.keys()).union(set(et_train_dict.keys())).union(set(et_valid_dict.keys()))
      else: 
          all_entities = set(et_filter_dict.keys())
+
+     kg_remove = kg_remove or {}
  
      with open(output_file, "w", encoding="utf-8") as f:
          for entity in all_entities:
@@ -290,9 +293,15 @@ def construct_output(kg_dict, et_train_dict, et_valid_dict, et_filter_dict, enti
              relations_part = " [SEP] ".join([ 
                  f"{entity_name} {relation_dict.get(rel, rel)} {entite_dict.get(tail, tail)}"
                  for rel, tail in kg_dict.get(entity, [])
-                 if entity != tail 
+                 if entity != tail and (entity, rel, tail) not in kg_remove
              ])
+
+             if kg_dict2:
+                for rel, tail in kg_dict2.get(entity, []):
+                    if entity != tail:
+                        relations_part += f" [SEP] {entity_name} {relation_dict.get(rel, rel)} {entite_dict.get(tail, tail)}"
  
+             
              if not relations_part:
                  relations_part = f"{entity_name} {relation_0} {entity_0}"
  
@@ -310,3 +319,18 @@ def copy_other_kg_files(source_folder, destination_folder):
              # Copy the file only if it doesn't already exist in the destination
              if not os.path.exists(destination_file):
                  shutil.copy2(source_file, destination_file)
+
+def load_kg_file(file_path):
+    kg_dict = defaultdict(list)
+    
+    with open(file_path, mode='r', encoding='utf-8') as f:
+        for line in f:
+            parts = line.strip().split("\t")
+            if len(parts) > 1:
+                entity = parts[0]
+                relations = parts[1:]
+                for rel in relations:
+                    relation, tail = rel.split(",", 1)
+                    kg_dict[entity].append((relation, tail))
+                
+    return kg_dict

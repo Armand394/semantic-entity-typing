@@ -116,6 +116,8 @@ for entity in tqdm(entity_high_degree, total=len(entity_high_degree), desc="Proc
     # Remove noisy neighbors through similarity score
     kg_train_removed, et_train_removed = remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_train, n_kg_remove, n_et_remove)
 
+    save_entity_kg_2hop(kg_train_removed, os.path.join(data_path, 'kg_removed.tsv'))
+
     # Store removed results
     kg_train_removed_df = pd.concat([kg_train_removed_df, kg_train_removed], axis=0).reset_index(drop=True)
     et_train_removed_df = pd.concat([et_train_removed_df, et_train_removed], axis=0).reset_index(drop=True)
