@@ -6,6 +6,7 @@ from utils import *
 from mhsk_utils import *
 import math
 from tqdm import tqdm
+from sampling_utils import *
 
 # Load SBERT model
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -83,10 +84,8 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
             entity_kg_2hop.append((entity2, relation, entity))
 
     save_entity_kg_2hop(entity_kg_2hop, os.path.join(data_path, 'relation2hop.tsv'))
-
     for type in et_top_2hop:
         entity_et_2hop.append((entity, type))
-
 
 # Entities with degree considered too high
 upperb_quantiles = e_coherence[['kg_degree', 'et_degree']].quantile(0.90)
@@ -102,42 +101,49 @@ entity_high_degree = entity_high_degree_df['entity'].to_list()
 kg_train_removed_df = pd.DataFrame()
 et_train_removed_df = pd.DataFrame()
 
-for entity in tqdm(entity_high_degree, total=len(entity_high_degree), desc="Processing entities", unit="entity"):
+# for entity in tqdm(entity_high_degree, total=len(entity_high_degree), desc="Processing entities", unit="entity"):
 
-    # Current sentences
-    kg_entity_text, neighbors = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id, filter=False)
-    et_train_sentences, et_train = et_sentences(df_train, entity, t2desc, t2id)
-    entity_sentences = kg_entity_text + et_train_sentences
+#     # Current sentences
+#     kg_entity_text, neighbors = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id, filter=False)
+#     et_train_sentences, et_train = et_sentences(df_train, entity, t2desc, t2id)
+#     entity_sentences = kg_entity_text + et_train_sentences
 
-    # Remove noisy relationships and types
-    n_kg_remove = int(math.ceil(len(kg_entity_text)*0.1))
-    n_et_remove = int(math.ceil(len(et_train_sentences)*0.1))
+#     # Remove noisy relationships and types
+#     n_kg_remove = int(math.ceil(len(kg_entity_text)*0.1))
+#     n_et_remove = int(math.ceil(len(et_train_sentences)*0.1))
 
-    # Remove noisy neighbors through similarity score
-    kg_train_removed, et_train_removed = remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_train, n_kg_remove, n_et_remove)
+#     # Remove noisy neighbors through similarity score
+#     kg_train_removed, et_train_removed = remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_train, n_kg_remove, n_et_remove)
 
-    save_entity_kg_2hop(kg_train_removed, os.path.join(data_path, 'kg_removed.tsv'))
-
-    # Store removed results
-    kg_train_removed_df = pd.concat([kg_train_removed_df, kg_train_removed], axis=0).reset_index(drop=True)
-    et_train_removed_df = pd.concat([et_train_removed_df, et_train_removed], axis=0).reset_index(drop=True)
+#     # Store removed results
+#     kg_train_removed_df = pd.concat([kg_train_removed_df, kg_train_removed], axis=0).reset_index(drop=True)
+#     et_train_removed_df = pd.concat([et_train_removed_df, et_train_removed], axis=0).reset_index(drop=True)
 
 # Update KG_train and ET_train without noise relations
-kg_train_new = df_triples.merge(kg_train_removed_df, on=[0, 1, 2], how='left', indicator=True)
-kg_train_new = kg_train_new[kg_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
-et_train_new = df_train.merge(et_train_removed_df, how='left', indicator=True)
-et_train_new = et_train_new[et_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
+# kg_train_new = df_triples.merge(kg_train_removed_df, on=[0, 1, 2], how='left', indicator=True)
+# kg_train_new = kg_train_new[kg_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
+# et_train_new = df_train.merge(et_train_removed_df, how='left', indicator=True)
+# et_train_new = et_train_new[et_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
 
 # Convert 2-hop additions in dataframe
 kg_train_2hop = pd.DataFrame(entity_kg_2hop, columns=[0,1,2])
 et_train_2hop = pd.DataFrame(entity_et_2hop, columns=[0,1])
 
 # Final processed train files
-kg_train_processed = pd.concat([kg_train_new, kg_train_2hop], axis=0).reset_index(drop=True)
-et_train_processed = pd.concat([et_train_new, et_train_2hop], axis=0).reset_index(drop=True)
+# kg_train_processed = pd.concat([kg_train_new, kg_train_2hop], axis=0).reset_index(drop=True)
+# et_train_processed = pd.concat([et_train_new, et_train_2hop], axis=0).reset_index(drop=True)
 
 # Save files
 data_sample_dir_2hop = os.path.join(project_folder, "data", f"FB15kET_sample_2hop")
 os.makedirs(data_sample_dir_2hop, exist_ok=True)
-kg_train_processed.to_csv(os.path.join(data_sample_dir_2hop, "KG_train.txt"), sep='\t', header=None, index=False)
-et_train_processed.to_csv(os.path.join(data_sample_dir_2hop, "ET_train.txt"), sep='\t', header=None, index=False)
+kg_dict = load_kg(os.path.join(data_path,"KG_train.txt"))
+et_train_dict = load_et(os.path.join(data_path,"ET_train.txt"))
+et_valid_dict = load_et(os.path.join(data_path,"ET_valid.txt"))
+entite_dict = load_tsv(os.path.join(data_path, "entities.tsv"))
+relation_dict = load_tsv(os.path.join(data_path, "relations.tsv"))
+type_dict = load_tsv(os.path.join(data_path, "types.tsv"))
+cluster_dict = load_tsv(os.path.join(data_path, "clusters.tsv"))
+output_file = os.path.join(data_sample_dir_2hop, "LMET_train.txt")
+kg_dict2 = load_kg_file(os.path.join(data_path,"relation2hop.tsv"))
+construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train", kg_dict2=kg_dict2)
+et_train_2hop.to_csv(os.path.join(data_sample_dir_2hop, "ET_train.txt"), sep='\t', header=None, index=False)

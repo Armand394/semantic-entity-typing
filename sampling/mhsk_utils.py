@@ -56,11 +56,11 @@ def recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2des
     i = 0
     for entity in tqdm(entities_kg, desc="Computing entity metrics", unit="Entity"):
         # Compute mean cosine similarity of KG sentences
-        kg_entity_text = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id)
+        kg_entity_text, _ = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id)
         base_sim_kg = compute_mean_similarity(kg_entity_text)
 
         # Compute mean cosine similarity of ET sentences
-        et_train_sentences = et_sentences(df_train, entity, t2desc, t2id)
+        et_train_sentences, _ = et_sentences(df_train, entity, t2desc, t2id)
         base_sim_et = compute_mean_similarity(et_train_sentences)
         
         # Degree of entity

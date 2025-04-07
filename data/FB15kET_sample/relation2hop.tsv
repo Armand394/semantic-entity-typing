@@ -1,0 +1,26 @@
+/m/03p41	/people/person/gender,/m/05zppz	/people/person/profession,/m/0kyk	/award/award_nominee/award_nominations./award/award_nomination/award,/m/0262zm	/film/actor/film./film/performance/film,/m/03kx49
+/m/0262yt	/award/award_category/winners./award/award_honor/award_winner,/m/03p41
+/m/016fly	/people/profession/people_with_this_profession,/m/03p41
+/m/03kx49	/film/film/starring./film/performance/actor,/m/03p41
+/m/060c4	/organization/role/leaders./organization/leadership/organization,/m/088fh
+/m/09c7w0	/location/location/contains,/m/088fh
+/m/02_j1w	/sports/sports_position/players./soccer/football_roster_position/team,/m/088fh
+/m/088fh	/education/educational_institution/colors,/m/06fvc	/organization/organization/headquarters./location/mailing_address/country,/m/09c7w0
+/m/0147fv	/tv/non_character_role/tv_regular_personal_appearances./tv/tv_regular_personal_appearance/program,/m/09lmb
+/m/09lmb	/tv/tv_program/regular_personal_appearances./tv/tv_regular_personal_appearance/appearance_type,/m/0c5lg
+/m/03wpmd	/tv/tv_actor/starring_roles./tv/regular_tv_appearance/series,/m/09lmb
+/m/0m7yy	/award/award_category/winners./award/award_honor/honored_for,/m/09lmb
+/m/02knxx	/people/person/gender,/m/05zppz
+/m/02b0y3	/soccer/football_team/current_roster./soccer/football_roster_position/position,/m/047fwlg
+/m/047fwlg	/sports/sports_position/players./sports/sports_team_roster/team,/m/06vlk0
+/m/06xj4w	/sports/sports_team/roster./sports/sports_team_roster/position,/m/047fwlg
+/m/0jmm4	/education/educational_institution/students_graduates./education/education/degree,/m/0bkj86
+/m/03rjj	/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport,/m/0jmm4
+/m/0jmgb	/sports/sports_team/sport,/m/0jmm4
+/m/03j24kf	/people/person/gender,/m/02blr4
+/m/04jpg2p	/film/film/starring./film/performance/actor,/m/02blr4
+/m/02blr4	/film/actor/film./film/performance/film,/m/0fg04
+/m/0gk4g	/medicine/disease/risk_factors,/m/02blr4
+/m/01t032	/base/petbreeds/dog_breed/size./base/petbreeds/dog_size/gender,/m/02blr4
+/m/02hrh1q	/people/profession/people_with_this_profession,/m/02blr4
+/m/01z77k	/award/award_winning_work/awards_won./award/award_honor/award_winner,/m/0g5lhl7

@@ -4,8 +4,6 @@ import logging
 import os
 import numpy as np
 from collections import defaultdict
-
-
 def set_logger(args):
     if not os.path.exists(os.path.join(args['save_dir'], args['save_path'])):
         os.makedirs(os.path.join(os.getcwd(), args['save_dir'], args['save_path']))
