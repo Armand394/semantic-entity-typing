@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import json
 from utils import *
-from sampling.mhsk_utils import *
+from mhsk_utils import *
 import math
 from tqdm import tqdm
 from sampling_utils import *
@@ -82,7 +82,10 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
 
     # Store best results for additional information
     for relation, entity2, direction in kg_top_2hop:
-        entity_kg_2hop[entity].append(f"{relation},{entity2},{direction}")
+        if direction == '-':
+            entity_kg_2hop[entity].append(f"{relation} {entity2}")
+        else:
+            entity_kg_2hop[entity].append(f"inv-{relation} {entity2}")
 
     for et_type in et_top_2hop:
         entity_et_2hop.append((entity, et_type))

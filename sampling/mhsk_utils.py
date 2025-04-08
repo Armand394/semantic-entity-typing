@@ -289,11 +289,11 @@ def remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_tra
 def relationship_removed(kg_train_removed, entity):
     # Case where entity is entity1
     out_1 = kg_train_removed[kg_train_removed[0] == entity]
-    out_1 = (out_1[1] + ',' + out_1[2] + ',-').tolist()
+    out_1 = (out_1[1] + ' ' + out_1[2]).tolist()
 
     # Case where entity is entity2
     out_2 = kg_train_removed[kg_train_removed[2] == entity]
-    out_2 = (out_2[1] + ',' + out_2[0] + ',inv').tolist()
+    out_2 = ( 'inv-' + out_2[1] + ' ' + out_2[0]).tolist()
 
     return out_1 + out_2
 
