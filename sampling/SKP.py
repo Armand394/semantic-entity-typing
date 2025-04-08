@@ -83,7 +83,7 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
         elif direction == 'inv':
             entity_kg_2hop.append((entity2, relation, entity))
 
-    save_entity_kg_2hop(entity_kg_2hop, os.path.join(data_path, 'relation2hop.tsv'))
+    save_entity_kg_2hop(entity_kg_2hop, os.path.join(data_path, 'relation2hop.tsv')) # Save 2-hop relations
     for type in et_top_2hop:
         entity_et_2hop.append((entity, type))
 
@@ -119,6 +119,8 @@ et_train_removed_df = pd.DataFrame()
 #     kg_train_removed_df = pd.concat([kg_train_removed_df, kg_train_removed], axis=0).reset_index(drop=True)
 #     et_train_removed_df = pd.concat([et_train_removed_df, et_train_removed], axis=0).reset_index(drop=True)
 
+# save_entity_kg_2hop(kg_train_removed_df, os.path.join(data_path, 'relation_2_remove.tsv'))
+
 # Update KG_train and ET_train without noise relations
 # kg_train_new = df_triples.merge(kg_train_removed_df, on=[0, 1, 2], how='left', indicator=True)
 # kg_train_new = kg_train_new[kg_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
@@ -137,13 +139,24 @@ et_train_2hop = pd.DataFrame(entity_et_2hop, columns=[0,1])
 data_sample_dir_2hop = os.path.join(project_folder, "data", f"FB15kET_sample_2hop")
 os.makedirs(data_sample_dir_2hop, exist_ok=True)
 kg_dict = load_kg(os.path.join(data_path,"KG_train.txt"))
-et_train_dict = load_et(os.path.join(data_path,"ET_train.txt"))
-et_valid_dict = load_et(os.path.join(data_path,"ET_valid.txt"))
+et_train_dict = load_et(os.path.join(data_path,"ET_train.txt")) #Ici faut ajouter ceux de 2hop généré avec et_train_2hop.to_csv
+et_valid_dict = load_et(os.path.join(data_path,"ET_valid.txt")) #Idem ici avec le valid
+et_test_dict = load_et(os.path.join(data_path,"ET_test.txt")) #Idem ici avec le test (sauf si tu touches pas à ET_test et ET_valid)
 entite_dict = load_tsv(os.path.join(data_path, "entities.tsv"))
 relation_dict = load_tsv(os.path.join(data_path, "relations.tsv"))
 type_dict = load_tsv(os.path.join(data_path, "types.tsv"))
 cluster_dict = load_tsv(os.path.join(data_path, "clusters.tsv"))
-output_file = os.path.join(data_sample_dir_2hop, "LMET_train.txt")
 kg_dict2 = load_kg_file(os.path.join(data_path,"relation2hop.tsv"))
+#kg_remove=load_kg_file(os.path.join(data_path,"relation_2_remove.tsv"))
+output_file = os.path.join(data_sample_dir_2hop, "LMET_train.txt")
 construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train", kg_dict2=kg_dict2)
+# construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train", kg_dict2=kg_dict2 , kg_remove=kg_remove)
+output_file = os.path.join(data_sample_dir_2hop, "LMET_valid.txt")
+construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train", kg_dict2=kg_dict2)
+# construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train", kg_dict2=kg_dict2 , kg_remove=kg_remove)
+output_file = os.path.join(data_sample_dir_2hop, "LMET_test.txt")
+construct_output(kg_dict, et_train_dict, et_valid_dict, et_test_dict, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="test", kg_dict2=kg_dict2)
+# construct_output(kg_dict, et_train_dict, et_valid_dict, et_test_dict, entite_dict, relation_dict, type_dict, cluster_dict, output_file, mode="train", kg_dict2=kg_dict2 , kg_remove=kg_remove)
+
+
 et_train_2hop.to_csv(os.path.join(data_sample_dir_2hop, "ET_train.txt"), sep='\t', header=None, index=False)

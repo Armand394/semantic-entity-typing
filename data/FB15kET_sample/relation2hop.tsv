@@ -1,26 +1,24 @@
-/m/03p41	/people/person/gender,/m/05zppz	/people/person/profession,/m/0kyk	/award/award_nominee/award_nominations./award/award_nomination/award,/m/0262zm	/film/actor/film./film/performance/film,/m/03kx49
-/m/0262yt	/award/award_category/winners./award/award_honor/award_winner,/m/03p41
-/m/016fly	/people/profession/people_with_this_profession,/m/03p41
-/m/03kx49	/film/film/starring./film/performance/actor,/m/03p41
-/m/060c4	/organization/role/leaders./organization/leadership/organization,/m/088fh
-/m/09c7w0	/location/location/contains,/m/088fh
-/m/02_j1w	/sports/sports_position/players./soccer/football_roster_position/team,/m/088fh
-/m/088fh	/education/educational_institution/colors,/m/06fvc	/organization/organization/headquarters./location/mailing_address/country,/m/09c7w0
-/m/0147fv	/tv/non_character_role/tv_regular_personal_appearances./tv/tv_regular_personal_appearance/program,/m/09lmb
-/m/09lmb	/tv/tv_program/regular_personal_appearances./tv/tv_regular_personal_appearance/appearance_type,/m/0c5lg
-/m/03wpmd	/tv/tv_actor/starring_roles./tv/regular_tv_appearance/series,/m/09lmb
-/m/0m7yy	/award/award_category/winners./award/award_honor/honored_for,/m/09lmb
-/m/02knxx	/people/person/gender,/m/05zppz
-/m/02b0y3	/soccer/football_team/current_roster./soccer/football_roster_position/position,/m/047fwlg
-/m/047fwlg	/sports/sports_position/players./sports/sports_team_roster/team,/m/06vlk0
-/m/06xj4w	/sports/sports_team/roster./sports/sports_team_roster/position,/m/047fwlg
-/m/0jmm4	/education/educational_institution/students_graduates./education/education/degree,/m/0bkj86
-/m/03rjj	/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport,/m/0jmm4
-/m/0jmgb	/sports/sports_team/sport,/m/0jmm4
-/m/03j24kf	/people/person/gender,/m/02blr4
-/m/04jpg2p	/film/film/starring./film/performance/actor,/m/02blr4
-/m/02blr4	/film/actor/film./film/performance/film,/m/0fg04
-/m/0gk4g	/medicine/disease/risk_factors,/m/02blr4
-/m/01t032	/base/petbreeds/dog_breed/size./base/petbreeds/dog_size/gender,/m/02blr4
+/m/03p41	/people/deceased_person/place_of_death,/m/02_286	/people/person/profession,/m/0kyk	/people/person/religion,/m/03_gx	/people/person/education./education/education/institution,/m/01w5m
+/m/0np9r	/people/profession/people_with_this_profession,/m/03p41
+/m/01w5m	/education/educational_institution/students_graduates./education/education/student,/m/03p41
+/m/088fh	/education/educational_institution_campus/educational_institution,/m/035gt8	/sports/sports_team/colors,/m/06fvc
+/m/02h4rq6	/education/educational_degree/people_with_this_degree./education/education/institution,/m/088fh
+/m/0dgrmp	/sports/sports_position/players./sports/sports_team_roster/team,/m/088fh
+/m/07nv3_	/sports/pro_athlete/teams./soccer/football_roster_position/team,/m/088fh
+/m/07c52	/media_common/netflix_genre/titles,/m/09lmb
+/m/09lmb	/tv/tv_program/regular_personal_appearances./tv/tv_regular_personal_appearance/appearance_type,/m/0147fv	/tv/tv_program/regular_cast./tv/regular_tv_appearance/actor,/m/03xmy1
+/m/03xmy1	/tv/tv_actor/starring_roles./tv/regular_tv_appearance/series,/m/09lmb
+/m/01pctb	/tv/tv_personality/tv_regular_appearances./tv/tv_regular_personal_appearance/program,/m/09lmb
+/m/02knxx	/people/person/ethnicity,/m/07mqps
+/m/04ztj	/people/marriage_union_type/unions_of_this_type./people/marriage/spouse,/m/02knxx
+/m/047fwlg	/sports/sports_position/players./sports/sports_team_roster/player,/m/07nv3_
+/m/088_9g	/sports/sports_team/roster./sports/sports_team_roster/position,/m/047fwlg
+/m/0l6m5	/olympics/olympic_games/sports,/m/0jmm4
+/m/0jmm4	/education/educational_institution/students_graduates./education/education/student,/m/04353	/education/educational_institution/students_graduates./education/education/degree,/m/02h4rq6
+/m/03rx9	/people/person/gender,/m/02blr4
+/m/02blr4	/people/person/profession,/m/09jwl
 /m/02hrh1q	/people/profession/people_with_this_profession,/m/02blr4
-/m/01z77k	/award/award_winning_work/awards_won./award/award_honor/award_winner,/m/0g5lhl7
+/m/09sb52	/award/award_category/nominees./award/award_nomination/award_nominee,/m/02blr4
+/m/0g8rj	/education/educational_institution/sexes_accepted./education/gender_enrollment/sex,/m/02blr4
+/m/04t6fk	/film/film/starring./film/performance/actor,/m/02blr4
+/m/01z77k	/film/film/genre,/m/07s9rl0
