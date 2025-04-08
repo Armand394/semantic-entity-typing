@@ -5,6 +5,7 @@ from sampling_utils import *
 from utils import read_id
 from dataloader import SEMdataset
 import numpy as np
+import json
 
 dataset = "FB15kET"
 
@@ -121,20 +122,26 @@ if generate_2hopsample:
     cluster_dict = load_tsv(os.path.join(data_sample_dir, "clusters.tsv"))
 
     # Chargement des données KG et ET
-    kg_dict = load_kg(os.path.join(data_sample_dir_2hop,"KG_train.txt"))
+    kg_dict = load_kg(os.path.join(data_sample_dir,"KG_train.txt"))
     et_train_dict = load_et(os.path.join(data_sample_dir_2hop,"ET_train.txt"))
     et_valid_dict = load_et(os.path.join(data_sample_dir,"ET_valid.txt"))
     et_test_dict = load_et(os.path.join(data_sample_dir,"ET_test.txt"))
 
+    # Load processing dictionaries
+    with open(os.path.join(data_sample_dir_2hop,"relation2hop.json"), "r") as f:
+        r2hop = json.load(f)
+    with open(os.path.join(data_sample_dir_2hop,"relation2remove.json"), "r") as f:
+        r2move = json.load(f)
+
     # Construct LMET_train.txt files for dataloading
     construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict,
-                    output_file=os.path.join(data_sample_dir_2hop, "LMET_train.txt"), mode="train")
+                    output_file=os.path.join(data_sample_dir_2hop, "LMET_train.txt"), mode="train", kg_dict2=r2hop, kg_remove=r2move)
     # Construct LMET_valid.txt files for dataloading
     construct_output(kg_dict, et_train_dict, et_valid_dict, {}, entite_dict, relation_dict, type_dict, cluster_dict,
-                    output_file=os.path.join(data_sample_dir_2hop, "LMET_valid.txt"), mode="train")
+                    output_file=os.path.join(data_sample_dir_2hop, "LMET_valid.txt"), mode="train", kg_dict2=r2hop, kg_remove=r2move)
     # Construct LMET_test.txt files for dataloading
     construct_output(kg_dict, et_train_dict, et_valid_dict, et_test_dict, entite_dict, relation_dict, type_dict,
-                    cluster_dict, output_file=os.path.join(data_sample_dir_2hop, "LMET_test.txt"), mode="test")
+                    cluster_dict, output_file=os.path.join(data_sample_dir_2hop, "LMET_test.txt"), mode="test", kg_dict2=r2hop, kg_remove=r2move)
 
     # Load dictionaries entity -> id
     e2id = read_id(os.path.join(data_sample_dir, 'entities.tsv'))

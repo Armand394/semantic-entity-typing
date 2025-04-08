@@ -293,14 +293,13 @@ def construct_output(kg_dict, et_train_dict, et_valid_dict, et_filter_dict, enti
              relations_part = " [SEP] ".join([ 
                  f"{entity_name} {relation_dict.get(rel, rel)} {entite_dict.get(tail, tail)}"
                  for rel, tail in kg_dict.get(entity, [])
-                 if entity != tail and (entity, rel, tail) not in kg_remove
+                 if entity != tail and
+                 (f"{relation_dict.get(rel, rel)} {entite_dict.get(tail, tail)}" not in kg_remove.get(entity,[]))
              ])
 
-             if kg_dict2:
-                for rel, tail in kg_dict2.get(entity, []):
-                    if entity != tail:
-                        relations_part += f" [SEP] {entity_name} {relation_dict.get(rel, rel)} {entite_dict.get(tail, tail)}"
- 
+             if entity in kg_dict2:
+                for arc in kg_dict2.get(entity):
+                        relations_part += f" [SEP] {entity_name} {arc}"
              
              if not relations_part:
                  relations_part = f"{entity_name} {relation_0} {entity_0}"

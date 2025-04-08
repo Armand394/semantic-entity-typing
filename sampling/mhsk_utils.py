@@ -56,7 +56,7 @@ def recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2des
     i = 0
     for entity in tqdm(entities_kg, desc="Computing entity metrics", unit="Entity"):
         # Compute mean cosine similarity of KG sentences
-        kg_entity_text, _ = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id)
+        kg_entity_text, _ = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id, filter=False)
         base_sim_kg = compute_mean_similarity(kg_entity_text)
 
         # Compute mean cosine similarity of ET sentences
@@ -225,11 +225,11 @@ def max_sim_2hop(entity_1hop_txt, entity_2hop_txt, hop2_ids, n_best, kg=True):
     
     if len(hop2_ids) <= n_best:
         return hop2_ids
-    
+
     # Encode KG sentences to get embeddings
     embeddings_1hop = model.encode(entity_1hop_txt, convert_to_numpy=True, batch_size=400)
     embeddings_2hop = model.encode(entity_2hop_txt, convert_to_numpy=True, batch_size=400)
-
+    
     # Compute 2-hop neighbors with most similarity
     cos_sim_matrix = cosine_similarity(embeddings_1hop, embeddings_2hop)
     similarities_2hop = np.mean(cos_sim_matrix, axis=0)
@@ -286,6 +286,17 @@ def remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_tra
 
     return kg_train_removed, et_train_removed
 
+def relationship_removed(kg_train_removed, entity):
+    # Case where entity is entity1
+    out_1 = kg_train_removed[kg_train_removed[0] == entity]
+    out_1 = (out_1[1] + ',' + out_1[2] + ',-').tolist()
+
+    # Case where entity is entity2
+    out_2 = kg_train_removed[kg_train_removed[2] == entity]
+    out_2 = (out_2[1] + ',' + out_2[0] + ',inv').tolist()
+
+    return out_1 + out_2
+
 def plot_entity_metrics_distribution(e_coherence, result_folder):
     # Create subplots
     fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
@@ -303,3 +314,19 @@ def plot_entity_metrics_distribution(e_coherence, result_folder):
     plt.tight_layout()
     plt.savefig(os.path.join(result_folder, "dsitribution_metrics"))
     plt.close()
+
+
+def save_entity_kg_2hop(entity_kg_2hop, output_tsv_path):
+    """
+    Sauvegarde les relations de type (entité, relation, entité2) dans un fichier TSV :
+    entité<TAB>relation,entité2<TAB>relation,entité3...
+    """
+    ent_rel_dict = defaultdict(list)
+
+    for head, rel, tail, direction in entity_kg_2hop:
+        if head != tail: 
+            ent_rel_dict[head].append(f"{rel},{tail},{direction}")
+
+    with open(output_tsv_path, "w", encoding="utf-8") as f:
+        for ent, rel_list in ent_rel_dict.items():
+            f.write(f"{ent}\t" + "\t".join(rel_list) + "\n")

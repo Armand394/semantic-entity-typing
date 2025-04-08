@@ -1,0 +1,1027 @@
+{
+    "/m/02skyy": [
+        "inv-/film/actor/dubbing_performances./film/dubbing_performance/language /m/01wy5m",
+        "/language/human_language/countries_spoken_in /m/0167v",
+        "inv-/location/location/containedby /m/0cwx_",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0pd4f",
+        "inv-/film/film/language /m/01_1hw",
+        "inv-/location/statistical_region/places_exported_to./location/imports_and_exports/exported_to /m/06f32",
+        "inv-/film/film/country /m/01gc7",
+        "inv-/tv/tv_program/languages /m/04glx0"
+    ],
+    "/m/03hfx6c": [
+        "inv-/american_football/football_team/current_roster./american_football/football_roster_position/position /m/03b3j",
+        "inv-/american_football/football_team/historical_roster./american_football/football_historical_roster_position/position_s /m/03wnh",
+        "/sports/sports_position/players./american_football/football_roster_position/team /m/070xg",
+        "inv-/sports/pro_athlete/teams./sports/sports_team_roster/position /m/037gjc",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/01r3hr",
+        "inv-/american_football/football_team/current_roster./sports/sports_team_roster/position /m/025_64l",
+        "inv-/american_football/football_player/position_s /m/019g65",
+        "/sports/sports_position/players./american_football/football_historical_roster_position/position_s /m/05b3ts"
+    ],
+    "/m/0fkx3": [
+        "inv-/location/location/adjoin_s./location/adjoining_relationship/adjoins /m/03rk0",
+        "/location/location/time_zones /m/02hcv8",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport /m/071t0",
+        "/location/location/containedby /m/02qkt",
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/03tmr",
+        "/location/country/languages_spoken /m/02h40lc",
+        "inv-/film/film/country /m/0kv9d3"
+    ],
+    "/m/07ffjc": [
+        "inv-/music/genre/parent_genre /m/05y8n7",
+        "/music/artist/label /m/0g768",
+        "inv-/music/artist/genre /m/01wn718",
+        "inv-/music/performance_role/guest_performances./music/recording_contribution/contributor /m/03bx0bm",
+        "/music/group_member/instruments_played /m/05r5c",
+        "/people/person/employment_history./business/employment_tenure/company /m/09f2j",
+        "/people/person/education./education/education/degree /m/02h4rq6"
+    ],
+    "/m/03cx282": [
+        "inv-/people/person/gender /m/03mstc",
+        "/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/059j2",
+        "inv-/award/award_category/winners./award/award_honor/honored_for /m/063y_ky",
+        "/olympics/olympic_participating_country/olympics_participated_in /m/0lgxj"
+    ],
+    "/m/04k8n": [
+        "inv-/user/tsegaran/random/taxonomy_subject/entry./user/tsegaran/random/taxonomy_entry/taxonomy /m/0mg1w",
+        "/user/tsegaran/random/subject_taxonomy/entry./user/tsegaran/random/taxonomy_entry/subject /m/01540",
+        "/food/food/nutrients./food/nutrition_fact/nutrient /m/04k8n",
+        "inv-/food/dietary_restriction/compatible_ingredients /m/07_lq",
+        "/food/ingredient/compatible_with_dietary_restrictions /m/07_lq",
+        "/base/localfood/produce/availability./base/localfood/produce_availability/location /m/0gx1l",
+        "inv-/base/localfood/food_producing_region/seasonal_availability./base/localfood/produce_availability/produce /m/0l2hf"
+    ],
+    "/m/01wqlc": [
+        "inv-/music/genre/artists /m/021dvj",
+        "inv-/music/artist/genre /m/02dbp7",
+        "/sports/sports_official/sport /m/02vx4",
+        "/people/deceased_person/cause_of_death /m/04p3w",
+        "/music/artist/track_contributions./music/track_contribution/role /m/05r5c",
+        "inv-/music/genre/parent_genre /m/01wtlq"
+    ],
+    "/m/02b1lm": [
+        "/people/person/nationality /m/0345h",
+        "/sports/pro_athlete/sports_played_professionally./sports/pro_sports_played/sport /m/02vx4",
+        "inv-/sports/sport/pro_athletes./sports/pro_sports_played/athlete /m/02vx4",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/player /m/02_j1w",
+        "/people/person/gender /m/05zppz",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/player /m/02b1lm",
+        "/sports/pro_athlete/teams./soccer/football_roster_position/position /m/02_j1w",
+        "/soccer/football_player/position_s /m/02nzb8"
+    ],
+    "/m/03yhgp": [
+        "inv-/sports/sports_team/roster./soccer/football_roster_position/position /m/0g701n",
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/04255q",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/02q3n9c",
+        "inv-/soccer/football_team/current_roster./soccer/football_roster_position/position /m/02nt75",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02b2np",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/02b1j1"
+    ],
+    "/m/060m4": [
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/06z6r",
+        "/olympics/olympic_participating_country/medals_won./olympics/olympic_medal_honor/olympics /m/0blg2",
+        "/military/military_combatant/military_conflicts./military/military_combatant_group/conflict /m/06k75",
+        "inv-/olympics/olympic_games/participating_countries /m/016r9z"
+    ],
+    "/m/01q03": [
+        "inv-/film/film_job/films_with_this_crew_job./film/film_crew_gig/film /m/01pvkk",
+        "inv-/film/film_genre/films_in_this_genre /m/04xvlr",
+        "inv-/award/award_category/nominees./award/award_nomination/nominated_for /m/02x4sn8",
+        "/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/09c7w0"
+    ],
+    "/m/0jmm4": [
+        "inv-/education/school_category/schools_of_this_kind /m/05jxkf",
+        "/sports/sports_league_draft/picks./sports/sports_league_draft_pick/school /m/065y4w7",
+        "inv-/sports/professional_sports_team/draft_picks./sports/sports_league_draft_pick/draft /m/0jmj7",
+        "/education/educational_institution/students_graduates./education/education/major_field_of_study /m/041y2",
+        "/education/educational_institution/students_graduates./education/education/degree /m/02_xgp2",
+        "/sports/sports_league_draft/picks./sports/sports_league_draft_pick/team /m/0jmm4"
+    ],
+    "/m/0142rn": [
+        "inv-/location/hud_foreclosure_area/estimated_number_of_mortgages./measurement_unit/dated_integer/source /m/0k3k1",
+        "inv-/location/hud_foreclosure_area/total_residential_addresses./measurement_unit/dated_integer/source /m/0r2dp",
+        "inv-/location/hud_foreclosure_area/total_90_day_vacant_residential_addresses./measurement_unit/dated_integer/source /m/0mmpz",
+        "inv-/location/hud_foreclosure_area/hhuniv./measurement_unit/dated_integer/source /m/0fvvz",
+        "/organization/organization/founders /m/0f7fy",
+        "inv-/location/hud_foreclosure_area/estimated_number_foreclosures./measurement_unit/dated_integer/source /m/0_7z2",
+        "/government/governmental_body/members./government/government_position_held/appointed_by /m/0157m"
+    ],
+    "/m/015czt": [
+        "/military/armed_force/personnel./military/military_service/military_person /m/02zfg3",
+        "/military/armed_force/personnel./military/military_service/rank /m/0130xz",
+        "inv-/people/person/employment_history./business/employment_tenure/company /m/015c4g",
+        "/business/employer/employees./business/employment_tenure/person /m/016kkx",
+        "inv-/military/rank/used_by_services./military/military_service/military_force /m/0130xz",
+        "inv-/military/military_person/service./military/military_service/military_force /m/02zfg3"
+    ],
+    "/m/0cqh57": [
+        "inv-/people/person/gender /m/027r0_f",
+        "/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/06f32",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport /m/0bynt"
+    ],
+    "/m/06cs1": [
+        "/organization/organization/leadership./organization/leadership/role /m/060c4",
+        "/organization/organization/headquarters./location/mailing_address/state_province_region /m/081yw",
+        "/education/educational_institution/students_graduates./education/education/degree /m/014mlp",
+        "inv-/education/field_of_study/students_majoring./education/education/institution /m/01d3n8",
+        "/education/educational_institution/students_graduates./education/education/major_field_of_study /m/01lj9",
+        "inv-/location/location/contains /m/09c7w0",
+        "inv-/education/educational_degree/people_with_this_degree./education/education/institution /m/016t_3",
+        "/education/educational_institution/school_type /m/05jxkf",
+        "/organization/organization/organization_type /m/06cs1"
+    ],
+    "/m/03tzh9": [
+        "/people/person/places_lived./people/place_lived/location /m/01n7q",
+        "/base/popstra/celebrity/friendship./base/popstra/friendship/participant /m/0c6qh",
+        "inv-/education/educational_institution/students_graduates./education/education/student /m/03ksy",
+        "/people/person/education./education/education/institution /m/03ksy",
+        "/people/person/nationality /m/0d060g",
+        "/people/person/ethnicity /m/041rx",
+        "/people/person/religion /m/03_gx",
+        "inv-/business/employer/employees./business/employment_tenure/person /m/01w5m"
+    ],
+    "/m/03w9bjf": [
+        "inv-/people/person/languages /m/02tf1y",
+        "inv-/location/country/languages_spoken /m/088q4",
+        "inv-/education/educational_institution/students_graduates./education/education/specialization /m/01jpqb",
+        "inv-/film/film/language /m/01jnc_"
+    ],
+    "/m/01jnf1": [
+        "inv-/education/educational_degree/people_with_this_degree./education/education/institution /m/02h4rq6",
+        "/education/educational_institution_campus/educational_institution /m/02jztz",
+        "/location/location/containedby /m/09c7w0",
+        "inv-/sports/professional_sports_team/draft_picks./sports/sports_league_draft_pick/school /m/0jmj7",
+        "inv-/people/person/education./education/education/institution /m/0d3k14",
+        "/education/educational_institution/students_graduates./education/education/major_field_of_study /m/03g3w",
+        "/business/employer/employees./business/employment_tenure/title /m/05_wyz"
+    ],
+    "/m/06wkj0": [
+        "/people/deceased_person/place_of_death /m/059rby",
+        "/people/deceased_person/cause_of_death /m/04p3w",
+        "/people/person/gender /m/05zppz",
+        "/people/person/nationality /m/09c7w0",
+        "inv-/film/film/story_by /m/05qbckf",
+        "inv-/people/profession/people_with_this_profession /m/06wkj0",
+        "inv-/people/cause_of_death/people /m/04p3w",
+        "/film/film_story_contributor/film_story_credits /m/05qbckf"
+    ],
+    "/m/01c7y": [
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0661ql3",
+        "/organization/organization_member/member_of./organization/organization_membership/organization /m/0j7v_",
+        "inv-/people/person/nationality /m/047s_cr",
+        "inv-/olympics/olympic_games/medals_awarded./olympics/olympic_medal_honor/country /m/016r9z",
+        "inv-/government/form_of_government/countries /m/018wl5",
+        "inv-/location/location/containedby /m/034q81",
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/07jbh"
+    ],
+    "/m/03mgdy": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/044crp",
+        "inv-/soccer/football_team/current_roster./soccer/football_roster_position/position /m/02vpvk",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/0272vm",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/01453"
+    ],
+    "/m/05y8n7": [
+        "inv-/music/performance_role/regular_performances./music/group_membership/group /m/0342h",
+        "inv-/music/record_label/artist /m/01gfq4",
+        "inv-/music/genre/parent_genre /m/059kh",
+        "/music/genre/artists /m/01wg982",
+        "/music/genre/subgenre /m/06cp5",
+        "/music/artist/genre /m/05r6t"
+    ],
+    "/m/0cc8q3": [
+        "inv-/award/award_category/winners./award/award_honor/award_winner /m/0m7yy",
+        "inv-/base/marchmadness/ncaa_basketball_tournament/seeds./base/marchmadness/ncaa_tournament_seed/team /m/0b_6pv",
+        "/base/marchmadness/ncaa_basketball_team/ncaa_tournament_seeds./base/marchmadness/ncaa_tournament_seed/tournament /m/0b_6h7",
+        "/business/asset/owners./business/asset_ownership/owner /m/09b3v",
+        "inv-/business/company_type/companies_of_this_type /m/025w401"
+    ],
+    "/m/02qk2d5": [
+        "/time/event/locations /m/0f2rq",
+        "inv-/base/newsevents/news_reporting_organisation/news_reports./base/newsevents/news_report/event /m/0kc6x",
+        "inv-/base/marchmadness/ncaa_basketball_team/ncaa_tournament_seeds./base/marchmadness/ncaa_tournament_seed/tournament /m/02qk2d5"
+    ],
+    "/m/0hm10": [
+        "/tv/tv_program/regular_personal_appearances./tv/tv_regular_personal_appearance/person /m/0261x8t",
+        "inv-/award/award_ceremony/awards_presented./award/award_honor/honored_for /m/05c1t6z",
+        "inv-/tv/tv_genre/programs /m/09lmb",
+        "inv-/tv/tv_personality/tv_regular_appearances./tv/tv_regular_personal_appearance/program /m/0253b6",
+        "/tv/tv_program/original_network./tv/tv_network_duration/network /m/0hm10",
+        "/tv/tv_program/languages /m/02h40lc",
+        "/tv/tv_program/regular_personal_appearances./tv/tv_regular_personal_appearance/appearance_type /m/043q4d",
+        "inv-/tv/tv_network/programs./tv/tv_network_duration/program /m/0hm10"
+    ],
+    "/m/070tng": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v"
+    ],
+    "/m/088fh": [
+        "inv-/education/educational_degree/people_with_this_degree./education/education/institution /m/03bwzr4",
+        "/education/educational_institution/parent_institution /m/07tgn",
+        "/sports/sports_team/roster./soccer/football_roster_position/position /m/02_j1w",
+        "/education/educational_institution/colors /m/019sc",
+        "inv-/education/field_of_study/students_majoring./education/education/institution /m/01r4k"
+    ],
+    "/m/047fwlg": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v"
+    ],
+    "/m/034_7s": [
+        "inv-/government/political_district/representatives./government/government_position_held/basic_title /m/05r4w",
+        "inv-/government/governmental_jurisdiction/governing_officials./government/government_position_held/basic_title /m/0hzlz",
+        "/location/statistical_region/religions./location/religion_percentage/religion /m/03_gx"
+    ],
+    "/m/0671wk": [
+        "/people/person/profession /m/0fj9f",
+        "/people/person/religion /m/051kv",
+        "inv-/people/profession/people_with_this_profession /m/0fj9f",
+        "inv-/base/popstra/celebrity/friendship./base/popstra/friendship/participant /m/01pcrw",
+        "inv-/film/film/starring./film/performance/actor /m/01rwyq",
+        "/royalty/chivalric_order_member/belongs_to_order./royalty/chivalric_order_membership/order /m/0671wk",
+        "/film/actor/film./film/performance/film /m/01rwyq",
+        "inv-/film/special_film_performance_type/film_performance_type./film/performance/actor /m/01pb34"
+    ],
+    "/m/03xds": [
+        "/location/location/contains /m/0gdk0",
+        "inv-/location/administrative_division/country /m/01x73",
+        "inv-/base/biblioness/bibs_location/country /m/0d35y",
+        "/people/marriage_union_type/unions_of_this_type./people/marriage/spouse /m/012vct",
+        "inv-/people/person/gender /m/042v2",
+        "inv-/people/person/spouse_s./people/marriage/type_of_union /m/063b4k",
+        "/location/country/second_level_divisions /m/0nh0f"
+    ],
+    "/m/07y9k": [
+        "/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/olympics /m/0lgxj",
+        "inv-/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport /m/0hzlz",
+        "inv-/sports/pro_athlete/sports_played_professionally./sports/pro_sports_played/sport /m/09l9tq",
+        "/sports/sports_team/roster./sports/sports_team_roster/position /m/02nzb8",
+        "inv-/user/jg/default_domain/olympic_games/sports /m/018qb4"
+    ],
+    "/m/01htzx": [
+        "inv-/tv/tv_genre/programs /m/03k9fj",
+        "/tv/tv_program/genre /m/03k9fj",
+        "/tv/tv_program/recurring_writers./tv/tv_program_writer_relationship/writer /m/0697kh",
+        "inv-/film/film/genre /m/02qrv7",
+        "inv-/tv/tv_actor/starring_roles./tv/regular_tv_appearance/series /m/0443xn"
+    ],
+    "/m/025ygws": [
+        "/sports/professional_sports_team/draft_picks./sports/sports_league_draft_pick/school /m/01jq4b",
+        "inv-/sports/sports_league_season/awards./sports/sports_award/award_winner /m/025ygws",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj",
+        "/sports/sports_award_winner/awards./sports/sports_award/season /m/025ygws",
+        "inv-/business/job_title/people_with_this_title./business/employment_tenure/company /m/01yc02"
+    ],
+    "/m/02sch9": [
+        "/government/governmental_jurisdiction/governing_officials./government/government_position_held/basic_title /m/060c4",
+        "/people/person/languages /m/03k50",
+        "inv-/people/person/gender /m/02js9p",
+        "inv-/olympics/olympic_games/medals_awarded./olympics/olympic_medal_honor/country /m/0l6mp"
+    ],
+    "/m/01dz7z": [
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/olympics /m/016r9z",
+        "/location/country/currency_used /m/09nqf",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0gc_c_",
+        "inv-/location/location/containedby /m/0bthb",
+        "inv-/tv/tv_program/country_of_origin /m/06cs95",
+        "inv-/film/film/country /m/0b6tzs",
+        "inv-/people/person/nationality /m/0261x8t",
+        "/location/country/second_level_divisions /m/0mmpz"
+    ],
+    "/m/07lrrt": [
+        "/fictional_universe/fictional_character/romantically_involved_with./fictional_universe/romantic_involvement/partner /m/04pzy",
+        "inv-/film/actor/film./film/performance/character /m/01pllx",
+        "inv-/fictional_universe/character_powers/characters_with_this_ability /m/07lrrt",
+        "inv-/fictional_universe/fictional_character_creator/fictional_characters_created /m/079ws",
+        "inv-/fictional_universe/character_occupation/characters_with_this_occupation /m/0btmb",
+        "/fictional_universe/fictional_character/occupation /m/016fly"
+    ],
+    "/m/04gm78f": [
+        "/award/award_nominated_work/award_nominations./award/award_nomination/award_nominee /m/015grj",
+        "inv-/award/award_category/nominees./award/award_nomination/nominated_for /m/0bdw6t",
+        "/award/award_nominated_work/award_nominations./award/award_nomination/award /m/0fbtbt"
+    ],
+    "/m/01mfj": [
+        "inv-/common/webpage/topic /m/0k8z",
+        "inv-/base/popstra/celebrity/shops_at./base/popstra/shopping_choice/company /m/01n5309",
+        "inv-/business/industry/companies /m/01mfj",
+        "/base/schemastaging/organization_extra/phone_number./base/schemastaging/phone_sandbox/service_location /m/0d060g",
+        "inv-/business/job_title/people_with_this_title./business/employment_tenure/company /m/01yc02",
+        "/business/employer/employees./business/employment_tenure/title /m/01yc02",
+        "/business/business_operation/net_profit./measurement_unit/dated_money_value/currency /m/09nqf",
+        "inv-/award/ranked_list/ranked_list_items./award/ranking/item /m/01pd60"
+    ],
+    "/m/05nwfr": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/070tng"
+    ],
+    "/m/03lpbx": [
+        "/business/asset_owner/assets_owned./business/asset_ownership/owned_asset /m/0kc6x",
+        "/award/award_category/winners./award/award_honor/award_winner /m/03yxwq",
+        "inv-/award/award_category/nominees./award/award_nomination/award_nominee /m/07bdd_",
+        "inv-/business/job_title/people_with_this_title./business/employment_tenure/company /m/01yc02",
+        "/business/employer/employees./business/employment_tenure/title /m/060c4"
+    ],
+    "/m/015wd7": [
+        "/music/genre/artists /m/04zwjd",
+        "inv-/music/artist/genre /m/01wk7ql",
+        "inv-/music/genre/parent_genre /m/016jhr",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj"
+    ],
+    "/m/01z77k": [
+        "inv-/tv/tv_genre/programs /m/07s9rl0",
+        "/media_common/netflix_title/netflix_genres /m/04xvlr",
+        "inv-/award/award_nominee/award_nominations./award/award_nomination/nominated_for /m/06pj8",
+        "/award/award_nominated_work/award_nominations./award/award_nomination/award /m/0bfvd4"
+    ],
+    "/m/01p_ng": [
+        "inv-/base/x2010fifaworldcupsouthafrica/world_cup_participant/world_cup_team./base/x2010fifaworldcupsouthafrica/current_world_cup_squad/position /m/0d3mlc",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/0xbm",
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/05169r",
+        "/sports/sports_position/players./sports/sports_team_roster/position /m/02_j1w",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/0dt_q_",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/019lty"
+    ],
+    "/m/01jcjt": [
+        "/location/hud_county_place/place /m/0_lr1",
+        "/people/marriage_union_type/unions_of_this_type./people/marriage/spouse /m/06t8b",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/04165w",
+        "inv-/people/person/spouse_s./people/marriage/type_of_union /m/050023",
+        "inv-/people/person/nationality /m/0gcs9",
+        "inv-/people/person/place_of_birth /m/06w33f8"
+    ],
+    "/m/0dzfdw": [
+        "/award/award_ceremony/awards_presented./award/award_honor/award /m/02lp0w",
+        "inv-/award/award_winner/awards_won./award/award_honor/ceremony /m/0hskw",
+        "inv-/award/award_category/winners./award/award_honor/ceremony /m/08_vwq",
+        "/award/award_ceremony/awards_presented./award/award_honor/award_winner /m/017s11"
+    ],
+    "/m/015mlw": [
+        "/music/artist/genre /m/0155w",
+        "inv-/music/record_label/artist /m/015_1q",
+        "inv-/award/award_category/nominees./award/award_nomination/award_nominee /m/02f73p",
+        "/people/person/gender /m/05zppz",
+        "/award/award_nominee/award_nominations./award/award_nomination/award /m/02f73p",
+        "inv-/music/instrument/instrumentalists /m/04rzd",
+        "inv-/music/genre/artists /m/01lyv",
+        "/award/award_winner/awards_won./award/award_honor/ceremony /m/01bx35"
+    ],
+    "/m/0b_6h7": [
+        "inv-/location/hud_county_place/place /m/0qpsn",
+        "inv-/people/person/spouse_s./people/marriage/location_of_ceremony /m/01bmlb",
+        "/base/marchmadness/ncaa_basketball_team/ncaa_tournament_seeds./base/marchmadness/ncaa_tournament_seed/tournament /m/0b_6pv",
+        "inv-/location/location/contains /m/09c7w0",
+        "/location/location/adjoin_s./location/adjoining_relationship/adjoins /m/05fjf",
+        "inv-/base/marchmadness/ncaa_basketball_tournament/seeds./base/marchmadness/ncaa_tournament_seed/team /m/0b_6zk"
+    ],
+    "/m/01vw77": [
+        "/music/genre/artists /m/03fbc",
+        "inv-/music/genre/subgenre /m/0gywn",
+        "/music/genre/parent_genre /m/03_d0",
+        "inv-/music/artist/genre /m/03fbc"
+    ],
+    "/m/0g57ws5": [
+        "/award/award_nominated_work/award_nominations./award/award_nomination/award /m/09td7p",
+        "inv-/film/film_festival_event/festival /m/05ys0wz",
+        "inv-/award/award_category/nominees./award/award_nomination/nominated_for /m/02rdyk7",
+        "/award/award_winning_work/awards_won./award/award_honor/award /m/0gr0m"
+    ],
+    "/m/0h1wg": [
+        "inv-/base/localfood/food_producing_region/seasonal_availability./base/localfood/produce_availability/produce /m/0l2hf",
+        "/base/localfood/produce/availability./base/localfood/produce_availability/location /m/0l2hf",
+        "/food/food/nutrients./food/nutrition_fact/nutrient /m/04k8n",
+        "/food/ingredient/compatible_with_dietary_restrictions /m/07_lq",
+        "inv-/food/dietary_restriction/compatible_ingredients /m/07_lq"
+    ],
+    "/m/03dft3": [
+        "/people/deceased_person/cause_of_death /m/01_qc_",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/01g63y",
+        "/influence/influence_node/influenced /m/0dzkq",
+        "/people/person/ethnicity /m/041rx",
+        "inv-/influence/influence_node/influenced_by /m/0gd_s",
+        "/people/person/religion /m/0kpl"
+    ],
+    "/m/02b1j1": [
+        "inv-/soccer/football_team/current_roster./soccer/football_roster_position/position /m/07b8m1",
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/044crp",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/047fwlg",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/03_9x6",
+        "inv-/sports/sports_team/roster./soccer/football_roster_position/position /m/0g701n",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/02b2np"
+    ],
+    "/m/03p41": [
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj",
+        "/medicine/disease/treatments /m/0217g",
+        "/influence/influence_node/influenced_by /m/0f0y8",
+        "inv-/music/genre/artists /m/03_d0",
+        "inv-/location/location/people_born_here /m/01_d4",
+        "/people/person/profession /m/0nbcg",
+        "inv-/people/profession/people_with_this_profession /m/09l65",
+        "inv-/education/educational_degree/people_with_this_degree./education/education/student /m/016t_3"
+    ],
+    "/m/09lmb": [
+        "/tv/tv_program/languages /m/0t_2",
+        "/tv/tv_program/regular_personal_appearances./tv/tv_regular_personal_appearance/person /m/01yzhn",
+        "/award/award_winning_work/awards_won./award/award_honor/ceremony /m/05c1t6z",
+        "inv-/tv/tv_personality/tv_regular_appearances./tv/tv_regular_personal_appearance/program /m/0253b6",
+        "inv-/award/award_nominee/award_nominations./award/award_nomination/nominated_for /m/02pbp9",
+        "inv-/tv/non_character_role/tv_regular_personal_appearances./tv/tv_regular_personal_appearance/program /m/043q4d"
+    ],
+    "/m/07x21": [
+        "inv-/influence/influence_node/influenced /m/043s3",
+        "inv-/people/profession/people_with_this_profession /m/0cbd2",
+        "inv-/government/governmental_jurisdiction/governing_officials./government/government_position_held/office_holder /m/07z1m",
+        "inv-/book/written_work/author /m/07v5q",
+        "inv-/government/political_district/representatives./government/government_position_held/office_holder /m/09c7w0",
+        "inv-/influence/influence_node/peers./influence/peer_relationship/peers /m/019fz",
+        "inv-/influence/influence_node/influenced_by /m/0h25"
+    ],
+    "/m/0m40d": [
+        "/music/genre/artists /m/012vd6",
+        "/award/award_nominee/award_nominations./award/award_nomination/award_nominee /m/01bczm",
+        "inv-/music/artist/genre /m/0phx4"
+    ],
+    "/m/01gfq4": [
+        "inv-/music/artist/label /m/03t9sp",
+        "/music/artist/track_contributions./music/track_contribution/role /m/05r5c",
+        "/people/person/profession /m/02hrh1q",
+        "inv-/music/genre/artists /m/0ggx5q",
+        "/people/person/places_lived./people/place_lived/location /m/02_286"
+    ],
+    "/m/02fhtq": [
+        "inv-/music/genre/subgenre /m/03_d0",
+        "/award/award_winner/awards_won./award/award_honor/ceremony /m/013b2h",
+        "inv-/music/artist/genre /m/01wvxw1",
+        "/music/genre/artists /m/01xzb6",
+        "inv-/award/award_category/nominees./award/award_nomination/award_nominee /m/026mfs"
+    ],
+    "/m/0hkq4": [
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0407yj_",
+        "/government/governmental_jurisdiction/governing_officials./government/government_position_held/basic_title /m/01_fjr",
+        "/location/location/contains /m/0clz7",
+        "inv-/location/location/containedby /m/0m_zm",
+        "inv-/people/person/nationality /m/04x1_w",
+        "/olympics/olympic_participating_country/medals_won./olympics/olympic_medal_honor/medal /m/02lq67"
+    ],
+    "/m/0979n": [
+        "inv-/film/film/language /m/07k8rt4",
+        "inv-/tv/tv_program/languages /m/06cs95",
+        "/education/field_of_study/students_majoring./education/education/institution /m/049dk",
+        "inv-/film/film/country /m/095zlp",
+        "inv-/location/location/containedby /m/03msf",
+        "inv-/people/profession/people_with_this_profession /m/02hrh1q"
+    ],
+    "/m/02mv_h": [
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/05jx17",
+        "inv-/sports/pro_athlete/teams./soccer/football_roster_position/position /m/07h1h5",
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/016gp5",
+        "inv-/soccer/football_team/current_roster./soccer/football_roster_position/position /m/02q3n9c",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/0cgwt8",
+        "inv-/sports/sports_team/roster./soccer/football_roster_position/position /m/04j1n8"
+    ],
+    "/m/026k4d": [
+        "inv-/music/genre/artists /m/016clz",
+        "inv-/music/performance_role/regular_performances./music/group_membership/group /m/018vs",
+        "/music/musical_group/member./music/group_membership/role /m/018vs",
+        "/music/artist/genre /m/05r6t",
+        "inv-/music/record_label/artist /m/026k4d"
+    ],
+    "/m/04pzy": [
+        "inv-/people/person/gender /m/0794g",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/01g63y",
+        "inv-/film/film/starring./film/performance/character /m/044g_k"
+    ],
+    "/m/04bjff": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/03dj48",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/0cgwt8"
+    ],
+    "/m/01fjfv": [
+        "inv-/award/award_category/nominees./award/award_nomination/award_nominee /m/02f73p",
+        "/music/group_member/instruments_played /m/0l14md",
+        "/influence/influence_node/peers./influence/peer_relationship/peers /m/03j24kf",
+        "/award/award_nominee/award_nominations./award/award_nomination/award /m/01by1l",
+        "inv-/influence/influence_node/influenced /m/01lc5"
+    ],
+    "/m/0dt_q_": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v"
+    ],
+    "/m/0c7hq": [
+        "/base/aareas/schema/administrative_area/administrative_children /m/0c7hq",
+        "inv-/location/country/currency_used /m/02vzc",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0j43swk",
+        "/military/military_combatant/military_conflicts./military/military_combatant_group/combatants /m/06bnz",
+        "/base/popstra/location/vacationers./base/popstra/vacation_choice/vacationer /m/0g824",
+        "inv-/base/biblioness/bibs_location/country /m/07ytt",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport /m/09f6b"
+    ],
+    "/m/026kqs9": [
+        "inv-/award/award_nominee/award_nominations./award/award_nomination/award /m/06rgq",
+        "/film/film/estimated_budget./measurement_unit/dated_money_value/currency /m/09nqf",
+        "inv-/award/award_nominated_work/award_nominations./award/award_nomination/award /m/07xtqq"
+    ],
+    "/m/0n6nl": [
+        "/time/time_zone/locations_in_this_time_zone /m/0135g",
+        "inv-/location/hud_foreclosure_area/estimated_number_of_mortgages./measurement_unit/dated_integer/source /m/0d9z_y",
+        "inv-/location/statistical_region/gdp_nominal./measurement_unit/dated_money_value/currency /m/05tbn",
+        "inv-/film/film/estimated_budget./measurement_unit/dated_money_value/currency /m/03shpq",
+        "inv-/base/schemastaging/person_extra/net_worth./measurement_unit/dated_money_value/currency /m/01v40wd",
+        "inv-/location/statistical_region/rent50_3./measurement_unit/dated_money_value/currency /m/0frf6"
+    ],
+    "/m/0536sd": [
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/06fcqw",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport /m/09_bl",
+        "inv-/user/tsegaran/random/subject_taxonomy/entry./user/tsegaran/random/taxonomy_entry/subject /m/04n6k",
+        "/location/country/currency_used /m/02l6h",
+        "/military/military_combatant/military_conflicts./military/military_combatant_group/combatants /m/06bnz",
+        "inv-/people/person/nationality /m/0j6cj",
+        "/government/governmental_jurisdiction/governing_officials./government/government_position_held/basic_title /m/060bp",
+        "inv-/base/biblioness/bibs_location/country /m/07ytt"
+    ],
+    "/m/02jjdr": [
+        "/people/person/languages /m/02h40lc",
+        "/people/person/profession /m/0dz3r",
+        "inv-/people/ethnicity/people /m/0x67",
+        "inv-/music/genre/artists /m/064t9",
+        "inv-/music/record_label/artist /m/02jjdr",
+        "/people/person/gender /m/05zppz"
+    ],
+    "/m/06p0s1": [
+        "inv-/award/award_category/nominees./award/award_nomination/nominated_for /m/02qvyrt",
+        "inv-/people/person/gender /m/05ztm4r",
+        "inv-/film/film/featured_film_locations /m/09z2b7"
+    ],
+    "/m/01n4bh": [
+        "inv-/music/genre/artists /m/016clz",
+        "inv-/music/artist/genre /m/0146pg",
+        "inv-/music/genre/parent_genre /m/01ym9b",
+        "/music/genre/subgenre /m/01n4bh",
+        "/music/artist/label /m/02bh8z"
+    ],
+    "/m/01lwfr": [
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/01cgz",
+        "/military/military_combatant/military_conflicts./military/military_combatant_group/conflict /m/01cpp0",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport /m/03_8r",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/017gl1",
+        "/organization/organization_member/member_of./organization/organization_membership/organization /m/07t65",
+        "inv-/location/location/containedby /m/01lwfr",
+        "inv-/time/event/locations /m/0k4y6",
+        "/olympics/olympic_participating_country/medals_won./olympics/olympic_medal_honor/medal /m/02lq5w"
+    ],
+    "/m/09l9tq": [
+        "inv-/military/military_combatant/military_conflicts./military/military_combatant_group/combatants /m/07f1x",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0gvvm6l",
+        "inv-/people/person/gender /m/02wlk"
+    ],
+    "/m/05wvs": [
+        "inv-/user/tsegaran/random/taxonomy_subject/entry./user/tsegaran/random/taxonomy_entry/taxonomy /m/0b22w",
+        "/user/tsegaran/random/subject_taxonomy/entry./user/tsegaran/random/taxonomy_entry/subject /m/01540",
+        "/food/food/nutrients./food/nutrition_fact/nutrient /m/0h1wg",
+        "/base/localfood/produce/availability./base/localfood/produce_availability/location /m/0gx1l",
+        "inv-/food/dietary_restriction/compatible_ingredients /m/07_lq",
+        "inv-/base/localfood/food_producing_region/seasonal_availability./base/localfood/produce_availability/produce /m/0l2hf",
+        "/food/ingredient/compatible_with_dietary_restrictions /m/07_lq"
+    ],
+    "/m/02rsw": [
+        "/military/military_person/service./military/military_service/military_force /m/07wh1",
+        "inv-/base/popstra/celebrity/friendship./base/popstra/friendship/participant /m/01pllx",
+        "inv-/tv/tv_program/regular_cast./tv/regular_tv_appearance/actor /m/0g60z",
+        "inv-/award/award_category/nominees./award/award_nomination/award_nominee /m/02n9nmz",
+        "/people/person/place_of_birth /m/02_286",
+        "inv-/location/location/people_born_here /m/02_286"
+    ],
+    "/m/0fm3nb": [
+        "/education/field_of_study/students_majoring./education/education/student /m/0219q",
+        "/education/field_of_study/students_majoring./education/education/institution /m/065y4w7",
+        "/film/film/other_crew./film/film_crew_gig/film_crew_role /m/0ch6mp2",
+        "inv-/people/person/education./education/education/major_field_of_study /m/0219q",
+        "/business/industry/companies /m/016tt2",
+        "/award/award_nominated_work/award_nominations./award/award_nomination/award /m/0fm3nb"
+    ],
+    "/m/01flzb": [
+        "inv-/music/artist/genre /m/0837ql",
+        "/music/genre/artists /m/015bwt",
+        "/music/artist/track_contributions./music/track_contribution/role /m/01vj9c",
+        "/people/person/profession /m/0kyk",
+        "inv-/music/genre/parent_genre /m/01flzb",
+        "inv-/people/profession/people_with_this_profession /m/0nbcg"
+    ],
+    "/m/06jry": [
+        "/base/localfood/produce/availability./base/localfood/produce_availability/location /m/0gx1l",
+        "inv-/base/localfood/food_producing_region/seasonal_availability./base/localfood/produce_availability/produce /m/0l2hf",
+        "/food/food/nutrients./food/nutrition_fact/nutrient /m/04k8n",
+        "inv-/food/dietary_restriction/compatible_ingredients /m/07_lq",
+        "inv-/medicine/drug_ingredient/more_general_ingredient /m/06jry",
+        "/food/ingredient/compatible_with_dietary_restrictions /m/07_lq"
+    ],
+    "/m/0d7wh": [
+        "inv-/people/person/languages /m/06mnps",
+        "inv-/film/film/language /m/03qnc6q",
+        "inv-/base/schemastaging/organization_extra/phone_number./base/schemastaging/phone_sandbox/service_language /m/0xbm",
+        "inv-/tv/tv_program/languages /m/05f4vxd",
+        "inv-/location/country/languages_spoken /m/0hdx8",
+        "inv-/award/award_nominated_work/award_nominations./award/award_nomination/award_nominee /m/04lhc4"
+    ],
+    "/m/02blr4": [
+        "inv-/people/person/gender /m/0htcn",
+        "/film/actor/film./film/performance/film /m/0g56t9t",
+        "/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/02vzc",
+        "inv-/film/film_format/film_format /m/0cj16",
+        "inv-/award/award_nominee/award_nominations./award/award_nomination/award_nominee /m/02bfmn"
+    ],
+    "/m/01lk31": [
+        "/government/government_office_category/officeholders./government/government_position_held/jurisdiction_of_office /m/081mh",
+        "inv-/organization/organization/headquarters./location/mailing_address/state_province_region /m/02c9dj",
+        "inv-/government/governmental_jurisdiction/governing_officials./government/government_position_held/basic_title /m/0824r",
+        "/government/government_office_category/officeholders./government/government_position_held/office_holder /m/08f3b1",
+        "inv-/government/legislative_session/members./government/government_position_held/district_represented /m/05l2z4",
+        "inv-/government/politician/government_positions_held./government/government_position_held/basic_title /m/0835q"
+    ],
+    "/m/02r6nbc": [
+        "inv-/film/film/genre /m/03mgx6z",
+        "/media_common/netflix_genre/titles /m/0bxsk",
+        "/film/film_genre/films_in_this_genre /m/0127ps",
+        "inv-/award/award_category/disciplines_or_subjects /m/0265vt",
+        "inv-/media_common/netflix_title/netflix_genres /m/026p_bs",
+        "inv-/tv/tv_program/genre /m/0828jw"
+    ],
+    "/m/03n15_": [
+        "/music/genre/artists /m/0qf3p",
+        "inv-/music/artist/genre /m/025xt8y",
+        "/people/person/places_lived./people/place_lived/location /m/01jr6",
+        "inv-/music/instrument/instrumentalists /m/0l14md",
+        "inv-/people/profession/people_with_this_profession /m/09jwl",
+        "inv-/music/record_label/artist /m/03rhqg"
+    ],
+    "/m/03fkgg": [
+        "inv-/government/legislative_session/members./government/government_position_held/district_represented /m/01gt99",
+        "inv-/people/person/places_lived./people/place_lived/location /m/03cglm",
+        "inv-/government/government_office_category/officeholders./government/government_position_held/jurisdiction_of_office /m/01t7n9",
+        "/government/political_district/representatives./government/government_position_held/legislative_sessions /m/070mff",
+        "inv-/location/location/containedby /m/0n22z",
+        "inv-/government/governmental_body/members./government/government_position_held/basic_title /m/07t58"
+    ],
+    "/m/0h407": [
+        "inv-/language/human_language/language_family /m/0295r",
+        "inv-/time/event/locations /m/02jx1",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/03y0pn",
+        "/location/location/contains /m/0h924",
+        "inv-/base/locations/countries/continent /m/06mzp"
+    ],
+    "/m/09ksp": [
+        "inv-/film/film/featured_film_locations /m/0m9p3",
+        "inv-/people/person/nationality /m/0336mc",
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/03krj",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0jjy0",
+        "inv-/location/statistical_region/places_exported_to./location/imports_and_exports/exported_to /m/09c7w0",
+        "/government/political_district/representatives./government/government_position_held/jurisdiction_of_office /m/02jxk",
+        "inv-/olympics/olympic_games/participating_countries /m/0lgxj",
+        "inv-/film/film/country /m/07l4zhn"
+    ],
+    "/m/02knxx": [
+        "/award/award_nominee/award_nominations./award/award_nomination/award /m/02pqp12",
+        "inv-/award/award_category/nominees./award/award_nomination/award_nominee /m/019f4v",
+        "/people/person/profession /m/0kyk",
+        "inv-/people/profession/people_with_this_profession /m/02jknp"
+    ],
+    "/m/07h1h5": [
+        "/sports/sport/teams /m/011v3",
+        "inv-/sports/sports_team/sport /m/0g701n",
+        "inv-/soccer/football_player/current_team./sports/sports_team_roster/position /m/02zbjwr",
+        "inv-/sports/sports_team/roster./soccer/football_roster_position/position /m/016gp5",
+        "/sports/sport/pro_athletes./sports/pro_sports_played/athlete /m/08b0cj",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/047fwlg"
+    ],
+    "/m/018mlg": [
+        "/government/governmental_jurisdiction/governing_officials./government/government_position_held/basic_title /m/0pqc5",
+        "/base/biblioness/bibs_location/city /m/030qb3t",
+        "inv-/location/location/contains /m/01n7q",
+        "/location/hud_foreclosure_area/estimated_number_foreclosures./measurement_unit/dated_integer/source /m/0jbk9",
+        "inv-/time/time_zone/locations_in_this_time_zone /m/02lcqs",
+        "/base/biblioness/bibs_location/country /m/09c7w0",
+        "inv-/location/hud_county_place/place /m/0r04p",
+        "inv-/government/government_office_category/officeholders./government/government_position_held/jurisdiction_of_office /m/01q24l",
+        "inv-/location/location/containedby /m/018mlg"
+    ],
+    "/m/015cl6": [
+        "/military/military_person/participated_in_conflicts /m/081pw",
+        "inv-/award/award_category/winners./award/award_honor/award_winner /m/015cl6",
+        "inv-/military/armed_force/personnel./military/military_service/military_person /m/07wh1",
+        "/people/person/spouse_s./people/marriage/location_of_ceremony /m/02_286",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj",
+        "inv-/military/military_conflict/military_personnel_involved /m/048n7",
+        "inv-/military/military_combatant/military_commanders./military/military_command/military_commander /m/09c7w0",
+        "/military/military_person/service./military/military_service/military_force /m/07wh1"
+    ],
+    "/m/02b1hq": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/016gp5",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/05jx17",
+        "inv-/sports/pro_athlete/teams./soccer/football_roster_position/position /m/07h1h5",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/0cgwt8",
+        "inv-/soccer/football_team/current_roster./soccer/football_roster_position/position /m/02q3n9c"
+    ],
+    "/m/02hfgl": [
+        "inv-/sports/sports_team/colors /m/0jm6n",
+        "inv-/education/educational_institution/colors /m/03np_7",
+        "inv-/dataworld/gardening_hint/split_to /m/06fvc"
+    ],
+    "/m/0nc7s": [
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/023gxx",
+        "/location/country/administrative_divisions /m/0dm0f",
+        "/military/military_combatant/military_conflicts./military/military_combatant_group/combatants /m/05b4w",
+        "inv-/people/person/nationality /m/03j24kf",
+        "inv-/people/family/country /m/017yzc",
+        "/location/location/contains /m/0138t4"
+    ],
+    "/m/01zst8": [
+        "/military/military_combatant/military_conflicts./military/military_combatant_group/combatants /m/0k6nt",
+        "inv-/language/human_language/main_country /m/02h40lc",
+        "inv-/people/person/nationality /m/0140t7",
+        "/location/location/contains /m/05zhg",
+        "inv-/film/film/distributors./film/film_film_distributor_relationship/region /m/0ds35l9",
+        "inv-/olympics/olympic_games/participating_countries /m/0124ld",
+        "inv-/film/film/country /m/0bpm4yw"
+    ],
+    "/m/02q3n9c": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v"
+    ],
+    "/m/02b168": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/016gp5",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj"
+    ],
+    "/m/0263q4z": [
+        "inv-/music/artist/genre /m/01w5jwb",
+        "/music/genre/artists /m/04n65n",
+        "inv-/music/genre/parent_genre /m/06cp5",
+        "/music/genre/subgenre /m/0263q4z"
+    ],
+    "/m/09yg6l": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj"
+    ],
+    "/m/021dvj": [
+        "/award/award_nominee/award_nominations./award/award_nomination/award /m/02qvyrt",
+        "/music/artist/genre /m/01wqlc",
+        "/people/person/ethnicity /m/0g6ff",
+        "/music/artist/track_contributions./music/track_contribution/role /m/05r5c",
+        "inv-/music/instrument/instrumentalists /m/07y_7",
+        "inv-/people/profession/people_with_this_profession /m/01c72t"
+    ],
+    "/m/013x0b": [
+        "/film/film_genre/films_in_this_genre /m/042y1c",
+        "/organization/organization/parent./organization/organization_relationship/parent /m/02bh8z",
+        "/organization/organization/child./organization/organization_relationship/child /m/0g768",
+        "inv-/education/educational_degree/people_with_this_degree./education/education/minor /m/014mlp"
+    ],
+    "/m/07qht4": [
+        "/film/film_genre/films_in_this_genre /m/011yhm",
+        "inv-/film/film/genre /m/01cssf",
+        "/media_common/netflix_genre/titles /m/04pmnt",
+        "inv-/media_common/netflix_title/netflix_genres /m/064ndc",
+        "/award/award_winning_work/awards_won./award/award_honor/ceremony /m/0gvstc3"
+    ],
+    "/m/0jmdb": [
+        "/education/educational_institution/students_graduates./education/education/degree /m/016t_3",
+        "/education/educational_institution/students_graduates./education/education/major_field_of_study /m/02lp1",
+        "inv-/education/field_of_study/students_majoring./education/education/institution /m/04_tv",
+        "/organization/endowed_organization/endowment./measurement_unit/dated_money_value/currency /m/09nqf",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj",
+        "inv-/sports/professional_sports_team/draft_picks./sports/sports_league_draft_pick/school /m/0jm4v"
+    ],
+    "/m/02lp0w": [
+        "/award/award_winner/awards_won./award/award_honor/ceremony /m/05c1t6z",
+        "/award/award_nominee/award_nominations./award/award_nomination/award /m/05ztrmj",
+        "/award/award_ceremony/awards_presented./award/award_honor/award /m/0dzfdw"
+    ],
+    "/m/014d7f": [
+        "/medicine/drug_ingredient/active_moiety_of_drug /m/014d7f",
+        "inv-/medicine/drug_ingredient/active_moiety_of_drug /m/014d7f"
+    ],
+    "/m/0g3bw": [
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0m63c",
+        "inv-/government/government_office_category/officeholders./government/government_position_held/jurisdiction_of_office /m/060bp",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/olympics /m/09n48",
+        "inv-/film/film/country /m/0j6b5",
+        "inv-/olympics/olympic_games/medals_awarded./olympics/olympic_medal_honor/country /m/0kbws",
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/09_bl"
+    ],
+    "/m/06z5s": [
+        "/people/deceased_person/cause_of_death /m/06z5s",
+        "inv-/people/marriage_union_type/unions_of_this_type./people/marriage/spouse /m/04ztj",
+        "/people/person/profession /m/0cbd2",
+        "/award/award_nominee/award_nominations./award/award_nomination/award /m/02x73k6",
+        "/people/person/ethnicity /m/07hwkr"
+    ],
+    "/m/055t01": [
+        "inv-/people/person/profession /m/0dn3n",
+        "/olympics/olympic_participating_country/medals_won./olympics/olympic_medal_honor/olympics /m/0kbws",
+        "inv-/people/ethnicity/languages_spoken /m/03w9bjf",
+        "inv-/film/film/language /m/07k8rt4"
+    ],
+    "/m/07b8m1": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/position /m/02sdk9v",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02mplj"
+    ],
+    "/m/0czp_": [
+        "/film/film/genre /m/07s9rl0",
+        "/award/award_ceremony/awards_presented./award/award_honor/award /m/0gqz2",
+        "inv-/award/award_category/category_of /m/0gr0m",
+        "/award/award/category /m/0p9sw",
+        "/time/recurring_event/instances /m/0bzm81"
+    ],
+    "/m/029n80": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/047fwlg",
+        "inv-/soccer/football_team/current_roster./soccer/football_roster_position/position /m/02vpvk",
+        "inv-/soccer/football_team/current_roster./sports/sports_team_roster/position /m/044crp",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/0272vm",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/01453"
+    ],
+    "/m/0dx84s": [
+        "/people/person/nationality /m/09c7w0",
+        "/base/popstra/organization/supporter./base/popstra/support/supporter /m/07cjqy",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj",
+        "/base/popstra/celebrity/vacations_in./base/popstra/vacation_choice/location /m/0f2rq",
+        "/sports/sports_award_winner/awards./sports/sports_award/season /m/025ygws",
+        "/baseball/baseball_player/batting_stats./baseball/batting_statistics/season /m/0dx84s"
+    ],
+    "/m/01qcz7": [
+        "inv-/olympics/olympic_medal/medal_winners./olympics/olympic_medal_honor/country /m/02lq5w",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0j6b5",
+        "inv-/olympics/olympic_games/medals_awarded./olympics/olympic_medal_honor/country /m/0jhn7",
+        "/olympics/olympic_participating_country/medals_won./olympics/olympic_medal_honor/olympics /m/018ctl",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/olympics /m/09x3r",
+        "/organization/organization_member/member_of./organization/organization_membership/organization /m/07t65",
+        "inv-/user/tsegaran/random/subject_taxonomy/entry./user/tsegaran/random/taxonomy_entry/subject /m/04n6k",
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/071t0"
+    ],
+    "/m/07147": [
+        "inv-/people/person/education./education/education/institution /m/0fpjyd",
+        "inv-/education/field_of_study/students_majoring./education/education/institution /m/01r4k",
+        "/education/educational_institution/students_graduates./education/education/major_field_of_study /m/02lp1",
+        "inv-/sports/professional_sports_team/draft_picks./sports/sports_league_draft_pick/school /m/07147",
+        "inv-/baseball/baseball_team/team_stats./baseball/baseball_team_stats/season /m/07147",
+        "/location/location/containedby /m/09c7w0"
+    ],
+    "/m/05vc71": [
+        "inv-/organization/organization_member/member_of./organization/organization_membership/organization /m/03s9v",
+        "inv-/business/job_title/people_with_this_title./business/employment_tenure/company /m/060c4",
+        "/organization/membership_organization/members./organization/organization_membership/member /m/0jcx",
+        "/business/employer/employees./business/employment_tenure/title /m/060c4",
+        "/organization/organization/board_members./organization/organization_board_membership/member /m/03s9v",
+        "inv-/award/award_category/presenting_organization /m/05vc71",
+        "/award/award_presenting_organization/award_categories_presented /m/05vc71"
+    ],
+    "/m/06qln": [
+        "/film/film_genre/films_in_this_genre /m/02qhqz4",
+        "inv-/education/educational_degree/people_with_this_degree./education/education/major_field_of_study /m/016t_3",
+        "inv-/film/film/genre /m/0m63c"
+    ],
+    "/m/02681xs": [
+        "inv-/award/award_category/winners./award/award_honor/award_winner /m/01by1l",
+        "inv-/award/award_winner/awards_won./award/award_honor/award_winner /m/01c8v0",
+        "/award/award_winner/awards_won./award/award_honor/award /m/01bgqh",
+        "inv-/award/award_category/nominees./award/award_nomination/award_nominee /m/01by1l"
+    ],
+    "/m/03vtbc": [
+        "/sports/sports_team/colors /m/01g5v",
+        "inv-/sports/sports_position/players./american_football/football_historical_roster_position/team /m/047g8h",
+        "inv-/location/location/contains /m/05kr_",
+        "/education/educational_institution/students_graduates./education/education/degree /m/016t_3"
+    ],
+    "/m/0355pl": [
+        "/sports/sports_team/location /m/05zhg",
+        "inv-/sports/sports_position/players./soccer/football_roster_position/team /m/0dgrmp",
+        "inv-/sports/sport/teams /m/02vx4",
+        "/soccer/football_team/current_roster./sports/sports_team_roster/position /m/02nzb8",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/team /m/02_j1w"
+    ],
+    "/m/05ys0wz": [
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_regional_debut_venue /m/0n08r",
+        "inv-/film/film_festival_event/films /m/05ys0wz",
+        "/film/film_festival/individual_festivals /m/0g57ws5",
+        "/film/film/distributors./film/film_film_distributor_relationship/distributor /m/0g1rw",
+        "inv-/film/film_genre/films_in_this_genre /m/09blyk",
+        "inv-/film/writer/film /m/012t1"
+    ],
+    "/m/0y1mh": [
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/sport /m/07jbh",
+        "/government/governmental_jurisdiction/governing_officials./government/government_position_held/basic_title /m/060c4",
+        "inv-/olympics/olympic_sport/athletes./olympics/olympic_athlete_affiliation/country /m/071t0",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/0ch26b_",
+        "/location/country/capital /m/06t2t",
+        "inv-/olympics/olympic_games/athletes./olympics/olympic_athlete_affiliation/country /m/0kbvb",
+        "/olympics/olympic_participating_country/athletes./olympics/olympic_athlete_affiliation/olympics /m/0kbws"
+    ],
+    "/m/018mrd": [
+        "inv-/organization/organization/headquarters./location/mailing_address/citytown /m/0kc6x",
+        "inv-/people/deceased_person/place_of_death /m/03bw6",
+        "/location/location/people_born_here /m/07qy0b",
+        "inv-/music/artist/origin /m/01l7cxq",
+        "/film/film_location/featured_in_films /m/02gpkt",
+        "inv-/people/profession/people_with_this_profession /m/02hrh1q"
+    ],
+    "/m/01b1nk": [
+        "inv-/film/film/country /m/0gbfn9",
+        "inv-/olympics/olympic_medal/medal_winners./olympics/olympic_medal_honor/country /m/02lq67",
+        "inv-/people/family/country /m/017yzc",
+        "inv-/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/017gm7",
+        "inv-/olympics/olympic_games/participating_countries /m/015pkt",
+        "/location/location/contains /m/0138t4",
+        "inv-/location/administrative_division/country /m/0n9dn",
+        "/government/governmental_jurisdiction/government_positions /m/060s9",
+        "inv-/film/film/distributors./film/film_film_distributor_relationship/region /m/05nlx4"
+    ],
+    "/m/01gr00": [
+        "/location/location/contains /m/0cv3w",
+        "inv-/people/person/nationality /m/0372kf",
+        "inv-/film/film/runtime./film/film_cut/film_release_region /m/05q4y12",
+        "/location/statistical_region/religions./location/religion_percentage/religion /m/092bf5",
+        "/business/employer/employees./business/employment_tenure/title /m/01dz7z"
+    ],
+    "/m/0b_6rk": [
+        "inv-/music/artist/origin /m/01wwvc5",
+        "inv-/time/event/locations /m/0b_6rk",
+        "inv-/location/hud_county_place/place /m/0ftxw"
+    ],
+    "/m/07yjb": [
+        "/film/film/other_crew./film/film_crew_gig/film_crew_role /m/01pvkk",
+        "inv-/film/film_distributor/films_distributed./film/film_film_distributor_relationship/film /m/086k8",
+        "/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/03gj2",
+        "/award/award_nominated_work/award_nominations./award/award_nomination/award /m/05b1610",
+        "inv-/film/film_story_contributor/film_story_credits /m/019gz"
+    ],
+    "/m/06www": [
+        "/film/film/release_date_s./film/film_regional_release_date/film_release_region /m/035qy",
+        "/film/film_genre/films_in_this_genre /m/08cfr1",
+        "inv-/film/film/genre /m/018nnz",
+        "/film/film/other_crew./film/film_crew_gig/film_crew_role /m/0dxtw",
+        "/film/film/language /m/02h40lc",
+        "inv-/film/film_format/film_format /m/07fb8_"
+    ],
+    "/m/033qxt": [
+        "inv-/people/person/ethnicity /m/023tp8",
+        "/people/ethnicity/people /m/04pqqb",
+        "inv-/location/country/official_language /m/03spz",
+        "inv-/location/country/languages_spoken /m/0hzlz",
+        "inv-/people/ethnicity/languages_spoken /m/033qxt",
+        "/language/human_language/region /m/03spz",
+        "/people/ethnicity/includes_groups /m/033qxt",
+        "inv-/film/film/language /m/02ph9tm"
+    ],
+    "/m/02l9wl": [
+        "/people/person/education./education/education/institution /m/01rtm4",
+        "/organization/endowed_organization/endowment./measurement_unit/dated_money_value/currency /m/01nv4h",
+        "/people/person/profession /m/0cbd2",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj",
+        "/people/person/gender /m/05zppz",
+        "inv-/film/film/starring./film/performance/actor /m/0qm8b"
+    ],
+    "/m/0148nj": [
+        "/music/artist/genre /m/0xhtw",
+        "inv-/music/genre/parent_genre /m/059kh",
+        "inv-/music/performance_role/regular_performances./music/group_membership/group /m/018vs",
+        "inv-/music/genre/subgenre /m/0xhtw",
+        "/music/musical_group/member./music/group_membership/role /m/04rzd",
+        "/music/genre/artists /m/03j_hq"
+    ],
+    "/m/04dbw3": [
+        "/people/person/profession /m/018gz8",
+        "inv-/people/ethnicity/included_in_group /m/04dbw3",
+        "inv-/film/film/language /m/02n72k",
+        "/language/human_language/countries_spoken_in /m/016wzw",
+        "inv-/award/award_nominee/award_nominations./award/award_nomination/award_nominee /m/083chw"
+    ],
+    "/m/05f33tk": [
+        "/sports/sports_position/players./sports/sports_team_roster/team /m/016gp5",
+        "inv-/sports/sports_team/roster./sports/sports_team_roster/position /m/02q3n9c",
+        "/sports/sports_position/players./soccer/football_roster_position/team /m/01453"
+    ],
+    "/m/047vp20": [
+        "inv-/film/film/starring./film/performance/actor /m/047q2k1",
+        "/people/person/places_lived./people/place_lived/location /m/04vmp",
+        "/base/schemastaging/person_extra/net_worth./measurement_unit/dated_money_value/currency /m/09nqf",
+        "/people/person/spouse_s./people/marriage/type_of_union /m/04ztj",
+        "/award/award_nominee/award_nominations./award/award_nomination/nominated_for /m/047q2k1",
+        "/tv/tv_program_guest/appeared_on./tv/tv_guest_personal_appearance/appearance_type /m/047vp20",
+        "/people/person/nationality /m/03rk0",
+        "inv-/people/profession/people_with_this_profession /m/01d_h8"
+    ],
+    "/m/02sg4b": [
+        "/sports/sports_team/colors /m/019sc",
+        "/baseball/baseball_team/team_stats./baseball/baseball_team_stats/season /m/025ygws",
+        "/sports/professional_sports_team/draft_picks./sports/sports_league_draft_pick/school /m/01wdj_",
+        "/baseball/baseball_team/current_roster./sports/sports_team_roster/position /m/02sg4b",
+        "inv-/sports/sports_position/players./sports/sports_team_roster/team /m/02sg4b"
+    ]
+}
