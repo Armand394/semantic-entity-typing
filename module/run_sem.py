@@ -10,7 +10,7 @@ from tqdm import tqdm  # make sure to install tqdm: pip install tqdm
 
 result = subprocess.check_output("nvidia-smi", shell=True)
 print(result.decode())
-device = torch.device('cuda:2')
+device = torch.device('cuda:1')
 
 def main(args):
     use_cuda = args['cuda'] and torch.cuda.is_available()

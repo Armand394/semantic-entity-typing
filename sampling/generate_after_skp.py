@@ -16,12 +16,12 @@ data_sample_dir = os.path.join(project_path, "data", f"{dataset}_sample")
 
 
 print("Generate sample graph with 2-hop neighbors")
-data_sample_dir_2hop = os.path.join(project_path, "data", f"{dataset}_sample_2hop_no_del")
+data_sample_dir_2hop = os.path.join(project_path, "data", f"{dataset}_sample_2hop_sentences")
 os.makedirs(data_sample_dir_2hop, exist_ok=True)
 
 # Chargement des dictionnaires à partir des fichiers TSV
 entite_dict = load_tsv(os.path.join(data_sample_dir, "entities.tsv"))
-relation_dict = load_tsv(os.path.join(data_sample_dir, "relations.tsv"))
+relation_dict = load_tsv(os.path.join(data_sample_dir_2hop, "relations.tsv"))
 type_dict = load_tsv(os.path.join(data_sample_dir, "types.tsv"))
 cluster_dict = load_tsv(os.path.join(data_sample_dir, "clusters.tsv"))
 
@@ -60,11 +60,11 @@ construct_output(kg_dict, et_train_dict, et_valid_dict, et_test_dict, entite_dic
 
 # Load dictionaries entity -> id
 e2id = read_id(os.path.join(data_sample_dir, 'entities.tsv'))
-r2id = read_id(os.path.join(data_sample_dir, 'relations.tsv'))
+r2id = read_id(os.path.join(data_sample_dir_2hop, 'relations.tsv'))
 t2id = read_id(os.path.join(data_sample_dir, 'types.tsv'))
 c2id = read_id(os.path.join(data_sample_dir, 'clusters.tsv'))
 
-args = args_dict(dataset=f"{dataset}_sample_2hop_no_del", data_dir=data_folder)
+args = args_dict(dataset=f"{dataset}_sample_2hop_sentences", data_dir=data_folder)
 
 SEMdataset(args, "LMET_train.txt", e2id, r2id, t2id, c2id, 'train')
 SEMdataset(args, "LMET_test.txt", e2id, r2id, t2id, c2id, 'test')
