@@ -21,7 +21,7 @@ print(torch.cuda.is_available())
 project_folder = os.getcwd()
 data_path = os.path.join(project_folder, "data", "FB15kET_sample")
 result_folder = os.path.join(project_folder, "data_entity_metrics")
-data_2hop_path = os.path.join(project_folder, "data", "FB15kET_sample_2hop")
+data_2hop_path = os.path.join(project_folder, "data", "FB15kET_sample_2hop_no_del")
 os.makedirs(data_2hop_path, exist_ok=True)
 
 # Load Ids and descriptions
@@ -94,56 +94,62 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
 with open(os.path.join(data_2hop_path, 'relation2hop.json'), "w") as f:
     json.dump(entity_kg_2hop, f, indent=4)
 
-# Entities with degree considered too high
-upperb_quantiles = e_coherence[['kg_degree', 'et_degree']].quantile(0.90)
-high_kg_degree = upperb_quantiles.loc['kg_degree']
-high_et_degree = upperb_quantiles.loc['et_degree']
+# # Entities with degree considered too high
+# upperb_quantiles = e_coherence[['kg_degree', 'et_degree']].quantile(0.90)
+# high_kg_degree = upperb_quantiles.loc['kg_degree']
+# high_et_degree = upperb_quantiles.loc['et_degree']
 
-# Filter only entities with bad metrics
-entity_high_degree_df = e_coherence[(e_coherence["kg_degree"] > high_kg_degree) \
-                              & (e_coherence["et_degree"] > high_et_degree)]
-entity_high_degree = entity_high_degree_df['entity'].to_list()
+# # Filter only entities with bad metrics
+# entity_high_degree_df = e_coherence[(e_coherence["kg_degree"] > high_kg_degree) \
+#                               & (e_coherence["et_degree"] > high_et_degree)]
+# entity_high_degree = entity_high_degree_df['entity'].to_list()
 
-# removed results dataframe
-kg_train_removed_df = pd.DataFrame()
-et_train_removed_df = pd.DataFrame()
-entity_kg_remove = defaultdict(list)
+# # removed results dataframe
+# kg_train_removed_df = pd.DataFrame()
+# et_train_removed_df = pd.DataFrame()
+# entity_kg_remove = defaultdict(list)
 
-for entity in tqdm(entity_high_degree, total=len(entity_high_degree), desc="Processing entities", unit="entity"):
+# for entity in tqdm(entity_high_degree, total=len(entity_high_degree), desc="Processing entities", unit="entity"):
 
-    # Current sentences
-    kg_entity_text, neighbors = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id, filter=False)
-    et_train_sentences, et_train = et_sentences(df_train, entity, t2desc, t2id)
-    entity_sentences = kg_entity_text + et_train_sentences
+#     # Current sentences
+#     kg_entity_text, neighbors = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id, filter=False)
+#     et_train_sentences, et_train = et_sentences(df_train, entity, t2desc, t2id)
+#     entity_sentences = kg_entity_text + et_train_sentences
 
-    # Remove noisy relationships and types
-    n_kg_remove = int(math.ceil(len(kg_entity_text)*0.1))
-    n_et_remove = int(math.ceil(len(et_train_sentences)*0.1))
+#     # Remove noisy relationships and types
+#     n_kg_remove = int(math.ceil(len(kg_entity_text)*0.1))
+#     n_et_remove = int(math.ceil(len(et_train_sentences)*0.1))
 
-    # Remove noisy neighbors through similarity score
-    kg_train_removed, et_train_removed = remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_train, n_kg_remove, n_et_remove)
-    # Save removed relationships and types
-    rel_removed = relationship_removed(kg_train_removed, entity)
-    entity_kg_remove[entity] = rel_removed
+#     # Remove noisy neighbors through similarity score
+#     kg_train_removed, et_train_removed = remove_noisy_neighbors(kg_entity_text, neighbors, et_train_sentences, et_train, n_kg_remove, n_et_remove)
+#     # Save removed relationships and types
+#     rel_removed = relationship_removed(kg_train_removed, entity)
+#     entity_kg_remove[entity] = rel_removed
 
-    # Store removed results
-    et_train_removed_df = pd.concat([et_train_removed_df, et_train_removed], axis=0).reset_index(drop=True)
+#     # Store removed results
+#     et_train_removed_df = pd.concat([et_train_removed_df, et_train_removed], axis=0).reset_index(drop=True)
 
 # Save
-with open(os.path.join(data_2hop_path, 'relation2remove.json'), "w") as f:
-    json.dump(entity_kg_remove, f, indent=4)
+# with open(os.path.join(data_2hop_path, 'relation2remove.json'), "w") as f:
+#     json.dump(entity_kg_remove, f, indent=4)
 
 # Update KG_train and ET_train without noise relations
 # kg_train_new = df_triples.merge(kg_train_removed_df, on=[0, 1, 2], how='left', indicator=True)
 # kg_train_new = kg_train_new[kg_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
-et_train_new = df_train.merge(et_train_removed_df, how='left', indicator=True)
-et_train_new = et_train_new[et_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
+# et_train_new = df_train.merge(et_train_removed_df, how='left', indicator=True)
+# et_train_new = et_train_new[et_train_new['_merge'] == 'left_only'].drop(columns=['_merge'])
 
 # Convert 2-hop additions in dataframe
-# kg_train_2hop = pd.DataFrame(entity_kg_2hop, columns=[0,1,2])
+kg_train_2hop = pd.DataFrame(entity_kg_2hop, columns=[0,1,2])
 et_train_2hop = pd.DataFrame(entity_et_2hop, columns=[0,1])
 
 # Final processed train files
 # kg_train_processed = pd.concat([kg_train_new, kg_train_2hop], axis=0).reset_index(drop=True)
-et_train_processed = pd.concat([et_train_new, et_train_2hop], axis=0).reset_index(drop=True)
+# et_train_processed = pd.concat([et_train_new, et_train_2hop], axis=0).reset_index(drop=True)
+# et_train_processed.to_csv(os.path.join(data_2hop_path, 'ET_train.txt'), sep='\t', header=None, index=False)
+
+# Same but without the deletion
+kg_train_processed = pd.concat([df_triples, kg_train_2hop], axis=0).reset_index(drop=True)
+kg_train_processed.to_csv(os.path.join(data_2hop_path, 'KG_train.txt'), sep='\t', header=None, index=False)
+et_train_processed = pd.concat([df_train, et_train_2hop], axis=0).reset_index(drop=True)
 et_train_processed.to_csv(os.path.join(data_2hop_path, 'ET_train.txt'), sep='\t', header=None, index=False)

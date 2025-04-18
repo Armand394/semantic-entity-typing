@@ -1,0 +1,1228 @@
+/base/birdconservation/topic	bird conservation [SEP] topic
+/base/concepts/topic	concepts [SEP] topic
+/base/poldb/topic	politician fact database [SEP] person
+/base/nobelprizes/topic	nobel prizes [SEP] topic
+/location/hud_county_place	location [SEP] The United States Department of Housing and Urban Development county place
+/base/eating/practicer_of_diet	eating [SEP] practicer of diet
+/royalty/kingdom	royalty [SEP] kingdom
+/business/shopping_center_owner	business [SEP] shopping center owner
+/base/ovguide/topic	online video guide [SEP] topic
+/base/yalebase/person	Yale university base [SEP] person
+/base/csafarms/topic	Community Supported Agriculture farms [SEP] topic
+/media_common/creative_work	media common [SEP] creative work
+/base/advertisingcharacters/product	advertising characters [SEP] product
+/fictional_universe/person_in_fiction	fictional universe [SEP] person in fiction
+/base/thoroughbredracing/thoroughbred_racehorse_sex	thoroughbred racing [SEP} thoroughbred racehorse sex
+/base/kinometric/topic	kinometric [SEP] topic
+/base/popstra/location	popstra [SEP] location
+/base/musicvideos/topic	music videos [SEP] topic
+/chess/chess_player	chess [SEP] chess player
+/base/arthist/helynevek	artist [SEP] Helynevek
+/base/deadwood/topic	deadwood [SEP] topic
+/base/univplus/extended_university	univ plus summer school platform [SEP] extended university
+/base/songforallseasons/topic	song for all seasons [SEP] topic
+/sports/sports_award_winner	sports [SEP] sports award winner
+/base/ontologies/ontology_instance	ontologies [SEP] ontology instance
+/law/litigant	law [SEP] litigant
+/business/sponsor	business [SEP] sponsor
+/base/dogbreed/topic	dog breed [SEP] topic
+/award/award_ceremony	award [SEP] award ceremony
+/base/summermovies2009/topic	summer movies 2009 [SEP] topic
+/base/coloniesandempire/topic	colonies and empire [SEP] topic
+/user/dkrmusix/default_domain/glenn_scott_davis_doctor_g	glenn scott davis doctor g
+/base/schemastaging/contact_product	schemas taging [SEP] contact product
+/base/argumentmaps/morally_disputed_activity	argument maps [SEP] morally disputed activity
+/broadcast/artist	broadcast [SEP] artist
+/fictional_universe/fictional_universe	fictional universe [SEP] fictional universe
+/film/editor	film [SEP] editor
+/olympics/olympic_bidding_city	olympics [SEP] olympic bidding city
+/base/krautrock/topic	krautrock, german experimental rock [SEP] topic
+/base/woodstock/topic	woodstock [SEP] topic
+/base/mystery/ufo_sighting_location	mystery [SEP] unidentified flying object UFO sighting location
+/base/foursquare/location	Foursquare [SEP] recommended location
+/base/starwars1/topic	starwars1 [SEP] topic
+/base/italianbooks/topic	italian books [SEP] topic
+/projects/project_focus	projects [SEP] project focus
+/comic_strips/comic_strip_genre	comic strips [SEP] comic strip genre
+/user/doconnor/pets/dog_breed	pets [SEP] dog breed
+/base/americancomedy/double_act_straight_man	American comedy [SEP] double act straight man
+/business/business_operation	business [SEP] business operation
+/award/award_presenting_organization	award [SEP] award presenting organization
+/base/webvideo/internet_video_character	web video [SEP] internet video character
+/religion/religious_practice	religion [SEP] religious practice
+/base/filmviews/topic	film views [SEP] topic
+/base/nederlandsedichters/topic	Netherland poets [SEP] topic
+/organization/organization_type	organization [SEP] organization type
+/media_common/quotation_source	media common [SEP] quotation source
+/visual_art/art_period_movement	visual art [SEP] art period movement
+/tv/tv_series_episode	tv [SEP] tv series episode
+/location/location	location [SEP] location
+/visual_art/art_owner	visual art [SEP] art owner
+/base/atlanta/topic	atlanta [SEP] topic
+/base/prison/prison_type	prison [SEP] prison type
+/sports/multi_event_tournament	sports [SEP] multi event tournament
+/fictional_universe/fictional_setting	fictional universe [SEP] fictional setting
+/base/caveart/topic	Cave Art [SEP] topic
+/business/product_category	business [SEP] product category
+/opera/librettist	opera [SEP] librettist
+/military/military_person	military [SEP] military person
+/base/newsevents/news_reporting_organisation	news events [SEP] news reporting organization
+/music/group_member	music [SEP] group member
+/base/bollywooddiary/topic	bollywood diary drama film [SEP] topic
+/base/classificationsearch/classification_system	classification search [SEP] classification system
+/people/profession	people [SEP] profession
+/base/serjtankian/topic	singer [SEP] Serj Tankian [SEP] topic
+/award/award_discipline	award [SEP] award discipline
+/base/argumentmaps/topic	argument maps [SEP] topic
+/medicine/disease	medicine [SEP] disease
+/tv/tv_program_creator	tv [SEP] tv program creator
+/base/thesolarsystem/topic	the solar system [SEP] topic
+/film/film_story_contributor	film [SEP] film story contributor
+/user/alexander/philosophy/topic	philosophy [SEP] topic
+/book/author	book [SEP] author
+/book/periodical_subject	book [SEP] periodical subject
+/base/montreal/topic	montreal [SEP] topic
+/base/infection/topic	infection [SEP] topic
+/people/appointed_role	people [SEP] appointed role
+/business/business_location	business [SEP] business location
+/base/pimfortuyn/topic	Pim Fortuyn [SEP] topic
+/base/monster/monster_gender	monster [SEP] monster gender
+/film/film_crewmember	film [SEP] film crewmember
+/education/honorary_degree_recipient	education [SEP] honorary degree recipient
+/internet/social_network_user	internet [SEP] social network user
+/base/schemastaging/food_extra	schemas taging [SEP] food extra
+/base/pixarfilms/film	pixar films [SEP] film
+/base/casinos/topic	casinos [SEP] topic
+/broadcast/producer	broadcast [SEP] producer
+/base/gender/topic	gender [SEP] topic
+/fictional_universe/fictional_employer	fictional universe [SEP] fictional employer
+/base/stefankumor/topic	stefankumor [SEP] topic
+/user/paulshanks/project_management/topic	project management [SEP] topic
+/base/horsefacts/topic	horse facts [SEP] topic
+/base/triathlon/topic	triathlon [SEP] topic
+/base/saturdaynightlive/person_impersonated_on_snl	Saturday Night Live [SEP] person impersonated on Saturday Night Live
+/media_common/media_genre	media common [SEP] media genre
+/people/professional_field	people [SEP] professional field
+/base/soapoperas/topic	soap operas [SEP] topic
+/base/contraltosingers/topic	contral to singers [SEP] topic
+/base/activism/topic	activism [SEP] topic
+/royalty/noble_rank	royalty [SEP] noble rank
+/base/engineering/topic	engineering [SEP] topic
+/base/saturdaynightlive/topic	Saturday Night Live [SEP] topic
+/base/popstra/celebrity	popstra [SEP] celebrity
+/base/lostbase/topic	American science fiction drama tv series Lost [SEP] actors
+/sports/sports_league_draft	sports [SEP] sports league draft
+/base/famouspets/pet_owner	famous pets [SEP] pet owner
+/user/lumimies/default_domain/age_limited_activity	age limited activity
+/base/iceandfire/topic	a song of ice and fire epic fantasy novel [SEP] topic
+/base/exercises/exercise_type	exercises [SEP] exercise type
+/user/spencermountain/default_domain/physical_movement	physical movement
+/base/argumentmaps/moral_agent	argument maps [SEP] moral agent
+/base/dancingwiththestars/contestant	dancing with the stars [SEP] contestant
+/location/citytown	location [SEP] city town
+/location/br_state	location [SEP] Brazilian state
+/base/surprisingheights/topic	surprising heights [SEP] topic
+/base/productplacement/product_placing_media	product placement [SEP] product placing media
+/base/samplepro/topic	samplepro [SEP] topic
+/architecture/building_function	architecture [SEP] building function
+/book/editor_title	book [SEP] editor title
+/location/statistical_region	location [SEP] statistical region
+/base/filmflexmovies/topic	filmflax movies [SEP] topic
+/base/indianelections/topic	indian elections [SEP] topic
+/music/songwriter	music [SEP] songwriter
+/user/techgnostic/default_domain/market_area	market area
+/base/webvideo/topic	web video [SEP] topic
+/base/fiberarts/topic	fiber arts [SEP] topic
+/medicine/drug_ingredient	medicine [SEP] drug ingredient
+/base/breakfast/topic	breakfast [SEP] topic
+/base/crime/warrant_issuer	crime [SEP] warrant issuer
+/book/newspaper_owner	book [SEP] newspaper owner
+/base/edgarpoe/topic	edgar poe [SEP] topic
+/base/rivalries/rival	rivalries [SEP] rival
+/radio/radio_subject	radio [SEP] radio subject
+/base/schemastaging/government_position_held_extra	schemas taging [SEP] extra government position held
+/base/thelastconfessionofalexanderpearce/topic	the last confession of Alexander Pearce [SEP] topic
+/base/cathedrals/cathedrals_in_england	cathedrals [SEP] cathedrals in england
+/celebrities/celebrity	celebrities [SEP] celebrity
+/base/saturdaynightlive/snl_host	Saturday Night Live [SEP] Saturday Night Live tv show host
+/tv/tv_producer	tv [SEP] tv producer
+/base/tagasauris/organic_object	tagasauris media annotation crowdsourcing company [SEP] organic object
+/comic_books/comic_book_penciler	comic books [SEP] comic book penciler
+/biology/hybrid_parent_gender	biology [SEP] hybrid parent gender
+/sports/sport_medal	sports [SEP] sport medal
+/user/jamie/default_domain/yacht_racing/yacht_racing_country	yacht racing [SEP] yacht racing country
+/tv/tv_writer	tv [SEP] tv writer
+/user/thadguidry/default_domain/private_pilot	private pilot
+/base/firsts/first_achievement_category	firsts [SEP] first achievement category
+/base/americancomedy/comedian	American comedy [SEP] comedian
+/base/tvfotc/topic	tvfotc [SEP] topic
+/base/reviews/reviewed_topic	reviews [SEP] reviewed topic
+/base/obamabase/possible_cabinet_member	obama base [SEP] possible cabinet member
+/base/audiobase/topic	audio base [SEP] topic
+/film/person_or_entity_appearing_in_film	film [SEP] person or entity appearing in film
+/base/vancouver2010/topic	vancouver 2010 winter olympic topic [SEP] topic
+/base/gunsnroses/topic	guns n roses American hard rock band [SEP] topic
+/base/militaryinfiction/location_in_fiction	military in fiction [SEP] location in fiction
+/base/bryan/topic	bryan [SEP] topic
+/base/fight/topic	fight [SEP] topic
+/cvg/computer_game_subject	computer video game [SEP] computer game subject
+/broadcast/content	broadcast [SEP] content
+/base/services/divination_technique	services [SEP] divination technique
+/base/writing/grammatical_category	writing [SEP] grammatical category
+/american_football/football_team	american football [SEP] football team
+/award/hall_of_fame_discipline	award [SEP] hall of fame discipline
+/film/producer	film [SEP] producer
+/base/cannes/topic	cannes [SEP] topic
+/base/activism/activist	activism [SEP] activist
+/base/tallships/film_with_tall_ships	tall ships [SEP] film with tall ships
+/user/urib/default_domain/us_founding_father	The United States founding father
+/user/exooo/default_domain/head_of_state	head of state
+/base/academyawards/host_of_oscar_show	academy awards [SEP] host of oscar show
+/base/washingtondc/topic	Washington, the District of Columbia [SEP] topic
+/base/starshapedcitadelsandcities/topic	star shaped citadels and cities [SEP] topic
+/base/services/topic	services [SEP] topic
+/law/legal_subject	law [SEP] legal subject
+/base/poldb/us_state_governor_current	politics database [SEP] the United States state governor current
+/base/propositions/topic	propositions [SEP] topic
+/education/academic_post_title	education [SEP] academic post title
+/base/charities/topic	charities [SEP] topic
+/base/victoriassecret/topic	Victorias secret [SEP] topic
+/location/region	location [SEP] region
+/tv/tv_actor	tv [SEP] tv actor
+/education/field_of_study	education [SEP] field of study
+/base/services/modeling_specialty	services [SEP] modeling specialty
+/base/horror/topic	horror [SEP] topic
+/base/argumentmaps/idea	argument maps [SEP] idea
+/base/worldwartwo/topic	the second world war [SEP] topic
+/base/aditya/topic	aditya [SEP] topic
+/music/music_video_performer	music [SEP] music video performer
+/base/garrettstrobel/topic	Garrett Strobel [SEP] topic
+/base/unitednations/united_nations_agency	United Nations [SEP] united nations agency
+/base/symbols/symbolized_concept	symbols [SEP] symbolized concept
+/base/parksandrecreation/topic	parks and recreation [SEP] topic
+/user/alexander/default_domain/court	court
+/base/predict/topic	predict [SEP] topic
+/base/lewisandclark/topic	Lewis and Clark Expedition [SEP] topic
+/people/ethnicity	people [SEP] ethnicity
+/location/administrative_division	location [SEP] administrative division
+/film/film_job	film [SEP] film job
+/tv/non_character_role	tv [SEP] non character role
+/base/onephylogeny/type_of_thing	one phylogeny [SEP] type of thing
+/film/actor	film [SEP] actor
+/base/argumentmaps/innovator	argument maps [SEP] innovator
+/base/lakesintheunitedstates/topic	lakes in The United States [SEP] topic
+/base/schemastaging/statistical_region_extra	schemas taging [SEP] statistical region extra
+/location/dated_location	location [SEP] dated location
+/fictional_universe/school_in_fiction	fictional universe [SEP] school in fiction
+/base/schemastaging/tv_character_extra	schemas taging [SEP] tv character extra
+/base/bibkn/topic	bibkn [SEP] topic
+/base/thoroughbredracing/thoroughbred_racehorse_origin	thoroughbred racing [SEP} thoroughbred racehorse origin
+/base/housemd/topic	House american medical drama tv series [SEP] topic
+/law/court_jurisdiction_area	law [SEP] court jurisdiction area
+/olympics/olympic_medal_demonstration	olympics [SEP] olympic medal demonstration
+/user/alexander/philosophy/subject	philosophy [SEP] subject
+/base/hannsheinzewers/topic	Geman actor, poet, philosopher and writer Hanns Heinz Ewers [SEP] topic
+/user/sprocketonline/economics/legislative_body	economics [SEP] legislative body
+/base/thefuture/topic	The Future [SEP] film topic
+/base/london/topic	london [SEP] topic
+/base/landcover/topic	land cover [SEP] topic
+/wine/wine_sub_region	wine [SEP] wine sub region
+/base/mystery/cryptid_observation_location	mystery [SEP] cryptid observation location
+/user/doconnor/pets/topic	pets [SEP] topic
+/fictional_universe/fictional_job_title	fictional universe [SEP] fictional job title
+/base/pirates/topic	pirates [SEP] topic
+/base/argumentmaps/original_idea	argument maps [SEP] original idea
+/base/madplex/topic	madplex [SEP] topic
+/tv/tv_crew_role	tv [SEP] tv crew role
+/base/crimeandforensics/topic	crime and forensics [SEP] topic
+/location/uk_non_metropolitan_district	location [SEP] British non metropolitan district
+/base/popstra/religion	popstra [SEP] religion
+/base/worldhiphop/topic	world hiphop [SEP] topic
+/base/ireland/topic	Ireland [SEP] topic
+/education/school_mascot	education [SEP] school mascot
+/broadcast/radio_format	broadcast [SEP] radio format
+/base/sharing/sharing_location	sharing [SEP] sharing location
+/user/osprey/default_domain/occupation	occupation
+/user/tsegaran/random/taxonomy_subject	random [SEP] taxonomy subject
+/base/petbreeds/topic	petbreeds [SEP] topic
+/base/univplus/topic	univ plus summer school platform [SEP] topic
+/base/aareas/schema/nl_dominion/constituent_country	administrative area [SEP] schema [SEP] Netherland dominion [SEP] constituent country
+/base/roses/rose_color	roses [SEP] rose color
+/base/aquanaut/topic	aquanaut [SEP] topic
+/film/film_character	film [SEP] film character
+/user/viral/default_domain/music_publisher	music publisher
+/base/sounds/vocal_contribution_category	sounds [SEP] vocal contribution category
+/base/setrakian/topic	setrakian [SEP] topic
+/projects/project_participant	projects [SEP] project participant
+/periodicals/newspaper_circulation_area	periodicals [SEP] newspaper circulation area
+/user/nitromaster101/default_domain/abh_city	abh city
+/base/literaturabrasileira/topic	literaturabrasileira [SEP] topic
+/business/issuer	business [SEP] issuer
+/film/music_contributor	film [SEP] music contributor
+/base/lastfm/topic	lastfm [SEP] topic
+/base/qualified_values/qualifier	qualified values [SEP] qualifier
+/exhibitions/exhibition_sponsor	exhibitions [SEP] exhibition sponsor
+/user/wf/shape_note_singing/singer	shape note singing [SEP] singer
+/base/articleindices/topic	article indices [SEP] topic
+/basketball/basketball_team	f
+/base/sportssandbox/sport	sports sand box [SEP] sport
+/base/philbsuniverse/artist_s_or_band_s	philbs universe [SEP] artists or bands
+/user/brendankwilliams/default_domain/inflation_rate	inflation rate
+/base/zeropointv/topic_film_title	Zero Point V [SEP] topic film title
+/language/language_dialect	language [SEP] language dialect
+/base/politicalconventions/topic	political conventions [SEP] topic
+/location/nl_municipality	location [SEP] Netherland municipality
+/base/testrepu/topic	testrepu [SEP] topic
+/base/campaigns/campaign_location	campaigns [SEP] campaign location
+/user/skud/legal/topic	legal [SEP] topic
+/base/athletics/topic	athletics [SEP] topic
+/base/visleg/labeled	visleg [SEP] labeled
+/olympics/olympic_athlete	olympics [SEP] olympic athlete
+/award/award_category	award [SEP] award category
+/base/tournaments/tournament_competitor	tournaments [SEP] tournament competitor
+/base/conservationaction/lead_agency_or_organization	conservation action [SEP] lead agency or organization
+/base/associationfootball/topic	association football [SEP] topic
+/user/mdaconta/human_resources/employee	human resources [SEP] employee
+/base/aareas/schema/de/urban_district	administrative area [SEP] schema [SEP] German [SEP] urban district
+/education/school_category	education [SEP] school category
+/base/eating/topic	eating [SEP] topic
+/film/director	film [SEP] director
+/base/rosetta/languoid	rosetta [SEP] languoid
+/sports/pro_athlete	sports [SEP] pro athlete
+/film/film_genre	film [SEP] film genre
+/base/test2/topic	test2 [SEP] topic
+/base/harrypotter/topic	Harry Potter [SEP] topic
+/fictional_universe/character_species	fictional universe [SEP] character species
+/base/skosbase/vocabulary_equivalent_topic	skosbase [SEP] vocabulary equivalent topic
+/base/coloniesandempire/former_french_colonies	colonies and empire [SEP] former french colonies
+/base/aareas/schema/england/administrative_county	administrative area [SEP] schema [SEP] england [SEP] administrative county
+/base/moscratch/topic	MO Scratch [SEP] topic
+/film/film_series	film [SEP] film series
+/base/authors/country_of_origin	authors [SEP] country of origin
+/user/narphorium/people/topic	people [SEP] topic
+/people/gender	people [SEP] gender
+/base/services/equestrian_disciplines	services [SEP] equestrian disciplines
+/user/elliott/national_concrete_canoe_competition/school	national concrete canoe competition [SEP] school
+/base/satelites/topic	satelites [SEP] topic
+/film/film_set_designer	film [SEP] film set designer
+/base/abcbirds/partnership	American Bird Conservancy [SEP] partnership
+/music/record_label	music [SEP] record label
+/base/dccardwell/topic	DC cardwell [SEP] topic
+/base/disneyana/disney_product_theme	disneyana [SEP] disney product theme
+/base/disaster2/topic	disaster 2 [SEP] topic
+/base/popstra/rehab_facility	popstra [SEP] rehab facility
+/base/newyorkfilmfestival/topic	New York film festival [SEP] topic
+/base/webvideo/internet_video_crew_role	web video [SEP] internet video crew role
+/base/soundalike/topic	sound alike [SEP] topic
+/base/saturdaynightlive/snl_actor	Saturday Night Live [SEP] Saturday Night Live actor
+/base/oxford/topic	oxford [SEP] topic
+/base/politicalconventions/vice_presidential_nominee	political conventions [SEP] vice presidential nominee
+/base/fashionmodels/eye_color	fashion models [SEP] eye color
+/base/lovecraft/topic	lovecraft [SEP] topic
+/base/edinburghinternationalfilmfestival/topic	Edinburgh international film festival [SEP] topic
+/type/attribution	type [SEP] attribution
+/base/aareas/schema/greater_london/borough	administrative area [SEP] schema [SEP] greater london [SEP] borough
+/tv/tv_genre	tv [SEP] tv genre
+/film/film_cut_type	film [SEP] film cut type
+/user/agroschim/default_domain/significant_follower	significant follower
+/base/yalebase/yale_topic	Yale university base [SEP] yale topic
+/base/airtrafficmanagement/topic	air traffic management [SEP] topic
+/film/film_festival_focus	film [SEP] film festival focus
+/base/firsts/first	firsts [SEP] first
+/language/human_language	language [SEP] human language
+/base/movies1001/topic	movies 1001 [SEP] topic
+/event/speech_topic	event [SEP] speech topic
+/base/bioventurist/bv_medical_condition	biology venture [SEP] biology venturist medical condition
+/media_common/adaptation	media common [SEP] adaptation
+/base/montagueinstitute/organizations	montague institute [SEP] organizations
+/base/tagit/concept	tagit [SEP] concept
+/base/fuvkin/topic	fuvkin [SEP] topic
+/people/measured_person	people [SEP] measured person
+/base/sundance/topic	sundance [SEP] topic
+/base/omnipop/topic	Omnipop talent management [SEP] topic
+/base/onlineadvertising/ad_network_vertical	online advertising [SEP] advertisement network vertical
+/base/popstra/company	popstra [SEP] company
+/base/jobmastates/topic	jobmastates [SEP] topic
+/base/authors/topic	authors [SEP] topic
+/base/jonathan_goodman/gender	jonathan goodman [SEP] gender
+/base/handball/topic	handball [SEP] topic
+/symbols/name_source	symbols [SEP] name source
+/exhibitions/exhibition_subject	exhibitions [SEP] exhibition subject
+/internet/website	internet [SEP] website
+/base/aareas/schema/us/county	administrative area [SEP] schema [SEP] the United States [SEP] county
+/base/beerbase/topic	beer base [SEP] topic
+/base/wfilmbase/topic	w film base [SEP] topic
+/base/fictionaluniverse/cloned_character	fictional universe [SEP] cloned character
+/sports/sport_country	sports [SEP] sport country
+/base/dystopia/topic	dystopia game genre [SEP] topic
+/base/culturalevent/event	cultural event [SEP] event
+/base/caseysbased/topic	caseys based [SEP] topic
+/base/arasmuzic/topic	Aras music [SEP] topic
+/base/geodescription/topic	geodescription [SEP] topic
+/base/startrek/topic	Star Trek American science fiction media franchise [SEP] topic
+/base/losangelesbands/topic	Los Angeles bands [SEP] topic
+/base/cambridge/topic	Cambridge university [SEP] topic
+/base/plopquiz/topic	plop quiz [SEP] topic
+/base/imdbbase/topic	Online database of information [SEP] topic
+/soccer/football_position	soccer [SEP] football position
+/base/biblioness/bibs_topic	biblioness [SEP] bibs topic
+/fictional_universe/fictional_language	fictional universe [SEP] fictional language
+/user/ktrueman/default_domain/international_organization	international organization
+/user/gmackenz/color/topic	color [SEP] topic
+/base/lgbtfilms/topic	lesbian gay bisexual and transgender films [SEP] topic
+/base/references/greek_loanword	references [SEP] greek loanword
+/base/aubreymaturin/place	Aubrey Maturin nautical historical novels [SEP] place
+/law/court	law [SEP] court
+/user/jschell/default_domain/fictional_character	fictional character
+/medicine/cancer_center_constituent	medicine [SEP] cancer center constituent
+/music/musical_group	music [SEP] musical group
+/user/spencermountain/default_domain/school_subject	school subject
+/user/dchudchu/default_domain/hospital_drama	hospital drama
+/base/longislandpingpongleague/topic	long island table tennis league [SEP] topic
+/base/crime/topic	crime [SEP] topic
+/sports/sports_championship_event	sports [SEP] sports championship event
+/base/jsbach/topic	German composer and musician Johann Sebastian Bach [SEP]topic
+/base/musiteca/topic	musiteca [SEP] topic
+/user/narphorium/people/nndb_person	people [SEP] Notable Names Database person
+/business/asset	business [SEP] asset
+/event/public_speaker	event [SEP] public speaker
+/broadcast/tv_station_owner	broadcast [SEP] tv station owner
+/base/services/boating_supplies_categories	services [SEP] boating supplies categories
+/internet/top_level_domain_sponsor	internet [SEP] top level domain sponsor
+/music/release_component	music [SEP] release component
+/organization/organization_sector	organization [SEP] organization sector
+/base/univplus/extended_institution	univ plus summer school platform [SEP] extended institution
+/base/ikariam/topic	ikariam [SEP] topic
+/base/schemastaging/govt_jurisdiction_extra	schemas taging [SEP] government jurisdiction extra
+/education/university	education [SEP] university
+/location/place_with_neighborhoods	location [SEP] place with neighborhoods
+/user/monsterceo/default_domain/governor	governor
+/dataworld/provenance	data world [SEP] provenance
+/organization/endowed_organization	organization [SEP] endowed organization
+/base/pethealth/pet_disease_risk_factor	pet health [SEP] pet disease risk factor
+/base/singapore/topic	singapore [SEP] topic
+/book/translated_work	book [SEP] translated work
+/base/typefaces/topic	typefaces [SEP] topic
+/base/elbogen/topic	elbogen [SEP] topic
+/base/database/topic	database [SEP] topic
+/base/ttiff/topic	Toronto International film festival [SEP] topic
+/base/authors/language_written_in	authors [SEP] language written in
+/base/conservationaction/topic	conservation action [SEP] topic
+/base/filmcameras/topic	film cameras [SEP] topic
+/base/vancouver/topic	vancouver [SEP] topic
+/base/searchengineoptimizationprovider/topic	search engine optimization provider [SEP] topic
+/symbols/coat_of_arms_bearer	symbols [SEP] coat of arms bearer
+/user/scapbi/default_domain/myfirsttype	my first type
+/user/narphorium/default_domain/profession	profession
+/tv/special_tv_performance_type	tv [SEP] special tv performance type
+/base/events/type_of_performance	events [SEP] type of performance
+/fictional_universe/character_powers	fictional universe [SEP] character powers
+/base/socialdance/dance_style	social dance [SEP] dance style
+/business/company_advisor	business [SEP] company advisor
+/finance/currency	finance [SEP] currency
+/martial_arts/martial_art	martial arts [SEP] martial art
+/visual_art/visual_artist	visual art [SEP] visual artist
+/book/publishing_company	book [SEP] publishing company
+/protected_sites/listed_site	protected sites [SEP] listed site
+/royalty/chivalric_order_member	royalty [SEP] chivalric order member
+/symbols/flag	symbols [SEP] flag
+/food/diet_follower	food [SEP] diet follower
+/internet/website_category	internet [SEP] website category
+/user/robert/ranked_lists/ranked_list_item	ranked lists [SEP] ranked list item
+/user/jack/default_domain/my_favorite_things	my favorite things
+/user/alust/default_domain/processed_with_review_queue	processed with review queue
+/business/board_member	business [SEP] board member
+/people/deceased_person	people [SEP] deceased person
+/education/department	education [SEP] department
+/base/computationalscienceandengineering/topic	computational science and engineering [SEP] topic
+/user/mehi/default_domain/persoana	persoana
+/base/ovguide/country_musical_groups	online video guide [SEP] country musical groups
+/tv/tv_location	tv [SEP] tv location
+/user/anne8/spa/massage_origin	spa [SEP] massage origin
+/base/ontologies/ontology_class	ontologies [SEP] ontology class
+/user/mikeshwe/hairstyles/topic	hairstyles [SEP] topic
+/user/patrick/default_domain/tagged_topic	tagged topic
+/user/robert/default_domain/scientologist_actors_2	scientologist actors 2
+/base/digitalmedia/topic	digital media [SEP] topic
+/user/fairestcat/bandom/musician	bandom [SEP] musician
+/music/performance_role	music [SEP] performance role
+/media_common/adapted_work	media common [SEP] adapted work
+/base/services/talent_agency_specialties	services [SEP] talent agency specialties
+/base/bengaluru/topic	bengaluru [SEP] topic
+/user/patrick/default_domain/tag	tag
+/base/wordnet/word	wordnet [SEP] word
+/travel/accommodation_feature	travel [SEP] accommodation feature
+/base/marchmadness/team_gender	march madness NCAA Division 1 men basketball tournament [SEP] team gender
+/business/consumer_company	business [SEP] consumer company
+/user/duck1123/default_domain/mtg_color	magic the gathering color
+/base/phytochemical/topic	phytochemical [SEP] topic
+/base/tagit/place	tagit [SEP] place
+/base/locations/counties_parishes_and_boroughs	locations [SEP] counties parishes and boroughs
+/media_common/literary_genre	media common [SEP] literary genre
+/user/narphorium/default_domain/base_equivalent_event	base equivalent event
+/base/vermont/topic	vermont [SEP] topic
+/user/tnsguy/default_domain/civil_marriage	civil marriage
+/base/webvideo/internet_video_genre	web video [SEP] internet video genre
+/music/special_music_video_performance_type	music [SEP] special music video performance type
+/location/nl_province	location [SEP] Netherland province
+/base/notablenewyorkers/topic	notable new yorkers [SEP] topic
+/user/skud/boats/naval_combatant	boats [SEP] naval combatant
+/base/magicthegathering/topic	magic the gathering [SEP] topic
+/fictional_universe/character_rank	fictional universe [SEP] character rank
+/base/morelaw/war	morelaw [SEP] war
+/base/todolists/topic	todo lists [SEP] topic
+/base/drmadhumohankomaragiri/topic	professional engineer Dr. Madhumohan Komaragiri [SEP] topic
+/base/shashank/topic	shashank [SEP] topic
+/base/datedlocationtest/dated_location_test	dated location test [SEP] dated location test
+/user/robert/us_congress/house_committee	The United States Congress [SEP] house committee
+/user/joehughes/default_domain/transit_service_area	transit service area
+/military/military_unit_place_of_origin	military [SEP] military unit place of origin
+/base/petbreeds/city_with_dogs	petbreeds [SEP] city with dogs
+/medicine/risk_factor	medicine [SEP] risk factor
+/music/concert_film	music [SEP] concert film
+/base/prison/prisoner	prison [SEP] prisoner
+/media_common/quotation_subject	media common [SEP] quotation subject
+/user/ngerakines/social_software/twitter_user	social software [SEP] twitter user
+/base/skills/skill_output	skills [SEP] skill output
+/base/nobelprizes/nobel_prize_winner	nobel prizes [SEP] nobel prize winner
+/location/continent	location [SEP] continent
+/base/zxspectrum/topic	ZX Spectrum home computer [SEP] topic
+/base/dqbase/topic	Data Quest base system [SEP] topic
+/base/locations/topic	locations [SEP] topic
+/base/retail/retail_outlet	retail [SEP] retail outlet
+/education/academic_institution	education [SEP] academic institution
+/film/film_location	film [SEP] film location
+/base/schemastaging/person_extra	schemas taging [SEP] person extra
+/base/newsevents/news_reported_event	news events [SEP] news reported event
+/user/kilaravi/ksr/topic	ksr [SEP] topic
+/military/rank	military [SEP] rank
+/base/ontologies/topic	ontologies [SEP] topic
+/base/leicester/topic	leicester [SEP] topic
+/base/satelites/orbited_body	satelites [SEP] orbited body
+/base/coloniesandempire/former_british_colonies_and_dominions	colonies and empire [SEP] former british colonies and dominions
+/base/thesocialset/clique_leading_member	the social set [SEP] clique leading member
+/base/aubreymaturin/real_place	Aubrey Maturin nautical historical novels [SEP] real place
+/base/americancomedy/topic	American comedy [SEP] topic
+/time/event	time [SEP] event
+/base/animalnames/topic	animal names [SEP] topic
+/base/politicalconventions/primary_candidate	political conventions [SEP] primary candidate
+/film/film_art_director	film [SEP] film art director
+/user/robert/x2008_presidential_election/topic	x2008 presidential election of the United States [SEP] topic
+/sports/sports_team	sports [SEP] sports team
+/base/godbase/topic	godbase [SEP] topic
+/music/voice	music [SEP] voice
+/base/grossout/topic	gross out [SEP] topic
+/base/ovguide/bollywood_films	online video guide [SEP] bollywood films
+/user/robert/default_domain/my_favorite_things	my favorite things
+/base/millvalleyfilmfestival/topic	Mill Valley Film Festival [SEP] topic
+/base/atheism/atheist	atheism [SEP] atheist
+/location/uk_statistical_location	location [SEP] British statistical location
+/user/ktrueman/default_domain/official_language	official language
+/base/bamberg/topic	bamberg [SEP] topic
+/base/estonia/topic	estonia [SEP] topic
+/medicine/icd_9_cm_classification	medicine [SEP] International Classification of Diseases ninth Revision Clinical Modification
+/cvg/cvg_publisher	computer video game [SEP] computer video game publisher
+/military/military_combatant	military [SEP] military combatant
+/base/gleebase/topic	gleebase [SEP] topic
+/base/aareas/schema/england/non_metropolitan_district	administrative area [SEP] schema [SEP] england [SEP] non metropolitan district
+/organization/membership_organization	organization [SEP] membership organization
+/user/robert/us_congress/crp_political_contributor	The United States Congress [SEP] Center for Responsive Politics political contributor
+/base/popstra/sww_base	popstra [SEP] sww base
+/user/johm/carnegie_mellon_university/department	carnegie mellon university [SEP] department
+/base/bangladesh/topic	bangladesh [SEP] topic
+/olympics/olympic_participating_country	olympics [SEP] olympic participating country
+/base/onephylogeny/topic	one phylogeny [SEP] topic
+/base/daylifetopics/daylife_id	daylife topics [SEP] daylife id
+/base/datedlocationtest/topic	dated location test [SEP] topic
+/base/nationalfootballleague/topic	national football league [SEP] topic
+/user/skud/flags/topic	flags [SEP] topic
+/base/petbreeds/large_dog_breed	petbreeds [SEP] large dog breed
+/film/film_subject	film [SEP] film subject
+/user/tsegaran/random/topic	random [SEP] topic
+/base/fashionmodels/topic	fashion models [SEP] topic
+/user/skud/names/topic	names [SEP] topic
+/base/obamabase/topic	obama base [SEP] topic
+/base/militaryinfiction/location_represented_in_fiction	military in fiction [SEP] location represented in fiction
+/base/moscratch/shce021709	MO Scratch [SEP] shce 021709
+/user/monsterceo/my_stuff/topic	my stuff [SEP] topic
+/base/services/engineering_service_sector	services [SEP] engineering service sector
+/base/banking/investment_broker	banking [SEP] investment broker
+/music/compositional_form	music [SEP] compositional form
+/base/torchbearers/topic	torch bearers [SEP] topic
+/base/tribecafilmfestival/topic	Tribeca film festival [SEP] topic
+/influence/influence_node	influence [SEP] influence node
+/base/radiostations/radio_station_format	radio stations [SEP] radio station format
+/base/nobelprizes/nobel_subject_area	nobel prizes [SEP] nobel subject area
+/base/zeropointv/topic	Zero Point V [SEP] topic
+/base/creativemindsatwork/topic	creative mind satwork [SEP] topic
+/government/government_office_or_title	government [SEP] government office or title
+/base/pusan/topic	pusan [SEP] topic
+/theater/theater_genre	theater [SEP] theater genre
+/base/socialmediamarketing/topic	social media marketing [SEP] topic
+/base/unitednations/topic	United Nations [SEP] topic
+/base/schemastaging/non_profit_extra	schemas taging [SEP] non profit extra
+/base/dancingwiththestars/topic	dancing with the stars [SEP] topic
+/education/educational_institution_campus	education [SEP] educational institution campus
+/tv/tv_director	tv [SEP] tv director
+/music/instrument	music [SEP] instrument
+/time/recurring_event	time [SEP] recurring event
+/people/family_member	people [SEP] family member
+/base/nations/supranational_body	nations [SEP] supranational body
+/basketball/basketball_player	basketball [SEP] basketball player
+/award/award_nominated_work	award [SEP] award nominated work
+/base/toronto/topic	Toronto [SEP] topic
+/base/americancomedy/movie	American comedy [SEP] movie
+/base/coinsdaily/design	coins daily [SEP] design
+/user/kryp/private/topic	private [SEP] topic
+/music/music_video_genre	music [SEP] music video genre
+/base/jamesbond007/topic	James Bond 007 [SEP] topic
+/base/moviereviews/topic	movie reviews [SEP] topic
+/base/aubreymaturin/character	Aubrey Maturin nautical historical novels [SEP] character
+/user/synedra/didwho/support	didwho [SEP] support
+/user/robert/military/branch	military [SEP] branch
+/religion/religious_leadership_title	religion [SEP] religious leadership title
+/base/events/performer	events [SEP] performer
+/base/blackhistorymonth/topic	black history month [SEP] topic
+/sports/sports_position	sports [SEP] sports position
+/base/marchmadness/topic	march madness NCAA Division 1 men basketball tournament [SEP] topic
+/base/tvmusic/topic	tv music [SEP] topic
+/user/alexander/default_domain/royal_realm	royal realm
+/base/qualia/topic	qualia [SEP] topic
+/base/musiteca/music_teacher	musiteca [SEP] music teacher
+/user/narphorium/default_domain/base_equivalent_location	base equivalent location
+/base/ihistory/topic	history [SEP] topic
+/olympics/olympic_event_competition	olympics [SEP] olympic event competition
+/user/narphorium/default_domain/job_title	job title
+/user/agroschim/default_domain/notable_author_of_a_lit_movement	notable author of a lit movement
+/film/film_company_role_or_service	film [SEP] film company role or service
+/architecture/building_complex	architecture [SEP] building complex
+/base/filebase/topic	filebase [SEP] topic
+/base/veniceinternationalfilmfestival/topic	Venice international film festival [SEP] topic
+/base/filmographies/topic	filmographies [SEP] topic
+/base/aareas/schema/nz/city	administrative area [SEP] schema [SEP] New Zealand [SEP] city
+/base/renesona/topic	renesona [SEP] topic
+/base/victoriassecret/victoria_s_secret_model	Victorias secret [SEP] victoria s secret model
+/base/consciousness/topic	consciousness [SEP] topic
+/base/pantheons/topic	pantheons [SEP] topic
+/base/prison/topic	prison [SEP] topic
+/government/governmental_body	government [SEP] governmental body
+/user/paulshanks/project_management/construction_cost_items	project management [SEP] construction cost items
+/interests/collection_category	interests [SEP] collection category
+/base/parody/parody	parody [SEP] parody
+/government/government_agency	government [SEP] government agency
+/base/trenthergenrader/topic	Trent Hergenrader [SEP] topic
+/people/marriage_union_type	people [SEP] marriage union type
+/base/dedication/topic	dedication [SEP] topic
+/user/mangala/default_domain/branch_of_government	branch of government
+/user/pak21/splitter/split_completed	splitter [SEP] split completed
+/base/technologyofdoing/proposal_agent	technology of doing [SEP] proposal agent
+/base/petbreeds/dog_breed	petbreeds [SEP] dog breed
+/theater/theatrical_lyricist	theater [SEP] theatrical lyricist
+/award/competitor	award [SEP] competitor
+/fictional_universe/character_occupation	fictional universe [SEP] character occupation
+/film/film_costumer_designer	film [SEP] film costumer designer
+/award/ranked_item	award [SEP] ranked item
+/base/thesocialset/clique_interest	the social set [SEP] clique interest
+/sports/sports_team_owner	sports [SEP] sports team owner
+/base/schemastaging/tennis_player_extra	schemas taging [SEP] tennis player extra
+/business/customer	business [SEP] customer
+/base/eventparticipants/known_participants	event participants [SEP] known participants
+/base/kinometric/genre	kinometric [SEP] genre
+/protected_sites/natural_or_cultural_preservation_agency	protected sites [SEP] natural or cultural preservation agency
+/base/beerbase/country_of_origin	beer base [SEP] country of origin
+/wine/wine_region	wine [SEP] wine region
+/freebase/task	freebase [SEP] task
+/base/greatfilms/topic	great films [SEP] topic
+/base/schemastaging/sport_extra	schemas taging [SEP] sport extra
+/base/knockoffs/knockoffed	knockoffs [SEP] knockoffed
+/architecture/building	architecture [SEP] building
+/base/electronic/topic	electronic [SEP] topic
+/base/blogsemportugues/films	blogs in Portugal [SEP] films
+/base/montagueinstitute/topic	montague institute [SEP] topic
+/symbols/flag_referent	symbols [SEP] flag referent
+/media_common/quotation_addressee	media common [SEP] quotation addressee
+/tv/tv_program_guest	tv [SEP] tv program guest
+/business/industry	business [SEP] industry
+/base/schemastaging/context_name	schemas taging [SEP] context name
+/business/product_theme	business [SEP] product theme
+/base/pinball/pinball_machine_manufacturer	pinball [SEP] pinball machine manufacturer
+/base/classificationsearch/topic	classification search [SEP] topic
+/government/legislative_committee_title	government [SEP] legislative committee title
+/base/fashionmodels/fashion_model	fashion models [SEP] fashion model
+/user/sprocketonline/economics/topic	economics [SEP] topic
+/base/seafood/topic	seafood [SEP] topic
+/base/mediaextended/film_ranch_owner	media extended [SEP] film ranch owner
+/base/horticulture/topic	horticulture [SEP] topic
+/award/award_nominee	award [SEP] award nominee
+/comic_books/comic_book_genre	comic books [SEP] comic book genre
+/projects/project_role	projects [SEP] project role
+/user/robert/default_domain/bipolar_disorder_sufferer	bipolar disorder sufferer
+/base/aareas/schema/us/state	administrative area [SEP] schema [SEP] the United States [SEP] state
+/base/mapcentral/fgdc_keyword	map central [SEP] fgdc keyword
+/government/legislative_committee	government [SEP] legislative committee
+/time/time_zone	time [SEP] time zone
+/base/allthingsnewyork/topic	all things New York [SEP] topic
+/base/jewlib/jewish_studies_field	Jewish Library [SEP] jewish studies field
+/base/visleg/topic	visleg [SEP] topic
+/base/inspiration/topic	inspiration [SEP] topic
+/theater/theater_actor	theater [SEP] theater actor
+/base/onlineadvertising/topic	online advertising [SEP] topic
+/user/robert/military/topic	military [SEP] topic
+/location/us_county	location [SEP] the United States county
+/music/featured_artist	music [SEP] featured artist
+/base/mediaextended/topic	media extended [SEP] topic
+/base/sopranosingers/topic	soprano singers [SEP] topic
+/base/aareas/schema/england/unitary_authority_plain	administrative area [SEP] schema [SEP] england [SEP] unitary authority plain
+/base/events/subject_of_festival	events [SEP] subject of festival
+/base/chinesemovies/topic	Chinese movies [SEP] topic
+/location/us_state	location [SEP] the United States state
+/base/londonfilmfestival/topic	London film festival [SEP] topic
+/base/aareas/schema/de/city	administrative area [SEP] schema [SEP] German [SEP] city
+/base/crime/crime_victim	crime [SEP] crime victim
+/media_common/netflix_title	media common [SEP] netflix title
+/religion/religious_leadership_jurisdiction	religion [SEP] religious leadership jurisdiction
+/medicine/medical_specialty	medicine [SEP] medical specialty
+/organization/organization_scope	organization [SEP] organization scope
+/base/morelaw/topic	morelaw [SEP] topic
+/base/locations/countries	locations [SEP] countries
+/base/popstra/topic	popstra [SEP] topic
+/base/symbols/topic	symbols [SEP] topic
+/geography/geographical_feature	geography [SEP] geographical feature
+/base/tagit/organic_thing	tagit [SEP] organic thing
+/dining/cuisine	dining [SEP] cuisine
+/base/fairytales/topic	fairy tales [SEP] topic
+/base/folklore/mythical_creature_location	folklore [SEP] mythical creature location
+/base/horsefacts/event_class	horse facts [SEP] event class
+/base/schemastaging/sports_team_extra	schemas taging [SEP] sports team extra
+/award/award_winning_work	award [SEP] award winning work
+/music/genre	music [SEP] genre
+/government/legislative_session	government [SEP] legislative session
+/base/greatbooksofthewesternworld/author	great books of the western world [SEP] author
+/base/civics/topic	civics [SEP] topic
+/location/uk_non_metropolitan_county	location [SEP] British non metropolitan county
+/base/chinesezodiac/topic	Chinese zodiac [SEP] topic
+/sports/coaching_position	sports [SEP] coaching position
+/film/film_distributor	film [SEP] film distributor
+/base/popstra/party	popstra [SEP] party
+/fictional_universe/work_of_fiction	fictional universe [SEP] work of fiction
+/base/famouspets/topic	famous pets [SEP] topic
+/base/familyguy/family_guy_reference	family guy [SEP] family guy reference
+/organization/organization_founder	organization [SEP] organization founder
+/cvg/cvg_genre	computer video game [SEP] computer video game genre
+/base/aareas/schema/nl/municipality	administrative area [SEP] schema [SEP] Netherland [SEP] municipality
+/ice_hockey/hockey_team	ice hockey [SEP] hockey team
+/base/programming1/topic	programming 1 [SEP] topic
+/base/events/location_of_events	events [SEP] location of events
+/base/athletics/athletics_discipline_type	athletics [SEP] athletics discipline type
+/base/northcarolina/topic	North Carolina [SEP] topic
+/user/szaijan/fantasy_football/player	fantasy football [SEP] player
+/user/brendan/default_domain/top_architectural_city	top architectural city
+/base/vancouver/podcaster	vancouver [SEP] podcaster
+/base/collectives/collective_member	collectives [SEP] collective member
+/computer/software_genre	computer [SEP] software genre
+/base/saturdaynightlive/snl_cast_member	Saturday Night Live [SEP] Saturday Night Live cast member
+/theater/theater_production_staff_role	theater [SEP] theater production staff role
+/base/infection/location_of_biosafety_facility	infection [SEP] location of biosafety facility
+/food/beer_country_region	food [SEP] beer country region
+/user/dylanrocks/national_football_league/topic	national football league [SEP] topic
+/user/robert/default_domain/victoria_s_secret_fashion_models	victoria s secret fashion models
+/base/marijuana420/topic	marijuana culture 420 [SEP] topic
+/film/film_song_performer	film [SEP] film song performer
+/user/mikeshwe/hairstyles/hairstyle_gender	hairstyles [SEP] hairstyle gender
+/base/aubreymaturin/topic	Aubrey Maturin nautical historical novels [SEP] topic
+/base/mapcentral/fgdc_location_keyword	map central [SEP] fgdc location keyword
+/sports/sport	sports [SEP] sport
+/base/snowboard/topic	snowboard [SEP] topic
+/medicine/medical_treatment	medicine [SEP] medical treatment
+/user/pumpkin/activities/activity	activities [SEP] activity
+/organization/organization	organization [SEP] organization
+/base/academyofcountrymusicawards/topic	academy of country music awards [SEP] topic
+/base/localfood/topic	local food [SEP] topic
+/visual_art/art_subject	visual art [SEP] art subject
+/theater/theater_company	theater [SEP] theater company
+/base/filmnoir/topic	film noir [SEP] topic
+/base/events/topic	events [SEP] topic
+/base/consumermedical/medical_term	consumer medical [SEP] medical term
+/base/aareas/schema/in/state	administrative area [SEP] schema [SEP] India [SEP] state
+/base/masterthesis/topic	master thesis [SEP] topic
+/base/stimulustracking/united_states_federal_executive_department	stimulus tracking [SEP] united states federal executive department
+/base/thejurypool/topic	the jury pool [SEP] topic
+/base/parody/topic	parody [SEP] topic
+/base/folklore/topic	folklore [SEP] topic
+/base/skills/topic	skills [SEP] topic
+/business/consumer_product	business [SEP] consumer product
+/base/inaugurations/topic	inaugurations [SEP] topic
+/base/austria/topic	austria [SEP] topic
+/base/stimulustracking/topic	stimulus tracking [SEP] topic
+/base/hindisoundtracks/topic	hindi soundtracks [SEP] topic
+/base/activism/activism_issue	activism [SEP] activism issue
+/business/sponsored_recipient	business [SEP] sponsored recipient
+/business/defunct_company	business [SEP] defunct company
+/broadcast/broadcast	broadcast [SEP] broadcast
+/base/disneyana/topic	disneyana [SEP] topic
+/base/locations/continents	locations [SEP] continents
+/base/aubreymaturin/malady	Aubrey Maturin nautical historical novels [SEP] malady
+/business/job_title	business [SEP] job title
+/government/us_president	government [SEP] the United States president
+/base/exoplanetology/topic	exoplanetology [SEP] topic
+/base/marsupials/topic	marsupials [SEP] topic
+/base/schemastaging/award_category_extra	schemas taging [SEP] award category extra
+/base/historicalfilms/topic	historical films [SEP] topic
+/user/damslattery/default_domain/film_studios	film studios
+/music/bassist	music [SEP] bassist
+/base/folklore/mythical_creature	folklore [SEP] mythical creature
+/travel/travel_destination	travel [SEP] travel destination
+/user/patrick/default_domain/military_combatant	military combatant
+/base/thebigpitch/topic	short film The Big Pitch [SEP] topic
+/base/unitednations/united_nations_member_state	United Nations [SEP] united nations member state
+/user/zeusi/default_domain/sports_representative	sports representative
+/base/anzacs/topic	The Australian and New Zealand Army Corps [SEP] topic
+/language/language_family	language [SEP] language family
+/user/kenny1234567/organization_registration_classification_by_country/topic	organization registration classification by country [SEP] topic
+/user/jschell/default_domain/alter_ego	alter ego
+/user/skud/nuclear_weapons/nuclear_power	nuclear weapons [SEP] nuclear power
+/user/alexbl/honorary_title/topic	honorary title [SEP] topic
+/base/greatbooksofthewesternworld/topic	great books of the western world [SEP] topic
+/base/williamshakespeare/topic	William Shakespeare English playwright poet and actor [SEP] topic
+/base/tabletennis/topic	table tennis [SEP] topic
+/base/tallships/topic	tall ships [SEP] topic
+/base/aareas/schema/nz/territorial_authority	administrative area [SEP] schema [SEP] New Zealand [SEP] territorial authority
+/music/guitarist	music [SEP] guitarist
+/government/governmental_jurisdiction	government [SEP] governmental jurisdiction
+/base/sharing/topic	sharing [SEP] topic
+/base/cannapedia/topic	cannapedia [SEP] topic
+/base/mmmpr/topic	mmmpr country [SEP] topic
+/metropolitan_transit/transit_stop	metropolitan transit [SEP] transit stop
+/rail/railway_terminus	rail [SEP] railway terminus
+/base/popstra/organization	popstra [SEP] organization
+/base/postneolithic/topic	post neolithic [SEP] topic
+/base/animemanga/anime_manga_genre	Anime Manga [SEP] anime manga genre
+/user/robert/ranked_lists/topic	ranked lists [SEP] topic
+/user/duck1123/default_domain/mtg_mana_color	mtg mana color
+/base/jewlib/original_owner	Jewish Library [SEP] original owner
+/base/coloniesandempire/former_spanish_colonies	colonies and empire [SEP] former spanish colonies
+/user/martijnweghorst/default_domain/moviemotel_title	moviemotel title
+/award/award	award [SEP] award
+/base/academyawards/topic	academy awards [SEP] topic
+/base/galalelsoury/topic	galalelsoury [SEP] topic
+/base/athletics/athletics_country	athletics [SEP] athletics country
+/base/birdinfo/unit_of_population_number	bird information [SEP] unit of population number
+/military/armed_force	military [SEP] armed force
+/film/cinematographer	film [SEP] cinematographer
+/base/jewishstudies/topic	jewish studies [SEP] topic
+/user/xena/default_domain/contralto	contralto
+/location/us_cbsa	location [SEP] the United States core-based statistical area
+/organization/organization_committee_title	organization [SEP] organization committee title
+/base/locations/states_and_provences	locations [SEP] states and provences
+/biology/breed_origin	biology [SEP] breed origin
+/music/composer	music [SEP] composer
+/olympics/olympic_games	olympics [SEP] olympic games
+/base/karlovyvaryinternationalfilmfestival/topic	Karlovy Vary international film festival [SEP] topic
+/base/services/exercise_programs	services [SEP] exercise programs
+/base/qateef/topic	qateef [SEP] topic
+/base/tomeverett/topic	Tom Everett [SEP] topic
+/user/ansamcw/my_homepage/topic	my homepage [SEP] topic
+/architecture/architect	architecture [SEP] architect
+/user/rlyeh/certainty/complete	certainty [SEP] complete
+/base/fairytales/fairy_tale_origin	fairy tales [SEP] fairy tale origin
+/people/person	people [SEP] person
+/religion/religion	religion [SEP] religion
+/base/schemastaging/disputed_location_claimant	schemas taging [SEP] disputed location claimant
+/base/natlang/abbreviated_topic	natural language [SEP] abbreviated topic
+/base/litcentral/focal_location	litcentral [SEP] focal location
+/base/ninamarlene/topic	Nina Marlene [SEP] topic
+/base/losangeles/topic	Los Angeles [SEP] topic
+/user/wiznia/default_domain/media_source	media source
+/base/performingearth/topic	performing earth [SEP] topic
+/base/jewlib/parent_institution	Jewish Library [SEP] parent institution
+/base/ecology/topic	ecology [SEP] topic
+/meteorology/cyclone_affected_area	meteorology [SEP] cyclone affected area
+/base/americancomedy/comedy_group_member	American comedy [SEP] comedy group member
+/base/schemastaging/educational_institution_extra	schemas taging [SEP] educational institution extra
+/base/phobias/aviophobic_person	phobias [SEP] aviophobic person
+/base/jewlib/topic	Jewish Library [SEP] topic
+/media_common/dedicator	media common [SEP] dedicator
+/base/niivgbase/topic	nii vg base [SEP] topic
+/base/aareas/schema/england/non_metropolitan_county	administrative area [SEP] schema [SEP] england [SEP] non metropolitan county
+/user/robert/earthquakes/topic	earthquakes [SEP] topic
+/music/music_video_job	music [SEP] music video job
+/sports/sports_award_type	sports [SEP] sports award type
+/base/wfilmbase/film	w film base [SEP] film
+/location/country	location [SEP] country
+/base/survivor/topic	survivor [SEP] topic
+/film/film_format	film [SEP] film format
+/base/inaugurations/inauguration_speaker	inaugurations [SEP] inauguration speaker
+/user/robert/performance/topic	performance [SEP] topic
+/base/godparents/godparent	godparents [SEP] godparent
+/film/writer	film [SEP] writer
+/base/phpdeveloper/topic	php developer [SEP] topic
+/people/place_of_interment	people [SEP] place of interment
+/base/hkiff/topic	Hong Kong international film festival [SEP] topic
+/medicine/diagnostic_test	medicine [SEP] diagnostic test
+/base/aareas/schema/administrative_area	administrative area [SEP] schema [SEP] administrative area
+/user/maxim75/default_domain/dbpedia_import	dbpedia import
+/base/litcentral/named_person	litcentral [SEP] named person
+/base/locarnointernationalfilmfestival/topic	locarno international film festival [SEP] topic
+/base/gender/gender_identity	gender [SEP] gender identity
+/government/u_s_congressperson	government [SEP] congress person of the United States
+/base/philbsuniverse/media	philbs universe [SEP] media
+/base/associationfootball/soccer_team	association football [SEP] soccer team
+/location/uk_constituent_country	location [SEP] British constituent country
+/biology/animal_owner	biology [SEP] animal owner
+/music/artist	music [SEP] artist
+/soccer/football_team	soccer [SEP] football team
+/location/uk_london_borough	location [SEP] British london borough
+/business/asset_owner	business [SEP] asset owner
+/base/x2010fifaworldcupsouthafrica/topic	South Africa 2010 fifa world cup [SEP] topic
+/award/award_winner	award [SEP] award winner
+/architecture/architectural_style	architecture [SEP] architectural style
+/business/brand	business [SEP] brand
+/royalty/system_of_nobility	royalty [SEP] system of nobility
+/film/film_distribution_medium	film [SEP] film distribution medium
+/base/services/data_recovery_service_type	services [SEP] data recovery service type
+/tv/tv_subject	tv [SEP] tv subject
+/base/vietnamwar/topic	Vietnam war [SEP] topic
+/organization/organization_member	organization [SEP] organization member
+/base/stimulustracking/government_agencies_affected	stimulus tracking [SEP] government agencies affected
+/base/sfiff/topic	San Francisco International Film Festival [SEP] topic
+/base/celeb/topic	celebrity [SEP] topic
+/user/tsegaran/random/dog_breed	random [SEP] dog breed
+/base/meshuggahalbumtimeline/topic	meshuggah album timeline [SEP] topic
+/base/onechanneltv/topic	one channel tv [SEP] topic
+/fictional_universe/ethnicity_in_fiction	fictional universe [SEP] ethnicity in fiction
+/base/webvideo/internet_video_actor	web video [SEP] internet video actor
+/military/military_post	military [SEP] military post
+/user/journ3eb/default_domain/band	band
+/visual_art/visual_art_genre	visual art [SEP] visual art genre
+/base/landcover/classification_system	land cover [SEP] classification system
+/music/producer	music [SEP] producer
+/base/mystery/cryptid_area_of_occurrence	mystery [SEP] cryptid area of occurrence
+/base/ecology/habitat	ecology [SEP] habitat
+/opera/opera_genre	opera [SEP] opera genre
+/religion/type_of_place_of_worship	religion [SEP] type of place of worship
+/base/journalists/topic	journalists [SEP] topic
+/user/harmeen/default_domain/freebase_s_database	freebase s database
+/location/uk_overseas_territory	location [SEP] British overseas territory
+/base/americancomedy/simpsons_writer	American comedy [SEP] simpsons writer
+/base/cambridge/colleges_and_universities	Cambridge university [SEP] colleges and universities
+/film/film_collection	film [SEP] film collection
+/user/zsi_editorial/editorial/topic	editorial [SEP] topic
+/visual_art/color	visual art [SEP] color
+/base/aareas/schema/earth/sovereign_state	administrative area [SEP] schema [SEP] earth [SEP] sovereign state
+/base/pokemon/pokemon_basis	pokemon [SEP] pokemon basis
+/base/lewisandclark/places_westward	Lewis and Clark Expedition [SEP] places westward
+/base/whedonverse/topic	whedonverse [SEP] topic
+/user/agroschim/default_domain/school_tradition	school tradition
+/base/casinos/casino_theme	casinos [SEP] casino theme
+/music/media_format	music [SEP] media format
+/base/endofallthings/topic	end of all things [SEP] topic
+/automotive/exterior_color	automotive [SEP] exterior color
+/base/litcentral/person_name_suffix	litcentral [SEP] person name suffix
+/organization/role	organization [SEP] role
+/base/consumermedical/disease	consumer medical [SEP] disease
+/base/musiteca/type_instrument	musiteca [SEP] type instrument
+/base/services/recreational_sports	services [SEP] recreational sports
+/base/caveart/region	Cave Art [SEP] region
+/base/edmonton/topic	Edmonton city in Canada [SEP] topic
+/law/inventor	law [SEP] inventor
+/base/myschool/topic	myschool [SEP] topic
+/user/susanfsu/default_domain/outdoor_activity	outdoor activity
+/astronomy/orbital_relationship	astronomy [SEP] orbital relationship
+/astronomy/celestial_object	astronomy [SEP] celestial object
+/base/militaryinfiction/military_rank_in_fiction	military in fiction [SEP] military rank in fiction
+/education/educational_institution	education [SEP] educational institution
+/base/cancer/topic	cancer [SEP] topic
+/base/blocks/topic	blocks [SEP] topic
+/base/schemastaging/tv_actor_extra	schemas taging [SEP] tv actor extra
+/theater/theater_director	theater [SEP] theater director
+/book/written_work	book [SEP] written work
+/user/bhludzin/default_domain/bank	bank
+/base/greatfilms/ranked_item	great films [SEP] ranked item
+/base/sanfrancisco/topic	San Francisco [SEP]  topic
+/user/skud/embassies_and_consulates/embassy	embassies and consulates [SEP] embassy
+/games/game_genre	games [SEP] game genre
+/base/ushahidi/topic	Ushahidi platform used by United Nations department of Field Services and Peacekeeping [SEP] topic
+/user/venkytv/default_domain/mythological_system	mythological system
+/base/tagit/topic	tagit [SEP] topic
+/base/meanstreets/topic	Mean Streets [SEP] topic
+/projects/project	projects [SEP] project
+/user/hailey2009/default_domain/centenarians	centenarians
+/base/ballet/topic	ballet [SEP] topic
+/base/productplacement/topic	product placement [SEP] topic
+/spaceflight/satellite_manufacturer	space flight [SEP] satellite manufacturer
+/base/services/event_category	services [SEP] event category
+/education/educational_degree	education [SEP] educational degree
+/base/audiobase/audio_equipment_manufacturer	audio base [SEP] audio equipment manufacturer
+/film/film_festival_event	film [SEP] film festival event
+/base/natlang/topic	natural language [SEP] topic
+/architecture/building_occupant	architecture [SEP] building occupant
+/music/music_video_subject	music [SEP] music video subject
+/tv/tv_character	tv [SEP] tv character
+/book/school_or_movement	book [SEP] school or movement
+/base/militaryinfiction/topic	military in fiction [SEP] topic
+/base/phobias/topic	phobias [SEP] topic
+/base/gossipgirl3/topic	gossip girl 3 [SEP] topic
+/base/references/topic	references [SEP] topic
+/base/academia/topic	academia [SEP] topic
+/architecture/architecture_firm_partners	architecture [SEP] architecture firm partners
+/base/cycling/cycling_discipline	cycling [SEP] cycling discipline
+/location/in_state	location [SEP] in state
+/celebrities/sexual_orientation	celebrities [SEP] sexual orientation
+/base/process/process_environment	process [SEP] process environment
+/base/thoroughbredracing/topic	thoroughbred racing [SEP} topic
+/government/political_district	government [SEP] political district
+/business/company_type	business [SEP] company type
+/medicine/notable_person_with_medical_condition	medicine [SEP] notable person with medical condition
+/base/fashionmodels/hair_color	fashion models [SEP] hair color
+/base/sportssandbox/topic	sports sand box [SEP] topic
+/user/alexbl/honorary_title/titled_person	honorary title [SEP] titled person
+/base/petbreeds/dog_coat_color	petbreeds [SEP] dog coat color
+/base/chivalry/topic	chivalry [SEP] topic
+/location/de_city	location [SEP] German city
+/base/pinball/pinball_machine_basis	pinball [SEP] pinball machine basis
+/user/moonhouse/default_domain/library_classification_system	library classification system
+/user/alexander/misc/topic	miscellaneous [SEP] topic
+/base/qualia/recreational_drug_user	qualia [SEP] recreational drug user
+/cvg/cvg_designer	computer video game [SEP] computer video game designer
+/location/postal_code	location [SEP] postal code
+/base/writing/topic	writing [SEP] topic
+/media_common/dedicatee	media common [SEP] dedicatee
+/base/musiteca/conductor	musiteca [SEP] conductor
+/music/music_video_director	music [SEP] music video director
+/royalty/monarch	royalty [SEP] monarch
+/base/pinball/topic	pinball [SEP] topic
+/base/charities/geographic_scope	charities [SEP] geographic scope
+/user/johm/carnegie_mellon_university/topic	carnegie mellon university [SEP] topic
+/people/appointer	people [SEP] appointer
+/people/cause_of_death	people [SEP] cause of death
+/cvg/computer_game_region	computer video game [SEP] computer game region
+/base/rewards/topic	rewards [SEP] topic
+/base/database/database_host	database [SEP] database host
+/user/jamie/food/topic	food [SEP] topic
+/base/icons/icon	icons [SEP] icon
+/distilled_spirits/spirit_producing_region	distilled spirits [SEP] spirit producing region
+/user/robert/earthquakes/earthquake_epicenter	earthquakes [SEP] earthquake epicenter
+/tv/tv_regular_personal_appearance	tv [SEP] tv regular personal appearance
+/base/athletics/athletics_area	athletics [SEP] athletics area
+/base/shanghaiinternationalfilmfestival/topic	Shanghai international film festival [SEP] topic
+/base/bdnabase/topic	bdnabase [SEP] topic
+/base/nanhikali/topic	Nanhi Kali Indian girl child education support program [SEP] topic
+/base/animemanga/topic	Anime Manga [SEP] topic
+/user/kilaravi/ksr/sports	ksr [SEP] sports
+/architecture/architectural_structure_owner	architecture [SEP] architectural structure owner
+/tv/tv_program	tv [SEP] tv program
+/base/skosbase/topic	skosbase [SEP] topic
+/base/elbogen/meeting_organizer	elbogen [SEP] meeting organizer
+/base/webcomic/topic	webcomic [SEP] topic
+/base/ihistory/person	history [SEP] person
+/base/newyorkcity/topic	New York City [SEP] topic
+/user/skud/legal/treaty_signatory	legal [SEP] treaty signatory
+/government/form_of_government	government [SEP] form of government
+/base/badpeople/bad_people_who_make_music	bad people [SEP] bad people who make music
+/base/schemastaging/topic	schemas taging [SEP] topic
+/base/cycling/topic	cycling [SEP] topic
+/military/military_commander	military [SEP] military commander
+/internet/website_owner	internet [SEP] website owner
+/base/ignoreme/topic	ignore me [SEP] topic
+/base/engineering/engineering_discipline	engineering [SEP] engineering discipline
+/base/uncommon/topic	uncommon [SEP] topic
+/base/shapedcities/shaped_city	shaped cities [SEP] shaped city
+/base/firsts/topic	firsts [SEP] topic
+/base/lrerutdanning/topic	head of education [SEP] topic
+/base/events/type_of_event	events [SEP] type of event
+/base/animal_synopses/animal_synopsis	animal synopses [SEP] animal synopsis
+/people/family	people [SEP] family
+/base/berlininternationalfilmfestival/topic	Berlin international film festival [SEP] topic
+/medicine/symptom	medicine [SEP] symptom
+/base/animemanga/media_format	Anime Manga [SEP] media format
+/base/danceporn/topic	dance porn [SEP] topic
+/base/starshapedcitadelsandcities/star_shaped_cities_and_citadels_in_germany	star shaped citadels and cities [SEP] star shaped cities and citadels in germany
+/base/curricula/leergebied_vak	curricula [SEP] leergebied vak
+/fictional_universe/character_gender	fictional universe [SEP] character gender
+/computer/software_license	computer [SEP] software license
+/freebase/equivalent_topic	freebase [SEP] equivalent topic
+/user/dylanrocks/the_27_club/topic	the 27 club [SEP] topic
+/award/recurring_competition	award [SEP] recurring competition
+/book/magazine_genre	book [SEP] magazine genre
+/base/americancomedy/tv_show	American comedy [SEP] tv show
+/base/anarchism/topic	anarchism [SEP] topic
+/base/rosenbaum/topic	rosenbaum [SEP] topic
+/fictional_universe/medical_condition_in_fiction	fictional universe [SEP] medical condition in fiction
+/base/websites/website	websites [SEP] website
+/music/engineer	music [SEP] engineer
+/film/film	film [SEP] film
+/base/americancomedy/double_act_comic	American comedy [SEP] double act comic
+/base/aareas/schema/earth/citytown	administrative area [SEP] schema [SEP] earth [SEP] city town
+/base/technopundits/topic	Technopundits business solution consultation firm  [SEP] topic
+/base/twinnedtowns/topic	twinned towns [SEP] topic
+/base/tagit/man_made_thing	tagit [SEP] man made thing
+/award/hall_of_fame_inductee	award [SEP] hall of fame inductee
+/base/markrobertdaveyphotographer/topic	mark robert davey photographer [SEP] topic
+/base/saturdaynightlive/snl_musical_guest	Saturday Night Live [SEP] Saturday Night Live musical guest
+/base/sfawards/topic	science fiction awards [SEP] topic
+/base/urbanlegends/topic	urban legends [SEP] topic
+/exhibitions/exhibition_venue	exhibitions [SEP] exhibition venue
+/base/bioventurist/bv_geography	biology venture [SEP] geography
+/user/rlyeh/history/causal_event	history [SEP] causal event
+/user/brendan/musician_products/brand	musician products [SEP] brand
+/user/lapax/default_domain/landlocked_country	landlocked country
+/dataworld/information_source	data world [SEP] information source
+/fictional_universe/fictional_object	fictional universe [SEP] fictional object
+/user/jon/default_domain/my_favorite_things	my favorite things
+/travel/tourist_attraction	travel [SEP] tourist attraction
+/base/trails/activity	trails [SEP] activity
+/film/film_casting_director	film [SEP] film casting director
+/base/svocab/movie	svocab [SEP] movie
+/base/yalebase/topic	Yale university base [SEP] topic
+/base/associationfootball/soccer_position	association football [SEP] soccer position
+/cvg/cvg_developer	computer video game [SEP] computer video game developer
+/base/cinemainspector/person_sign	cinema inspector [SEP] person sign
+/book/published_work	book [SEP] published work
+/user/skud/nuclear_weapons/topic	nuclear weapons [SEP] topic
+/user/szaijan/fantasy_football/position	fantasy football [SEP] position
+/user/szaijan/fantasy_football/topic	fantasy football [SEP] topic
+/user/gommit/brands/brand	brands [SEP] brand
+/base/filmcameras/camera_film_format	film cameras [SEP] camera film format
+/base/advertisingcharacters/character_portrayer	advertising characters [SEP] character portrayer
+/base/saveaussiemusic/spi_coverage_type	save australian music [SEP] spi coverage type
+/base/slovakia/topic	slovakia [SEP] topic
+/base/recordingstudios/studio_musician	recording studios [SEP] studio musician
+/base/athletics/athletics_medal	athletics [SEP] athletics medal
+/base/daylifetopics/topic	daylife topics [SEP] topic
+/film/film_company	film [SEP] film company
+/broadcast/genre	broadcast [SEP] genre
+/base/therockbat/topic	therock bat [SEP] topic
+/base/hamlet/topic	hamlet [SEP] topic
+/base/tonyfranksbuckley/topic	Tony Franks buckley [SEP] topic
+/base/schemastaging/organization_extra	schemas taging [SEP] organization extra
+/base/siswimsuitmodels/topic	si swimsuit models [SEP] topic
+/government/government	government [SEP] government
+/base/jamesbond007/bond_film	James Bond 007 [SEP] bond film
+/base/seafood/fishery_location	seafood [SEP] fishery location
+/base/saltproject/topic	salt project [SEP] topic
+/location/capital_of_administrative_division	location [SEP] capital of administrative division
+/government/government_office_category	government [SEP] government office category
+/base/mystery/topic	mystery [SEP] topic
+/base/magic/magician	magic [SEP] magician
+/user/danboo/default_domain/bicycle_model_typical_use	bicycle model typical use
+/base/kwebbase/kwtopic	kwebbase [SEP] kwtopic
+/base/americancomedy/impersonated_celebrity	American comedy [SEP] impersonated celebrity
+/base/satelites/natural_satellite	satelites [SEP] natural satellite
+/user/robert/default_domain/notable_conservative	notable conservative
+/base/aareas/schema/de/district	administrative area [SEP] schema [SEP] German [SEP] district
+/media_common/dedicated_work	media common [SEP] dedicated work
+/base/bibkn/department	bibkn [SEP] department
+/business/employer	business [SEP] employer
+/book/translation	book [SEP] translation
+/base/greatfilms/ranked_list	great films [SEP] ranked list
+/music/lyricist	music [SEP] lyricist
+/base/atheism/topic	atheism [SEP] topic
+/base/neutra/topic	neutra [SEP] topic
+/base/americancomedy/vaudeville_performer	American comedy [SEP] vaudeville performer
+/architecture/venue	architecture [SEP] venue
+/base/petbreeds/pet_gender	petbreeds [SEP] pet gender
+/amusement_parks/ride_theme	amusement parks [SEP] ride theme
+/base/joeunger/topic	Joe Unger [SEP] topic
+/base/myspace/myspace_user	myspace social networking service [SEP] myspace user
+/base/events/geographical_scope	events [SEP] geographical scope
+/base/handball/handball_position	handball [SEP] handball position
+/base/wrestling/professional_wrestling_manager	wrestling [SEP] professional wrestling manager
+/base/cinequestfilmfestival/topic	Cinequest film festival [SEP] topic
+/base/database/database_topic	database [SEP] database topic
+/user/robert/mobile_phones/mobile_phone_region	mobile phones [SEP] mobile phone region
+/olympics/olympic_medal	olympics [SEP] olympic medal
+/theater/theatrical_composer	theater [SEP] theatrical composer
+/base/productplacement/product_placed_brand	product placement [SEP] product placed brand
+/sports/professional_sports_team	sports [SEP] professional sports team
+/base/localfood/food_producing_region	local food [SEP] food producing region
+/user/lbwelch	lbwelch
+/fictional_universe/fictional_character_creator	fictional universe [SEP] fictional character creator
+/base/cinemainspector/topic	cinema inspector [SEP] topic
+/base/musiteca/situation	musiteca [SEP] situation
+/tv/tv_personality	tv [SEP] tv personality
+/government/political_appointer	government [SEP] political appointer
+/base/biblioness/bibs_location	biblioness [SEP] bibs location
+/film/production_company	film [SEP] production company
+/base/crime/lawyer	crime [SEP] lawyer
+/base/engineering/tunnel	engineering [SEP] tunnel
+/user/jonasy/default_domain/currency2	currency
+/base/classiccorvettes/topic	classic corvettes [SEP] topic
+/base/malemodels/topic	male models [SEP] topic
+/cvg/game_voice_actor	computer video game [SEP] game voice actor
+/base/litcentral/topic	litcentral [SEP] topic
+/medicine/disease_cause	medicine [SEP] disease cause
+/base/cinemainspectortest/topic	cinema inspector test [SEP] topic
+/user/robert/x2008_presidential_election/candidate	x2008 presidential election of the United States [SEP] candidate
+/book/periodical_publisher	book [SEP] periodical publisher
+/user/robert/us_congress/topic	The United States Congress [SEP] topic
+/organization/club_interest	organization [SEP] club interest
+/user/gangofnuns/computer_hardware/computer_hardware_vendor	computer hardware [SEP] computer hardware vendor
+/astronomy/astronomical_discovery	astronomy [SEP] astronomical discovery
+/base/americancomedy/comedy_genre	American comedy [SEP] comedy genre
+/base/michellecarusocabrera/topic	Michelle Caruso-Cabrera American politician and journalist [SEP] topic
+/film/film_production_designer	film [SEP] film production designer
+/base/horticulture/cultivar_origin	horticulture [SEP] cultivar origin
+/base/arthist/int_zm_nyek	artist [SEP] int zm nyek
+/base/animalnames/animal_gender	animal names [SEP] animal gender
+/user/techgnostic/default_domain/magazine_topic	magazine topic
+/base/tina526base/topic	tina 526 base [SEP] topic
+/tv/tv_network	tv [SEP] tv network
+/base/disaster2/injured_person	disaster 2 [SEP] injured person
+/user/narphorium/people/notable_person	people [SEP] notable person
+/user/gmackenz/color/color	color [SEP] color
+/base/bisac/bisac_equivalent_subject	bisac [SEP] bisac equivalent subject
+/law/invention	law [SEP] invention
+/user/ngerakines/social_software/topic	social software [SEP] topic
+/base/mapcentral/topic	map central [SEP] topic
+/base/marchmadness/ncaa_basketball_tournament	march madness NCAA Division 1 men basketball tournament [SEP] ncaa basketball tournament
+/fictional_universe/fictional_character	fictional universe [SEP] fictional character
+/base/pixarfilms/topic	pixar films [SEP] topic
+/base/x2011internationalyearforpeopleofafricandescent/topic	x2011 international year for people of african descent [SEP] topic
+/base/schemastaging/athlete_extra	schemas taging [SEP] athlete extra
+/user/manuelbuenaga/default_domain/cognition	cognition
+/base/skateboarding/topic	skateboarding [SEP] topic
+/fictional_universe/fictional_organization_type	fictional universe [SEP] fictional organization type
+/base/poetrybase/topic	poetry base [SEP] topic
+/base/stbase/topic	stbase [SEP] topic
+/base/moscowinternationalfilmfestival/topic	Moscow international film festival [SEP] topic
+/business/board_member_title	business [SEP] board member title
+/location/hud_foreclosure_area	location [SEP] hud foreclosure area
+/base/ottawa/topic	Ottawa city of Canada [SEP] topic
+/user/thalendar/default_domain/roleplaying_game_genre	roleplaying game genre
+/common/annotation_category	common [SEP] annotation category
+/base/wordnet/word_sense	wordnet [SEP] word sense
+/film/special_film_performance_type	film [SEP] special film performance type
+/base/pethealth/treatment	pet health [SEP] treatment
+/base/performer/topic	performer [SEP] topic
+/user/robert/military/military_power	military [SEP] military power
+/base/thewestwing/topic	the west wing American political drama tv series [SEP] topic
+/theater/theater_character	theater [SEP] theater character
+/theater/theater_producer	theater [SEP] theater producer
+/base/languagesfordomainnames/topic	languages for domain names [SEP] topic
+/base/parody/parodied_subject	parody [SEP] parodied subject
+/sports/sports_team_location	sports [SEP] sports team location
+/base/babylon5/topic	babylon5 [SEP] topic
+/military/military_conflict	military [SEP] military conflict
+/base/wastrology/topic	astrology [SEP] topic
+/book/book_subject	book [SEP] book subject
+/base/jambandmusic/topic	Jam Band music [SEP] topic
+/base/politicalconventions/convention_speaker	political conventions [SEP] convention speaker
+/base/popstra/business_location	popstra [SEP] business location
+/film/film_screening_venue	film [SEP] film screening venue
+/media_common/netflix_genre	media common [SEP] netflix genre
+/base/aareas/schema/england/unitary_authority	administrative area [SEP] schema [SEP] england [SEP] unitary authority
+/base/godparents/topic	godparents [SEP] topic
+/government/politician	government [SEP] politician
+/business/product_endorser	business [SEP] product endorser
+/base/sameas/api_provider	sameas [SEP] api provider
+/user/tsegaran/language/topic	language [SEP] topic
+/award/competition_type	award [SEP] competition type
+/base/barbie/topic	barbie [SEP] topic
+/olympics/olympic_host_city	olympics [SEP] olympic host city
+/organization/non_profit_organization	organization [SEP] non profit organization
+/base/thebigpitch/pitchman	short film The Big Pitch [SEP] pitchman
+/olympics/olympic_sport	olympics [SEP] olympic sport
+/base/usgovernment/topic	The United States government [SEP] topic
+/symbols/namesake	symbols [SEP] namesake
+/user/alexander/philosophy/philosopher	philosophy [SEP] philosopher
+/base/sxswfilm/topic	SXSW film [SEP] topic
