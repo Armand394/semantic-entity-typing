@@ -112,7 +112,7 @@ generate_2hopsample = True
 
 if generate_2hopsample:
     print("Generate sample graph with 2-hop neighbors")
-    data_sample_dir_2hop = os.path.join(project_path, "data", f"{dataset}_sample_2hop")
+    data_sample_dir_2hop = os.path.join(project_path, "data", f"{dataset}_sample_2hop_no_del")
     os.makedirs(data_sample_dir_2hop, exist_ok=True)
 
     # Chargement des dictionnaires à partir des fichiers TSV
@@ -149,7 +149,7 @@ if generate_2hopsample:
     t2id = read_id(os.path.join(data_sample_dir, 'types.tsv'))
     c2id = read_id(os.path.join(data_sample_dir, 'clusters.tsv'))
 
-    args = args_dict(dataset=f"{dataset}_sample_2hop", data_dir=data_folder)
+    args = args_dict(dataset=f"{dataset}_sample_2hop_no_del", data_dir=data_folder)
 
     SEMdataset(args, "LMET_train.txt", e2id, r2id, t2id, c2id, 'train')
     SEMdataset(args, "LMET_test.txt", e2id, r2id, t2id, c2id, 'test')

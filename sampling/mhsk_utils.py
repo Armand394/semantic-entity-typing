@@ -81,7 +81,7 @@ def recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2des
     e_coherence = pd.DataFrame(metrics, columns=['entity', 'kg_sim_mu', 'et_sim_mu', 'degree',
                                                 'avg_txt_length', 'kg_degree', 'et_degree','type_kg_ratio'])
 
-    e_coherence.to_csv(os.path.join(result_folder, "entity_metrics_sample.csv"), index=False)
+    e_coherence.to_csv(os.path.join(result_folder, "entity_metrics_sample_new.csv"), index=False)
 
 def compute_mean_similarity(sentences):
     if len(sentences) < 2:
@@ -330,3 +330,77 @@ def save_entity_kg_2hop(entity_kg_2hop, output_tsv_path):
     with open(output_tsv_path, "w", encoding="utf-8") as f:
         for ent, rel_list in ent_rel_dict.items():
             f.write(f"{ent}\t" + "\t".join(rel_list) + "\n")
+
+
+def two_hop_neighbors_2(df_triples, entity, r2text, r2id, e2desc, e2id):
+    from collections import defaultdict
+
+    bad_r = ["/common/annotation_category/annotations./common/webpage/topic",
+             "/common/topic/webpage./common/webpage/category"]
+
+    e_col, r_col, s_col = df_triples.columns
+
+    outgoing_map = defaultdict(set)
+    incoming_map = defaultdict(set)
+
+    for obj, rel, subj in zip(df_triples[e_col], df_triples[r_col], df_triples[s_col]):
+        outgoing_map[obj].add((subj, rel))
+        incoming_map[subj].add((obj, rel))
+
+    neighbors = set()
+    sentences = set()
+
+    # CASE 1: entity --> mid --> obj_z
+    for mid, r1 in outgoing_map[entity]:  
+        for obj_z, r2 in outgoing_map.get(mid, set()):
+            if r2 in bad_r or r1 in bad_r:
+                continue
+            composed_r = f"{r1}.{r2}"
+            neighbors.add((composed_r, obj_z, '-'))
+            sentences.add(f"{r2text[r2id[r1]]} {r2text[r2id[r2]]} {e2desc[e2id[obj_z]]}")
+
+    # CASE 2: entity <-- mid <-- obj_z
+    for mid, r1 in incoming_map[entity]:  
+        for obj_z, r2 in incoming_map.get(mid, set()):
+            if r2 in bad_r or r1 in bad_r:
+                continue
+            composed_r = f"{r1}.{r2}"
+            neighbors.add((composed_r, obj_z, 'inv'))
+            sentences.add(f"{e2desc[e2id[obj_z]]} {r2text[r2id[r1]]} {r2text[r2id[r2]]}")
+
+    # CASE 3: entity --> mid <-- obj_z
+    for mid, r1 in outgoing_map[entity]:  
+        for obj_z, r2 in incoming_map.get(mid, set()): 
+            if r2 in bad_r or r1 in bad_r:
+                continue
+            composed_r = f"{r1}.{r2}"
+            neighbors.add((composed_r, obj_z, 'inv'))
+            sentences.add(f"{e2desc[e2id[obj_z]]} {r2text[r2id[r1]]} {r2text[r2id[r2]]}")
+
+    # CASE 4: entity <-- mid --> obj_z
+    for mid, r1 in incoming_map[entity]:
+        for obj_z, r2 in outgoing_map.get(mid, set()):  
+            if r2 in bad_r or r1 in bad_r:
+                continue
+            composed_r = f"{r1}.{r2}"
+            neighbors.add((composed_r, obj_z, '-'))
+            sentences.add(f"{r2text[r2id[r1]]} {r2text[r2id[r2]]} {e2desc[e2id[obj_z]]}")
+
+    return list(neighbors), list(sentences)
+
+def update_relation_tsv(tsv_path, new_relations, r2id):
+    max_id = max(r2id.values()) if r2id else -1
+    with open(tsv_path, 'a', encoding='utf-8') as f:
+        for rel in new_relations:
+            if rel not in r2id:
+                max_id += 1
+                r2id[rel] = max_id
+                f.write(f"{rel}\t{max_id}\n")
+
+def generate_relation2text(tsv_path, output_path):
+    with open(tsv_path, 'r', encoding='utf-8') as fin, open(output_path, 'w', encoding='utf-8') as fout:
+        for line in fin:
+            rel = line.strip().split('\t')[0]
+            rel_text = rel.replace('/', ' ').strip()
+            fout.write(f"{rel}\t{rel_text}\n")
+

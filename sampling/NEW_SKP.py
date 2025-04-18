@@ -21,7 +21,7 @@ print(torch.cuda.is_available())
 project_folder = os.getcwd()
 data_path = os.path.join(project_folder, "data", "FB15kET_sample")
 result_folder = os.path.join(project_folder, "data_entity_metrics")
-data_2hop_path = os.path.join(project_folder, "data", "FB15kET_sample_2hop")
+data_2hop_path = os.path.join(project_folder, "data", "FB15kET_sample_2hop_sentences")
 os.makedirs(data_2hop_path, exist_ok=True)
 
 # Load Ids and descriptions
@@ -42,11 +42,11 @@ with open(os.path.join(data_path, 'entity_wiki.json'), "r") as f:
     entity_labels = json.load(f)
 
 # Recompute coherence metrics for entities
-if not os.path.exists(os.path.join(result_folder, "entity_metrics_sample.csv")):
+if not os.path.exists(os.path.join(result_folder, "entity_metrics_sample_new.csv")):
     recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2desc, t2id, result_folder)
 
 # Load entity coherence metrics
-e_coherence = pd.read_csv(os.path.join(result_folder, "entity_metrics_sample.csv"))
+e_coherence = pd.read_csv(os.path.join(result_folder, "entity_metrics_sample_new.csv"))
 
 # Entities with degree considered too low
 lowerb_quantiles = e_coherence[['kg_degree', 'et_degree']].quantile(0.1)
@@ -73,7 +73,7 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
     n_type = int(round(low_et_degree*2* (1 - len(et_train_sentences) / (low_et_degree+1))) + 2)
     
     # 2-hop neighbor sentences
-    kg_2hop, kg_2hop_sentences = two_hop_neighbors(df_triples, entity, r2text, r2id, e2desc, e2id)
+    kg_2hop, kg_2hop_sentences = two_hop_neighbors_2(df_triples, entity, r2text, r2id, e2desc, e2id)
     types_2hop, et_txt_2hop = two_hop_types(df_triples, df_train, entity, t2desc, t2id)
 
     # 2-hop kg neighbor and type with highest average similarity score
@@ -89,6 +89,13 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
 
     for et_type in et_top_2hop:
         entity_et_2hop.append((entity, et_type))
+
+    new_composed_relations = set()
+    for relation, _, _ in kg_top_2hop:
+        if '.' in relation and relation not in r2id:
+            new_composed_relations.add(relation)
+
+    update_relation_tsv(os.path.join(data_2hop_path, 'relations.tsv'), new_composed_relations, r2id)
 
 # Save
 with open(os.path.join(data_2hop_path, 'relation2hop.json'), "w") as f:
@@ -153,3 +160,4 @@ kg_train_processed = pd.concat([df_triples, kg_train_2hop], axis=0).reset_index(
 kg_train_processed.to_csv(os.path.join(data_2hop_path, 'KG_train.txt'), sep='\t', header=None, index=False)
 et_train_processed = pd.concat([df_train, et_train_2hop], axis=0).reset_index(drop=True)
 et_train_processed.to_csv(os.path.join(data_2hop_path, 'ET_train.txt'), sep='\t', header=None, index=False)
+generate_relation2text(os.path.join(data_2hop_path, 'relations.tsv'), os.path.join(data_2hop_path, 'relation2text.txt'))
