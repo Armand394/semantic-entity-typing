@@ -94,6 +94,7 @@ for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Proces
 with open(os.path.join(data_2hop_path, 'relation2hop.json'), "w") as f:
     json.dump(entity_kg_2hop, f, indent=4)
 
+
 # # Entities with degree considered too high
 # upperb_quantiles = e_coherence[['kg_degree', 'et_degree']].quantile(0.90)
 # high_kg_degree = upperb_quantiles.loc['kg_degree']

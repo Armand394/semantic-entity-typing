@@ -48,261 +48,40 @@ def plot_percentages_ranks(df_rank, result_folder):
     plt.close()
 
 
-def plot_metrics_classif(df_stats_correct, df_stats_bad, metric1, metric2, result_folder, xlabel=None, ylabel=None):
-    # Initialize figure
-    plt.figure(figsize=(8, 6))
+def plot_rank_value_pairplots(df, figure_folder, figure_name):
+    # Define columns to plot against 'rank_value'
+    x_cols = ['kg_sim_mu', 'et_sim_mu', 'avg_txt_length', 'kg_degree', 'et_degree']
+    y_col = 'rank_value'
 
-    # Plot KDE distributions focusing on core density
-    sns.kdeplot(x=df_stats_correct[metric1], y=df_stats_correct[metric2], cmap="Blues", alpha=0.8, fill=False, levels=5)
-    sns.kdeplot(x=df_stats_bad[metric1], y=df_stats_bad[metric2], cmap="Reds", alpha=0.65, fill=False, levels=5)
+    # Set up the plot
+    num_cols = len(x_cols)
+    fig, axes = plt.subplots(nrows=1, ncols=num_cols, figsize=(5 * num_cols, 5), constrained_layout=True)
+    
+    axes[0].set_ylabel(y_col)
 
-    # Set axis labels with LaTeX formatting
-    plt.xlabel(rf"${xlabel}$" if xlabel else metric1)
-    plt.ylabel(rf"${ylabel}$" if ylabel else metric2)
+    # Plot each subplot
+    for i, col in enumerate(x_cols):
+        ax = axes[i]
+        if col in ['kg_degree', 'et_degree']:
+            sns.scatterplot(x=np.log1p(df[col]), y=df[y_col], ax=ax)
+            ax.set_xlabel(f"log({col})")
+        else:
+            sns.scatterplot(x=df[col], y=df[y_col], ax=ax)
+            ax.set_xlabel(col)
 
-    # Define legend handles
-    legend_handles = [mpatches.Patch(facecolor="blue", alpha=0.8, label="Correct"),
-                      mpatches.Patch(facecolor="red", alpha=0.65, label="Wrong")]
+        # Only label y-axis on the first plot
+        if i == 0:
+            ax.set_ylabel(y_col)
+        else:
+            ax.set_ylabel('')
 
-    # Add legend
-    plt.legend(handles=legend_handles, loc="upper right")
-
-    # Figure plot location
-    figure_result = os.path.join(result_folder, f"classification_{metric1}_{metric2}_results.png")
-
-    # Save and close plot
-    plt.savefig(figure_result)
+    # Save the plot
+    plot_path = os.path.join(figure_folder, f"{figure_name}.png")
+    plt.savefig(plot_path, dpi=300)
     plt.close()
-
-
-def plot_top_relationships(entities_good_topn, entities_bad_topn, df_triples, result_folder):
-
-    # Filter df_triples for good and bad classified entities
-    df_good_topn = df_triples[df_triples['object'].isin(entities_good_topn)]
-    df_bad_topn = df_triples[df_triples['object'].isin(entities_bad_topn)]
-
-    # Count the top 10 most frequent relations for both groups
-    top_relations_good = df_good_topn['relation'].value_counts().head(10)
-    top_relations_bad = df_bad_topn['relation'].value_counts().head(10)
-
-    # Identify common relations between the two sets
-    common_relations = set(top_relations_good.index).intersection(set(top_relations_bad.index))
-
-    # Function to assign colors
-    def assign_colors(labels, common_clusters, base_color):
-        return ["plum" if label in common_clusters else base_color for label in labels]
-
-    # Assign colors for good and bad clusters
-    colors_good = assign_colors(list(top_relations_good.index), common_relations, base_color='seagreen')
-    colors_bad = assign_colors(list(top_relations_bad.index), common_relations, base_color='tomato')
-
-    # Determine which colors are used for legend
-    legend_colors_good = set(colors_good)
-    legend_colors_bad = set(colors_bad)
-
-    # Create patches for the legend (only for colors used in the plot)
-    legend_patches_good = []
-    if "seagreen" in legend_colors_good:
-        legend_patches_good.append(mpatches.Patch(color="seagreen", label="Correct"))
-    if "plum" in legend_colors_good:
-        legend_patches_good.append(mpatches.Patch(color="plum", label="Common"))
-
-    legend_patches_bad = []
-    if "tomato" in legend_colors_bad:
-        legend_patches_bad.append(mpatches.Patch(color="tomato", label="Incorrect"))
-    if "plum" in legend_colors_bad:
-        legend_patches_bad.append(mpatches.Patch(color="plum", label="Common"))
-
-    # Plot for top 10 relations in top 2 classified entities
-    plt.figure(figsize=(10, 6))
-    plt.barh(top_relations_good.index[::-1], top_relations_good.values[::-1], color=colors_good[::-1], alpha=0.7)
-    plt.xlabel("Frequency", fontsize=10)
-    # plt.ylabel("Relation", fontsize=10)
-    plt.yticks(fontsize=10)
-    if legend_patches_good:
-        plt.legend(handles=legend_patches_good, fontsize=10)
-    plt.tight_layout()
-    plt.savefig(os.path.join(result_folder, "relationships_good.png"))
-    plt.close()
-
-    # Plot for top 10 relations in entities outside top 100
-    plt.figure(figsize=(10, 6))
-    plt.barh(top_relations_bad.index[::-1], top_relations_bad.values[::-1], color=colors_bad[::-1], alpha=0.7)
-    plt.xlabel("Frequency", fontsize=10)
-    # plt.ylabel("Relation", fontsize=10)
-    plt.yticks(fontsize=10)
-    if legend_patches_bad:
-        plt.legend(handles=legend_patches_bad, fontsize=10)
-    plt.tight_layout()
-    plt.savefig(os.path.join(result_folder, "relationships_bad.png"))
-    plt.close()
-
-
-def plot_top_types(entities_good_topn, entities_bad_topn, df_type_train, result_folder):
-
-    # Filter df_type_train for good and bad classified entities
-    df_good_topn = df_type_train[df_type_train['object'].isin(entities_good_topn)]
-    df_bad_topn = df_type_train[df_type_train['object'].isin(entities_bad_topn)]
-
-    # Count the top 10 most frequent types for both groups
-    top_types_good = df_good_topn['type'].value_counts().head(10)
-    top_types_bad = df_bad_topn['type'].value_counts().head(10)
-
-    # Identify common types between the two sets
-    common_types = set(top_types_good.index).intersection(set(top_types_bad.index))
-
-    # Function to assign colors
-    def assign_colors(labels, common_types, base_color):
-        return ["plum" if label in common_types else base_color for label in labels]
-
-    # Assign colors for good and bad clusters
-    colors_good = assign_colors(list(top_types_good.index), common_types, base_color='seagreen')
-    colors_bad = assign_colors(list(top_types_bad.index), common_types, base_color='tomato')
-
-    # Determine which colors are used for legend
-    legend_colors_good = set(colors_good)
-    legend_colors_bad = set(colors_bad)
-
-    # Create patches for the legend
-    legend_patches_good = []
-    if "seagreen" in legend_colors_good:
-        legend_patches_good.append(mpatches.Patch(color="seagreen", label="Correct"))
-    if "plum" in legend_colors_good:
-        legend_patches_good.append(mpatches.Patch(color="plum", label="Common"))
-
-    legend_patches_bad = []
-    if "tomato" in legend_colors_bad:
-        legend_patches_bad.append(mpatches.Patch(color="tomato", label="Incorrect"))
-    if "plum" in legend_colors_bad:
-        legend_patches_bad.append(mpatches.Patch(color="plum", label="Common"))
-
-
-    # Plot for top 10 types in correctly classified entities
-    plt.figure(figsize=(10, 6))
-    plt.barh(top_types_good.index[::-1], top_types_good.values[::-1], color=colors_good[::-1], alpha=0.7)
-    plt.xlabel("Frequency", fontsize=10)
-    # plt.ylabel("Type", fontsize=10)
-    plt.yticks(fontsize=10)
-    if legend_patches_good:
-        plt.legend(handles=legend_patches_good, fontsize=10)
-    plt.tight_layout()
-    plt.savefig(os.path.join(result_folder, "types_good_cl.png"))
-    plt.close()
-
-    # Plot for top 10 types in incorrectly classified entities
-    plt.figure(figsize=(10, 6))
-    plt.barh(top_types_bad.index[::-1], top_types_bad.values[::-1], color=colors_bad[::-1], alpha=0.7)
-    plt.xlabel("Frequency", fontsize=10)
-    # plt.ylabel("Type", fontsize=10)
-    plt.yticks(fontsize=10)
-    if legend_patches_bad:
-        plt.legend(handles=legend_patches_bad, fontsize=10)
-    plt.tight_layout()
-    plt.savefig(os.path.join(result_folder, "types_bad_cl.png"))
-    plt.close()
-
-def frequent_clusters_plot(cluster_labels, clustered_entities, entities_good_topn, entities_bad_topn, top_n=5, result_folder=None):
-
-    # Count occurrences of clusters for correctly and wrongly classified entities
-    good_cluster_counts = {}
-    bad_cluster_counts = {}
-
-    for cluster, entities in clustered_entities.items():
-        label = cluster_labels.get(cluster, "Unknown")
-        cluster_size = len(entities)  # Total number of entities in this cluster
-
-        if cluster_size > 0:
-            # Count how many entities in this cluster belong to good or bad classifications
-            good_entities_in_cluster = set(entities).intersection(entities_good_topn)
-            bad_entities_in_cluster = set(entities).intersection(entities_bad_topn)
-
-            # Normalize by cluster size
-            good_count = len(good_entities_in_cluster) / cluster_size
-            bad_count = len(bad_entities_in_cluster) / cluster_size
-
-            if good_count > 0:
-                good_cluster_counts[label] = good_count
-
-            if bad_count > 0:
-                bad_cluster_counts[label] = bad_count
-
-    # Get the most frequent normalized clusters
-    top_good_clusters = sorted(good_cluster_counts.items(), key=lambda x: x[1], reverse=True)[:top_n]
-    top_bad_clusters = sorted(bad_cluster_counts.items(), key=lambda x: x[1], reverse=True)[:top_n]
-
-    # Extract data for plotting
-    good_labels, good_values = zip(*top_good_clusters) if top_good_clusters else ([], [])
-    bad_labels, bad_values = zip(*top_bad_clusters) if top_bad_clusters else ([], [])
-
-    # Find common clusters
-    common_clusters = set(good_labels) & set(bad_labels)
-
-    # Function to assign colors
-    def assign_colors(labels, common_clusters, base_color):
-        return ["plum" if label in common_clusters else base_color for label in labels]
-
-    # Assign colors for good and bad clusters
-    colors_good = assign_colors(good_labels, common_clusters, base_color='seagreen')
-    colors_bad = assign_colors(bad_labels, common_clusters, base_color='tomato')
-
-    # Determine which colors are used for legend
-    legend_colors_good = set(colors_good)
-    legend_colors_bad = set(colors_bad)
-
-    # Create patches for the legend (only for colors used in the plot)
-    legend_patches_good = []
-    if "seagreen" in legend_colors_good:
-        legend_patches_good.append(mpatches.Patch(color="seagreen", label="Correct Classification"))
-    if "plum" in legend_colors_good:
-        legend_patches_good.append(mpatches.Patch(color="plum", label="Common Cluster"))
-
-    legend_patches_bad = []
-    if "tomato" in legend_colors_bad:
-        legend_patches_bad.append(mpatches.Patch(color="tomato", label="Incorrect Classification"))
-    if "plum" in legend_colors_bad:
-        legend_patches_bad.append(mpatches.Patch(color="plum", label="Common Cluster"))
-
-    # Plot correctly classified entities' clusters (normalized)
-    plt.figure(figsize=(10, 6))
-    plt.barh(good_labels[::-1], good_values[::-1], color=colors_good[::-1], alpha=0.7)
-    plt.xlabel("Normalized Frequency", fontsize=10)
-    plt.ylabel("Cluster Label", fontsize=10)
-    if legend_patches_good:
-        plt.legend(handles=legend_patches_good, fontsize=10)
-    plt.yticks(fontsize=9)
-    plt.tight_layout()
-    plt.savefig(os.path.join(result_folder, "top_clusters_good_normalized.png"))
-    plt.close()
-
-    # Plot wrongly classified entities' clusters (normalized)
-    plt.figure(figsize=(10, 6))
-    plt.barh(bad_labels[::-1], bad_values[::-1], color=colors_bad[::-1], alpha=0.7)
-    plt.xlabel("Normalized Frequency", fontsize=10)
-    plt.ylabel("Cluster Label", fontsize=10)
-    plt.yticks(fontsize=9)
-    if legend_patches_bad:
-        plt.legend(handles=legend_patches_bad, fontsize=10)
-    plt.tight_layout()
-    plt.savefig(os.path.join(result_folder, "top_clusters_bad_normalized.png"))
-    plt.close()
-
 
 
 def box_plot_metrics(metrics_df, columns, fig_name, figure_folder):
-
-    latex_labels = {
-    'avg_ttr': r'$TTT_{\mu}$',
-    'triple_train_coherence_mean': r'$RTcC_{\mu}$',
-    'triple_train_coherence_std': r'$RTcC_{\sigma}$',
-    'triple_self_coherence_mean': r'$RC_{\mu}$',
-    'triple_self_coherence_std': r'$RC_{\sigma}$',
-    'type_self_coherence_mean': r'$TC_{\mu}$',
-    'type_self_coherence_std': r'$TC_{\sigma}$',
-    'direct_neighbors': r'$dir_n$',
-    'type_triple_ratio': r'$(T\!-\!R)_{ratio}$',
-    'avg_triple_length': r'$R_{alen}$',
-    'avg_type_length': r'$T_{alen}$'
-    }
 
     figure = os.path.join(figure_folder, f"boxplot_{fig_name}.png")
 
@@ -310,9 +89,6 @@ def box_plot_metrics(metrics_df, columns, fig_name, figure_folder):
     df_melted = metrics_df.melt(id_vars='y', 
                         value_vars= columns,
                         var_name='Metric', value_name='Value')
-
-    # Map the column names to LaTeX-style metric names
-    df_melted['Metric'] = df_melted['Metric'].map(latex_labels)
 
     # Define custom colors for the classes
     custom_palette = {0: "firebrick", 1: "limegreen"}
@@ -328,4 +104,46 @@ def box_plot_metrics(metrics_df, columns, fig_name, figure_folder):
     plt.legend(title="Class (y)", loc='upper right')
     plt.tight_layout()
     plt.savefig(figure)
+    plt.close()
+
+
+def rank_by_metric_barplot(entity_metrics, figure_folder):
+
+    entity_metrics = entity_metrics.copy()
+
+    # Bin variables to be tuned for plotting
+    entity_metrics.loc[:,'et_degree_bin'] = pd.qcut(entity_metrics['et_degree'], q=10, duplicates='drop')
+    entity_metrics.loc[:,'kg_degree_bin'] = pd.qcut(entity_metrics['kg_degree'], q=10, duplicates='drop')
+    entity_metrics.loc[:,'avg_txt_length_bin'] = pd.qcut(entity_metrics['avg_txt_length'], q=10, duplicates='drop')
+
+    # Average rank by quantile bin
+    binned_types = entity_metrics.groupby('et_degree_bin', observed=True)['rank_value'].mean()
+    binned_kg = entity_metrics.groupby('kg_degree_bin', observed=True)['rank_value'].mean()
+    binned_length = entity_metrics.groupby('avg_txt_length_bin', observed=True)['rank_value'].mean()
+
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    # First plot
+    axes[0].bar(range(len(binned_types)), binned_types.values, color='salmon')
+    axes[0].set_xticks(range(len(binned_types)))
+    axes[0].set_xticklabels(binned_types.index.astype(str), rotation=45, ha='right')
+    axes[0].set_title('Average rank_value by num_types')
+    axes[0].set_xlabel('et_degree_bin')
+    axes[0].set_ylabel('Average rank_value')
+    axes[0].tick_params(axis='x', rotation=45)
+    # Second plot
+    axes[1].bar(range(len(binned_kg)), binned_kg.values, color='skyblue')
+    axes[1].set_xticks(range(len(binned_kg)))
+    axes[1].set_xticklabels(binned_kg.index.astype(str), rotation=45, ha='right')
+    axes[1].set_title('Average rank_value by kg_degree')
+    axes[1].set_xlabel('kg_degree_bin')
+    # Third plot
+    axes[2].bar(range(len(binned_length)), binned_length.values, color='mediumseagreen')
+    axes[2].set_xticks(range(len(binned_length)))
+    axes[2].set_xticklabels(binned_length.index.astype(str), rotation=45, ha='right')
+    axes[2].set_title('Average rank_value by avg_txt_length')
+    axes[2].set_xlabel('avg_txt_length')
+
+    # Save figure
+    plt.tight_layout()
+    plt.savefig(os.path.join(figure_folder, "metrics_rank_distributions.png"))
     plt.close()

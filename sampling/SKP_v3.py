@@ -42,7 +42,7 @@ with open(os.path.join(data_path, 'entity_wiki.json'), "r") as f:
     entity_labels = json.load(f)
 
 # Recompute coherence metrics for entities
-if not os.path.exists(os.path.join(result_folder, "entity_metrics_sample_new.csv")):
+if not os.path.exists(os.path.join(result_folder, "entity_metrics_sample.csv")):
     recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2desc, t2id, result_folder)
 
 # Load entity coherence metrics

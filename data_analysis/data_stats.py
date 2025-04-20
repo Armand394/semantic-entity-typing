@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import json
 
-
 def run_stats_analysis(data_folder, dataset, folder_result):
 
     df_entities, df_relations, df_types, df_triples, df_train, df_test, df_validate = load_data(data_folder)
@@ -20,7 +19,22 @@ def run_stats_analysis(data_folder, dataset, folder_result):
     ntest = df_test.count()[0]
     nvalidate = df_validate.count()[0]
 
-    print(f"count descriptive staistics Entities={nentities}, Relations={nrelations}, Types={ntypes}, Triples={ntriples}, Train={ntrain}, Valid={nvalidate}, Test={ntest}")
+    # Create a dictionary of metrics
+    stats = {
+        "Entities": nentities,
+        "Relations": nrelations,
+        "Types": ntypes,
+        "Triples": ntriples,
+        "Train": ntrain,
+        "Valid": nvalidate,
+        "Test": ntest
+    }
+
+    # Convert to DataFrame with 'Metric' and 'Value' columns
+    stats_df = pd.DataFrame(list(stats.items()), columns=["Metric", "Value"])
+
+    # Save as TSV
+    stats_df.to_csv(os.path.join(folder_result, f"{dataset}_general_stat.tsv"), sep='\t', index=False)
 
     # Rename columns for clarity
     df_triples = df_triples.rename(columns={df_triples.columns[0]: 'object', 
@@ -110,16 +124,15 @@ def run_stats_analysis(data_folder, dataset, folder_result):
     descriptive_statistics = pd.concat([descriptive_statistics, hop1_t_sats], axis=0)
 
     # Save results
-    file_result = os.path.join(folder_result, dataset + ".csv")
+    file_result = os.path.join(folder_result, f"{dataset}_neighbor_stat.csv")
     descriptive_statistics.to_csv(file_result, index=True, header=True)  
 
-    print(descriptive_statistics)
 
 
 def plot_sample_graph(data_folder, result_folder, fig_name, FB=True):
     
     # Figure plot location
-    figure_result = os.path.join(result_folder, fig_name + ".png")
+    figure_result = os.path.join(result_folder, "figures", fig_name + ".png")
 
     # Load data
     df_entities, df_relations, df_types, df_triples, df_train, df_test, df_validate = load_data(data_folder)
@@ -163,7 +176,6 @@ def select_sample_entity(df_triples, df_train, df_test):
     # Select entity 
     if not filtered_entities.empty:
         selected_entity = filtered_entities.index[1] 
-        print(f"Selected Entity: {selected_entity}")
         return str(selected_entity)
     else:
         return None
@@ -255,70 +267,6 @@ def plot_entity_graph(entity_example, filtered_triples, filtered_train, filtered
     # Show the graph
     plt.title(f"Graph for Entity: {entity_example}")
     plt.savefig(figure_result)
-
-def hop_2_rel_neighbors(df_triples, data_folder):
-
-    if not os.path.exists(os.path.join(data_folder,"two_hop_neighbors.json")):
-        # Retrieve columns
-        e_col, r_col, s_col = df_triples.columns
-
-        # Step 1: Construct adjacency lists for incoming & outgoing relations (store relations as well)
-        outgoing_map = defaultdict(set)
-        incoming_map = defaultdict(set)
-
-        # Fill adjacency maps with (neighbor, relation) tuples
-        for obj, rel, subj in zip(df_triples[e_col], df_triples[r_col], df_triples[s_col]):
-            outgoing_map[obj].add((subj, rel))  # object -> subject (relation)
-            incoming_map[subj].add((obj, rel))  # subject <- object (relation)
-
-        # Step 2: Compute 2-hop neighbors with labeled relations
-        two_hop_neighbors = defaultdict(list)
-
-        # Step 2: Compute and write 2-hop neighbors line by line
-        json_file_path = os.path.join(data_folder, "two_hop_neighbors.json")
-
-        with open(json_file_path, "w") as f:
-            f.write("{\n")  # Start JSON object
-            first_entry = True  # To control comma placement
-
-            for entity in set(outgoing_map.keys()).union(set(incoming_map.keys())):
-                neighbors = set()
-
-                # CASE 1: (object_x --> mid --> object_z) -> Label format: "r z"
-                for mid, r1 in outgoing_map[entity]:  
-                    for obj_z, r2 in outgoing_map.get(mid, set()):  
-                        neighbors.add((obj_z, f"{r2} {obj_z}"))
-
-                # CASE 2: (object_x <-- mid <-- object_z) -> Label format: "z r"
-                for mid, r1 in incoming_map[entity]:  
-                    for obj_z, r2 in incoming_map.get(mid, set()):  
-                        neighbors.add((obj_z, f"{obj_z} {r2}"))
-
-                # CASE 3: (object_x --> mid <-- object_z) -> Label format: "z r"
-                for mid, r1 in outgoing_map[entity]:  
-                    for obj_z, r2 in incoming_map.get(mid, set()):  
-                        neighbors.add((obj_z, f"{obj_z} {r2}"))
-
-                # CASE 4: (object_x <-- mid --> object_z) -> Label format: "r z"
-                for mid, r1 in incoming_map[entity]:
-                    for obj_z, r2 in outgoing_map.get(mid, set()):  
-                        neighbors.add((obj_z, f"{r2} {obj_z}"))
-
-                # Write entity's neighbors to file line by line
-                if neighbors:
-                    if not first_entry:
-                        f.write(",\n")  # Add comma except for the first entry
-                    first_entry = False
-
-                    json.dump({entity: list(neighbors)}, f)
-
-            f.write("\n}")  # End JSON object
-
-    # open
-    with open(os.path.join(data_folder, 'two_hop_neighbors.json'), "r") as f:
-        two_hop_neighbors = json.load(f)
-
-    return two_hop_neighbors
 
 def load_data(data_folder):
     # Specify files 1

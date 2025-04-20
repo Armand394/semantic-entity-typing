@@ -14,7 +14,6 @@ data_folder = os.path.join(project_path, "data")
 data_dir = os.path.join(project_path, "data", dataset)
 data_sample_dir = os.path.join(project_path, "data", f"{dataset}_sample")
 
-
 print("Generate sample graph with 2-hop neighbors")
 data_sample_dir_2hop = os.path.join(project_path, "data", f"{dataset}_sample_2hop_sentences")
 os.makedirs(data_sample_dir_2hop, exist_ok=True)

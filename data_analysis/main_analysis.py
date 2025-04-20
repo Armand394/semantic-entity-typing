@@ -1,169 +1,121 @@
-from tools_kg import *
-from data_stats import *
-from cleaning import *
-from visualisations import *
-from pathlib import Path
+import pandas as pd
 import os
 import json
-import pandas as pd
-import statsmodels.api as sm
-from wordfreq import top_n_list
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import MinMaxScaler
+from pathlib import Path
+import json
+from utils import *
+from analysis_tools import *
+from visualisations import *
+from data_stats import *
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 # Specify locations for loading and saving data
-project_folder = Path(__file__).parent.parent
-data_folder = os.path.join(project_folder, "data")
-result_folder = os.path.join(project_folder, "results", "Rank Performance")
-figures_folder = os.path.join(project_folder, "results", "Rank Performance", "Figures")
-descriptive_stats_folder = os.path.join(project_folder, "results", "Descriptive statistics")
+project_folder = os.getcwd()
+data_path = os.path.join(project_folder, "data", "FB15kET")
+data_path_YG = os.path.join(project_folder, "data", "YAGO43kET")
+result_folder = os.path.join(project_folder, "results")
+figure_folder = os.path.join(project_folder, "results", "figures")
 
-# Create directories if they do not exist
-os.makedirs(result_folder, exist_ok=True)
-os.makedirs(figures_folder, exist_ok=True)
-os.makedirs(descriptive_stats_folder, exist_ok=True)
+# Load Ids and descriptions
+e2id = read_id(os.path.join(data_path, 'entities.tsv'))
+r2id = read_id(os.path.join(data_path, 'relations.tsv'))
+t2id = read_id(os.path.join(data_path, 'types.tsv'))
+c2id = read_id(os.path.join(data_path, 'clusters.tsv'))
 
-# Specify data folder
-data_folder_FB = os.path.join(data_folder, "FB15kET")
-data_folder_YG = os.path.join(data_folder, "YAGO43kET")
+e2desc, e2text = read_entity_wiki(os.path.join(data_path, 'entity_wiki.json'), e2id, 'hybrid')
+r2text = read_rel_context(os.path.join(data_path, 'relation2text.txt'), r2id)
+t2desc = read_type_context(os.path.join(data_path, 'hier_type_desc.txt'), t2id)
 
-# wiki FB
-entity_labels_FB = os.path.join(data_folder_FB, 'entity_wiki.json')
+# Load KG data
+df_triples = pd.read_csv(os.path.join(data_path, "KG_train.txt"), sep='\t', header=None)
+df_train = pd.read_csv(os.path.join(data_path, "ET_train.txt"), sep='\t', header=None)
+rank_df = pd.read_csv(os.path.join(data_path, "rank_FB15kET_original.txt"), header=None, sep='\t')
 
-# If Descriptive Statistics Datasets not computed
-if os.path.exists(descriptive_stats_folder) and not os.listdir(descriptive_stats_folder):
-    run_stats_analysis(data_folder_FB, "FB15kET", result_folder)
-    run_stats_analysis(data_folder_YG, "YAGO43kET", result_folder)
-    plot_sample_graph(data_folder_FB, result_folder, "Sample graph FB")
-    plot_sample_graph(data_folder_YG, result_folder, "Sample graph YG", FB=False)
-
-
-with open(entity_labels_FB, "r") as f:
+with open(os.path.join(data_path, 'entity_wiki.json'), "r") as f:
     entity_labels = json.load(f)
 
-# Load all data
-df_entities, df_relations, df_types, df_triples, df_train, df_test, df_validate = load_data(data_folder_FB)
-df_type_text = pd.read_csv(os.path.join(data_folder_FB, 'hier_type_desc.txt'), sep='\t', header=None)
-df_rank = pd.read_csv(os.path.join(data_folder_FB, "rank_FB15kET_original.txt"), sep='\t', header=None)
+# General descripive statistics of Knowledge Graph
+if not os.path.exists(os.path.join(result_folder, "FB15kET_neighbor_stat.csv")):
+    run_stats_analysis(data_path, "FB15kET", result_folder)
+    run_stats_analysis(data_path_YG, "YAGO43kET", result_folder)
 
-# preprocess rank dataframe for easy manipulation
-df_rank = process_rank_df(df_rank, entity_labels)
+plot_sample_graph(data_path, result_folder, "sample_FB")
+plot_sample_graph(data_path_YG, result_folder, "sample_YG", FB=False)
 
-# Plot percentage of types with rank above thresholds
-plot_percentages_ranks(df_rank, figures_folder)
+# Recompute metrics for entities (--> efficient if GPU available)
+if not os.path.exists(os.path.join(result_folder, "entity_metrics.csv")):
+    recompute_similarity(df_triples, df_train, r2text, r2id, e2desc, e2id, t2desc, t2id, result_folder)
 
-# Preprocess triples and train types
-df_triples, df_train = preprocess_dataframes(df_triples, df_train, entity_labels)
+# Merge on entity
+entity_metrics = pd.read_csv(os.path.join(result_folder, "entity_metrics.csv"))
 
-# Retreive entities with good and bad predictions
-correct_entities, wrong_entities = classification_entities(df_rank, top_hit=1, undersampling=False)
+# Process rank dataframe for average rank prediction of entity
+rank_avg_df = avg_rank_entity(rank_df)
 
-# Plot top relations for good and bad
-plot_top_relationships(correct_entities, wrong_entities, df_triples, result_folder=figures_folder)
-plot_top_types(correct_entities, wrong_entities, df_train, result_folder=figures_folder)
+# Merge average rank of entities on metrics data
+entity_metrics = pd.merge(entity_metrics, rank_avg_df, on='entity', how='left')
+entity_metrics_preds = entity_metrics.copy()
+entity_metrics_preds = entity_metrics_preds.dropna()
 
-# Text of relations
-relation_mapping = pd.read_csv(os.path.join(data_folder_FB, 'relation2text.txt'), sep="\t", header=None, names=["relation_id", "relation_text"])
-relation_dict = dict(zip(relation_mapping["relation_id"], relation_mapping["relation_text"]))
-df_triples['relation'] = df_triples['relation'].map(relation_dict).fillna(df_triples['relation'])
+# ====== Percentage of types with rank above thresholds ======
+plot_percentages_ranks(rank_df, figure_folder)
 
-# Create text for outgoing and incoming arcs of each entity
-df_triples_text = convert_entity_text(df_triples)
+# ===== Pair plot degree - similarity =====
+plt.figure(figsize=(16,12))
+sns.pairplot(entity_metrics_preds[['kg_sim_mu', 'et_sim_mu', 'kg_degree', 'et_degree', 'avg_txt_length']])
+plt.savefig(os.path.join(figure_folder, "pairplot_degree_similarity.png"))
+plt.close()
 
-# Text of types
-df_train_type_txt = convert_type_df_to_text(df_type_text, df_train)
+# ====== Pair plot rank - metrics ======
+plot_rank_value_pairplots(entity_metrics_preds, figure_folder, "pairplot_rank_metrics")
 
-# Final dataframe for KG train text data
-df_KG_train_text = pd.concat([df_triples_text, df_train_type_txt])
+# ===== Average rank quantiles bins - 3 important metrics =====
+rank_by_metric_barplot(entity_metrics_preds, figure_folder)
 
-# Retreive entities with good and bad predictions
-correct_entities, wrong_entities = classification_entities(df_rank, top_hit=1, undersampling=True)
+# ===== Transform and update columns and dataframes ======
 
-# Define file paths
-correct_file_path = os.path.join(result_folder, "data_metrics_good_cl.csv")
-bad_file_path = os.path.join(result_folder, "data_metrics_bad_cl.csv")
+# Create 'correct' prediction feature for entity
+entity_metrics_preds.loc[:, 'y'] = (entity_metrics_preds["rank_value"] == 1).astype(int)
+entity_metrics_low = entity_metrics_preds[entity_metrics_preds['degree'] < 15].copy(deep=True)
+entity_metrics_high = entity_metrics_preds[entity_metrics_preds['degree'] > 135].copy(deep=True)
 
-# Check if the file for correctly classified entities exists
-if os.path.exists(correct_file_path):
-    print('correct classif - loading existing metrics')
-    df_stats_correct = pd.read_csv(correct_file_path)
-else:
-    print('correct classif - start compute metrics')
-    df_stats_correct = compute_metrics_statistics(correct_entities, df_KG_train_text,
-                                                  df_triples_text, df_train_type_txt)
-    df_stats_correct.to_csv(correct_file_path, index=False)
+# Make copy of dataframe for scaling, fittings and plotting
+metric_cols = list(entity_metrics_preds.columns[1:-2])
+metric_cols.remove('degree')
 
-# Check if the file for wrongfully classified entities exists
-if os.path.exists(bad_file_path):
-    print('bad classif - loading existing metrics')
-    df_stats_bad = pd.read_csv(bad_file_path)
-else:
-    print('bad classif - start compute metrics')
-    df_stats_bad = compute_metrics_statistics(wrong_entities, df_KG_train_text,
-                                              df_triples_text, df_train_type_txt)
-    df_stats_bad.to_csv(bad_file_path, index=False)
+# Analyze skewness of metrics before transforming
+analyze_skewness(entity_metrics_preds, metric_cols, result_folder, "test_skewness_metrics", alpha=0.05)
 
+# Apply log transform
+entity_metrics_preds[metric_cols] = np.log1p(entity_metrics_preds[metric_cols])
+entity_metrics_low[metric_cols]   = np.log1p(entity_metrics_low[metric_cols])
+entity_metrics_high[metric_cols]  = np.log1p(entity_metrics_high[metric_cols])
 
-# Rename columns
-df_stats_correct = rename_columns(df_stats_correct)
-df_stats_bad = rename_columns(df_stats_bad)
+# ====== Create boxplot for metrics - disitribution difference correct and wrong ======
 
-# Add the classification column
-df_stats_correct["y"] = 1
-df_stats_bad["y"] = 0 
+# low degree
+box_plot_metrics(entity_metrics_low, metric_cols, 'pred_metrics_low', figure_folder)
 
-# Dataframe with final features
-df_final = pd.concat([df_stats_correct, df_stats_bad], ignore_index=True)
-df_final = df_final.drop(columns=["entity"])
+# high degree
+box_plot_metrics(entity_metrics_high, metric_cols, 'pred_metrics_high', figure_folder)
 
-coherence_columns = ["triple_train_coherence_mean", "triple_train_coherence_std",
-                                         'triple_self_coherence_mean', 'triple_self_coherence_std',
-                                            'type_self_coherence_mean', 'type_self_coherence_std']
-
-box_plot_metrics(df_final, coherence_columns, fig_name="coherence_metrics", figure_folder=figures_folder)
-
-# Columns you want to scale
-cols_to_scale = ['direct_neighbors', 'type_triple_ratio', 'avg_triple_length',
-                 'avg_type_length', 'avg_ttr']
-
-# Initialize the scaler
-scaler = MinMaxScaler()
-
-# Fit and transform the selected columns
-df_final[cols_to_scale] = scaler.fit_transform(df_final[cols_to_scale])
-
-box_plot_metrics(df_final, cols_to_scale, fig_name="text_metrics", figure_folder=figures_folder)
-
-# Compute descriptive statistics features
-descriptive_stats_features(df_final, result_folder)
-
-# Select all columns except the first one
-X = df_final.iloc[:,:-1]
-y = df_final["y"]
-
-# Add a constant term for the intercept
-X = sm.add_constant(X)
-
-# Logistic Regression
-model = sm.Logit(y, X).fit()
-
-# Make predictions (probabilities)
-y_pred_prob = model.predict(X)
-
-# Convert probabilities to class labels (threshold = 0.5)
-y_pred = (y_pred_prob >= 0.5).astype(int)
-
-# Compute accuracy
-accuracy = accuracy_score(y, y_pred)
-print(accuracy)
-
-# Print and save model summary
-print(model.summary())
-output_file = os.path.join(result_folder,"logistic_regression_summary.txt")
-with open(output_file, "w") as f:
-    f.write(model.summary().as_text())
+# all entities
+box_plot_metrics(entity_metrics_preds, metric_cols, 'pred_metrics', figure_folder)
 
 
-# Do the test of differences in distribution between correct and wrong for variables
-output_tests = os.path.join(result_folder, "stat_test_distribution.csv")
-df_test_results = apply_statistical_tests_and_save(df_final, output_tests)
+# ====== Logistic Regression fit ======
+metric_cols.append('y')
+
+entity_metrics_preds = entity_metrics_preds[metric_cols]
+entity_metrics_low = entity_metrics_low[metric_cols]
+entity_metrics_high = entity_metrics_high[metric_cols]
+
+logistic_regression_fit(entity_metrics_preds, "all", result_folder)
+logistic_regression_fit(entity_metrics_low, "low", result_folder)
+logistic_regression_fit(entity_metrics_high, "high", result_folder)
+
+
+# ====== Statistical-test distribution ======
+stat_test_metric_distribution(entity_metrics_preds, result_folder, "all")
+stat_test_metric_distribution(entity_metrics_low, result_folder, "low")
+stat_test_metric_distribution(entity_metrics_high, result_folder, "high")
