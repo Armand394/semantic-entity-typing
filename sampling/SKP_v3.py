@@ -9,6 +9,10 @@ import math
 from tqdm import tqdm
 from sampling_utils import *
 
+"""
+COMPLETE SEMANTIC 2-HOP CHANGES OF SEMANTIC KNOWLEDGE PROCESS - SKP V3
+"""
+
 # Load SBERT model
 model = SentenceTransformer("all-MiniLM-L6-v2")
 

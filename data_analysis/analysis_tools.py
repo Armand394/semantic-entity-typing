@@ -184,6 +184,33 @@ def analyze_skewness(df, columns, result_folder, table_name, alpha=0.05):
     result_df.to_csv(output_path, index=False)
 
 
+def export_metric_summary_table(df_all, df_low, df_high, columns, output_folder, file_name, use_median=False):
+    """
+    Computes average (or median) of selected metrics for y=0 and y=1
+    across all, low-degree, and high-degree entities.
+    Saves the result as a CSV table.
+    """
+    os.makedirs(output_folder, exist_ok=True)
+    method = "median" if use_median else "mean"
+
+    summary_data = {}
+
+    for col in columns:
+        summary_data[col] = {
+            f"All (y=0)": df_all[df_all.y == 0][col].median() if use_median else df_all[df_all.y == 0][col].mean(),
+            f"All (y=1)": df_all[df_all.y == 1][col].median() if use_median else df_all[df_all.y == 1][col].mean(),
+            f"Low (y=0)": df_low[df_low.y == 0][col].median() if use_median else df_low[df_low.y == 0][col].mean(),
+            f"Low (y=1)": df_low[df_low.y == 1][col].median() if use_median else df_low[df_low.y == 1][col].mean(),
+            f"High (y=0)": df_high[df_high.y == 0][col].median() if use_median else df_high[df_high.y == 0][col].mean(),
+            f"High (y=1)": df_high[df_high.y == 1][col].median() if use_median else df_high[df_high.y == 1][col].mean(),
+        }
+
+    result_df = pd.DataFrame.from_dict(summary_data, orient='index')
+    result_df.index.name = "Metric"
+    
+    output_path = os.path.join(output_folder, f"{file_name}.csv")
+    result_df.to_csv(output_path)
+
 
 def logistic_regression_fit(entity_metrics_preds, fit_name, result_folder):
     # Select all columns except the first one

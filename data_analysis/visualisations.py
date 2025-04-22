@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 # Apply global settings
 plt.rcParams.update({
@@ -18,6 +19,16 @@ plt.rcParams.update({
     'axes.linewidth': 1.2,        # Make spines slightly thicker
     'axes.labelsize': 11
 })
+
+metric_latex_map = {
+    "kg_sim_mu": r"$\mathrm{R}_{\mu}^{\cos}$",    # Relationship sentence coherence
+    "et_sim_mu": r"$\mathrm{T}_{\mu}^{\cos}$",    # Type sentence coherence
+    "degree":     r"$d$",                         # Total entity degree
+    "avg_txt_length": r"$L_{\mathrm{e}}$",        # Avg. length of entity descriptions
+    "kg_degree":  r"$d_{\mathrm{r}}$",            # Relationship graph degree
+    "et_degree":  r"$d_{\mathrm{t}}$",            # Type graph degree
+    "type_kg_ratio": r"$\rho_{t:r}$"              # Type-to-relationship ratio
+}
 
 def plot_percentages_ranks(df_rank, result_folder):
     # Compute percentage of types with rank above thresholds
@@ -48,30 +59,81 @@ def plot_percentages_ranks(df_rank, result_folder):
     plt.close()
 
 
+def plot_similarity_metrics_pairplots(df, figure_folder, figure_name):
+    # Define columns to plot against 'rank_value'
+    x_cols = ['avg_txt_length', 'kg_degree', 'et_degree']
+    y_col = ['kg_sim_mu', 'et_sim_mu']
+
+    x_cols = ['avg_txt_length', 'kg_degree', 'et_degree']
+    y_cols = ['kg_sim_mu', 'et_sim_mu']
+
+    # Set up a grid of plots (rows = y metrics, cols = x metrics)
+    nrows, ncols = len(y_cols), len(x_cols)
+    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(5 * ncols, 4 * nrows), constrained_layout=True)
+
+    # Ensure axes is always a 2D array
+    if nrows == 1:
+        axes = [axes]
+    if ncols == 1:
+        axes = [[ax] for ax in axes]
+
+    for i, y in enumerate(y_cols):
+        for j, x in enumerate(x_cols):
+            ax = axes[i][j]
+
+            # Apply log transform for degree-based x axes
+            if x in ['kg_degree', 'et_degree']:
+                sns.scatterplot(x=np.log1p(df[x]), y=df[y], ax=ax)
+                if i == 1:
+                    ax.set_xlabel(f"log({metric_latex_map[x]})", fontsize=14)
+                else:
+                    ax.set_xlabel(" ")
+            else:
+                sns.scatterplot(x=df[x], y=df[y], ax=ax)
+                if i == 1:
+                    ax.set_xlabel(metric_latex_map[x], fontsize=14)
+                else:
+                    ax.set_xlabel(" ")
+
+            # Set y-axis label only on first column
+            if j == 0:
+                ax.set_ylabel(metric_latex_map[y], fontsize=14)
+            else:
+                ax.set_ylabel("")
+
+            # No title
+            ax.set_title("")
+
+    # Save the plot
+    os.makedirs(figure_folder, exist_ok=True)
+    plot_path = os.path.join(figure_folder, f"{figure_name}.png")
+    plt.savefig(plot_path, dpi=300)
+    plt.close()
+
 def plot_rank_value_pairplots(df, figure_folder, figure_name):
     # Define columns to plot against 'rank_value'
-    x_cols = ['kg_sim_mu', 'et_sim_mu', 'avg_txt_length', 'kg_degree', 'et_degree']
+    x_cols = ['kg_sim_mu', 'et_sim_mu']
     y_col = 'rank_value'
 
     # Set up the plot
     num_cols = len(x_cols)
     fig, axes = plt.subplots(nrows=1, ncols=num_cols, figsize=(5 * num_cols, 5), constrained_layout=True)
     
-    axes[0].set_ylabel(y_col)
+    axes[0].set_ylabel('Rank')
 
     # Plot each subplot
     for i, col in enumerate(x_cols):
         ax = axes[i]
         if col in ['kg_degree', 'et_degree']:
             sns.scatterplot(x=np.log1p(df[col]), y=df[y_col], ax=ax)
-            ax.set_xlabel(f"log({col})")
+            ax.set_xlabel(f"log({metric_latex_map[col]})", fontsize=14)
         else:
             sns.scatterplot(x=df[col], y=df[y_col], ax=ax)
-            ax.set_xlabel(col)
+            ax.set_xlabel(metric_latex_map[col], fontsize=14)
 
         # Only label y-axis on the first plot
         if i == 0:
-            ax.set_ylabel(y_col)
+            ax.set_ylabel('Rank prediction', fontsize=14)
         else:
             ax.set_ylabel('')
 
@@ -85,10 +147,21 @@ def box_plot_metrics(metrics_df, columns, fig_name, figure_folder):
 
     figure = os.path.join(figure_folder, f"boxplot_{fig_name}.png")
 
-    # Melt the DataFrame to long format for plotting
-    df_melted = metrics_df.melt(id_vars='y', 
-                        value_vars= columns,
-                        var_name='Metric', value_name='Value')
+    # Apply Min-Max scaling to the selected columns
+    scaler = MinMaxScaler()
+    metrics_df_scaled = metrics_df.copy()
+    metrics_df_scaled[columns] = scaler.fit_transform(metrics_df_scaled[columns])
+
+    # Melt the DataFrame to long format for seaborn
+    df_melted = metrics_df_scaled.melt(
+        id_vars='y',
+        value_vars=columns,
+        var_name='Metric',
+        value_name='Value'
+    )
+
+    # Replace metric names with LaTeX labels
+    df_melted['Metric'] = df_melted['Metric'].map(metric_latex_map).fillna(df_melted['Metric'])
 
     # Define custom colors for the classes
     custom_palette = {0: "firebrick", 1: "limegreen"}
@@ -123,25 +196,24 @@ def rank_by_metric_barplot(entity_metrics, figure_folder):
 
     fig, axes = plt.subplots(1, 3, figsize=(18, 6))
     # First plot
-    axes[0].bar(range(len(binned_types)), binned_types.values, color='salmon')
-    axes[0].set_xticks(range(len(binned_types)))
-    axes[0].set_xticklabels(binned_types.index.astype(str), rotation=45, ha='right')
-    axes[0].set_title('Average rank_value by num_types')
-    axes[0].set_xlabel('et_degree_bin')
-    axes[0].set_ylabel('Average rank_value')
-    axes[0].tick_params(axis='x', rotation=45)
+    axes[1].bar(range(len(binned_types)), binned_types.values, color='salmon')
+    axes[1].set_xticks(range(len(binned_types)))
+    axes[1].set_xticklabels(binned_types.index.astype(str), rotation=45, ha='right')
+    axes[1].set_xlabel(metric_latex_map['et_degree'], fontsize=14)
+    axes[1].tick_params(axis='x', rotation=45)
+
     # Second plot
-    axes[1].bar(range(len(binned_kg)), binned_kg.values, color='skyblue')
-    axes[1].set_xticks(range(len(binned_kg)))
-    axes[1].set_xticklabels(binned_kg.index.astype(str), rotation=45, ha='right')
-    axes[1].set_title('Average rank_value by kg_degree')
-    axes[1].set_xlabel('kg_degree_bin')
+    axes[0].bar(range(len(binned_kg)), binned_kg.values, color='skyblue')
+    axes[0].set_xticks(range(len(binned_kg)))
+    axes[0].set_xticklabels(binned_kg.index.astype(str), rotation=45, ha='right')
+    axes[0].set_ylabel('Average Rank', fontsize=14)
+    axes[0].set_xlabel(metric_latex_map['kg_degree'], fontsize=14)
+
     # Third plot
     axes[2].bar(range(len(binned_length)), binned_length.values, color='mediumseagreen')
     axes[2].set_xticks(range(len(binned_length)))
     axes[2].set_xticklabels(binned_length.index.astype(str), rotation=45, ha='right')
-    axes[2].set_title('Average rank_value by avg_txt_length')
-    axes[2].set_xlabel('avg_txt_length')
+    axes[2].set_xlabel(metric_latex_map['avg_txt_length'], fontsize=14)
 
     # Save figure
     plt.tight_layout()

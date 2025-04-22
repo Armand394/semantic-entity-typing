@@ -7,7 +7,6 @@ from utils import *
 from analysis_tools import *
 from visualisations import *
 from data_stats import *
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 # Specify locations for loading and saving data
 project_folder = os.getcwd()
@@ -58,13 +57,11 @@ entity_metrics_preds = entity_metrics.copy()
 entity_metrics_preds = entity_metrics_preds.dropna()
 
 # ====== Percentage of types with rank above thresholds ======
+rank_df.columns = ['entity', 'type', 'rank']
 plot_percentages_ranks(rank_df, figure_folder)
 
 # ===== Pair plot degree - similarity =====
-plt.figure(figsize=(16,12))
-sns.pairplot(entity_metrics_preds[['kg_sim_mu', 'et_sim_mu', 'kg_degree', 'et_degree', 'avg_txt_length']])
-plt.savefig(os.path.join(figure_folder, "pairplot_degree_similarity.png"))
-plt.close()
+plot_similarity_metrics_pairplots(entity_metrics_preds, figure_folder, "pairplot_degree_similarity")
 
 # ====== Pair plot rank - metrics ======
 plot_rank_value_pairplots(entity_metrics_preds, figure_folder, "pairplot_rank_metrics")
@@ -93,15 +90,21 @@ entity_metrics_high[metric_cols]  = np.log1p(entity_metrics_high[metric_cols])
 
 # ====== Create boxplot for metrics - disitribution difference correct and wrong ======
 
-# low degree
+# Boxplots
 box_plot_metrics(entity_metrics_low, metric_cols, 'pred_metrics_low', figure_folder)
-
-# high degree
 box_plot_metrics(entity_metrics_high, metric_cols, 'pred_metrics_high', figure_folder)
-
-# all entities
 box_plot_metrics(entity_metrics_preds, metric_cols, 'pred_metrics', figure_folder)
 
+# summary table
+export_metric_summary_table(
+    df_all=entity_metrics_preds,
+    df_low=entity_metrics_low,
+    df_high=entity_metrics_high,
+    columns=metric_cols,
+    output_folder=result_folder,
+    file_name="metric_summary_by_class_and_degree",
+    use_median=False  # Set to True to use medians instead of means
+)
 
 # ====== Logistic Regression fit ======
 metric_cols.append('y')
