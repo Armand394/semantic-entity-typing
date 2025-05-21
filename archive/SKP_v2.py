@@ -52,47 +52,47 @@ if not os.path.exists(os.path.join(result_folder, "entity_metrics_sample.csv")):
 # Load entity coherence metrics
 e_coherence = pd.read_csv(os.path.join(result_folder, "entity_metrics_sample.csv"))
 
-# # Entities with degree considered too low
-# lowerb_quantiles = e_coherence[['kg_degree', 'et_degree']].quantile(0.1)
-# low_kg_degree = lowerb_quantiles.loc['kg_degree']
-# low_et_degree = lowerb_quantiles.loc['et_degree']
+# Entities with degree considered too low
+lowerb_quantiles = e_coherence[['kg_degree', 'et_degree']].quantile(0.1)
+low_kg_degree = lowerb_quantiles.loc['kg_degree']
+low_et_degree = lowerb_quantiles.loc['et_degree']
 
-# # Filter only entities with bad metrics
-# entity_low_degree_df = e_coherence[(e_coherence["kg_degree"] <= low_kg_degree) \
-#                               & (e_coherence["et_degree"] <= low_et_degree)]
-# entity_low_degree = entity_low_degree_df['entity'].to_list()
+# Filter only entities with bad metrics
+entity_low_degree_df = e_coherence[(e_coherence["kg_degree"] <= low_kg_degree) \
+                              & (e_coherence["et_degree"] <= low_et_degree)]
+entity_low_degree = entity_low_degree_df['entity'].to_list()
 
-# entity_kg_2hop = []
-# entity_et_2hop = []
+entity_kg_2hop = []
+entity_et_2hop = []
 
-# for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Processing entities", unit="entity"):
+for entity in tqdm(entity_low_degree, total=len(entity_low_degree), desc="Processing entities", unit="entity"):
     
-#     # Current sentences
-#     kg_entity_text, _ = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id)
-#     et_train_sentences, _ = et_sentences(df_train, entity, t2desc, t2id)
-#     entity_sentences = kg_entity_text + et_train_sentences
+    # Current sentences
+    kg_entity_text, _ = kg_sentences(df_triples, entity, r2text, r2id, e2desc, e2id)
+    et_train_sentences, _ = et_sentences(df_train, entity, t2desc, t2id)
+    entity_sentences = kg_entity_text + et_train_sentences
 
-#     # Number 2-hop relations and types added
-#     n_rel = int(round(low_kg_degree * (1 - len(kg_entity_text) / (low_kg_degree+1))) + 2)
-#     n_type = int(round(low_et_degree*2* (1 - len(et_train_sentences) / (low_et_degree+1))) + 2)
+    # Number 2-hop relations and types added
+    n_rel = int(round(low_kg_degree * (1 - len(kg_entity_text) / (low_kg_degree+1))) + 2)
+    n_type = int(round(low_et_degree*2* (1 - len(et_train_sentences) / (low_et_degree+1))) + 2)
     
-#     # 2-hop neighbor sentences
-#     kg_2hop, kg_2hop_sentences = two_hop_neighbors(df_triples, entity, r2text, r2id, e2desc, e2id)
-#     types_2hop, et_txt_2hop = two_hop_types(df_triples, df_train, entity, t2desc, t2id)
+    # 2-hop neighbor sentences
+    kg_2hop, kg_2hop_sentences = two_hop_neighbors(df_triples, entity, r2text, r2id, e2desc, e2id)
+    types_2hop, et_txt_2hop = two_hop_types(df_triples, df_train, entity, t2desc, t2id)
 
-#     # 2-hop kg neighbor and type with highest average similarity score
-#     kg_top_2hop = max_sim_2hop(entity_sentences, kg_2hop_sentences, kg_2hop, n_rel)
-#     et_top_2hop = max_sim_2hop(entity_sentences, et_txt_2hop, types_2hop, n_type, kg=False)
+    # 2-hop kg neighbor and type with highest average similarity score
+    kg_top_2hop = max_sim_2hop(entity_sentences, kg_2hop_sentences, kg_2hop, n_rel)
+    et_top_2hop = max_sim_2hop(entity_sentences, et_txt_2hop, types_2hop, n_type, kg=False)
 
-#     # Store best results for additional information
-#     for relation, entity2, direction in kg_top_2hop:
-#         if direction == '-':
-#             entity_kg_2hop.append((entity, relation, entity2))
-#         else:
-#             entity_kg_2hop.append((entity2, relation, entity))
+    # Store best results for additional information
+    for relation, entity2, direction in kg_top_2hop:
+        if direction == '-':
+            entity_kg_2hop.append((entity, relation, entity2))
+        else:
+            entity_kg_2hop.append((entity2, relation, entity))
 
-#     for et_type in et_top_2hop:
-#         entity_et_2hop.append((entity, et_type))
+    for et_type in et_top_2hop:
+        entity_et_2hop.append((entity, et_type))
 
 
 # Entities with degree considered too high
